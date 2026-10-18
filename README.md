@@ -28,7 +28,7 @@ paid software is removed.
 | Editors | neovim, helix, zed, vscode, micro, emacs (doom) |
 | Files | yazi (TUI) + thunar (GUI) |
 | Lock screen | hyprlock |
-| Display manager | greetd — **autologin** straight into niri |
+| Display manager | greetd — login prompt (tuigreet), autologin opt-in |
 | Theme | chiaroscuro (Kanso) — GTK and Qt |
 | Fonts | JetBrainsMono Nerd Font (free replacement for the paid original) |
 | AI agents | opencode, codex, gemini-cli, claude-code, aider |
@@ -183,7 +183,7 @@ Nothing sensitive is stored in this repository.
 
 - **Nothing boots after installing** — you didn't copy the machine's
   `hardware-configuration.nix` into `hosts/<host>/`. See [INSTALL.md](./INSTALL.md).
-- **Black screen after autologin** — press `Ctrl + Alt + F3` for a TTY, log in, fix and
+- **Black screen after login** — press `Ctrl + Alt + F3` for a TTY, log in, fix and
   rebuild.
 - **Home-Manager fails on an existing file** (e.g. Firefox `profiles.ini`) — the flake sets
   `backupFileExtension = "backup"`, so the old file is renamed to `*.backup`.
@@ -204,7 +204,8 @@ Nothing sensitive is stored in this repository.
 - **Two portable hosts** (`amd`, `intel`) with template `hardware-configuration.nix`.
 - **Real Intel iGPU module.** Upstream's `niri/intel.nix` was actually an **NVIDIA** module;
   renamed to `nvidia.nix`, and a genuine Intel iGPU module was added.
-- **Autologin enabled** via greetd.
+- **Login prompt by default** (greetd + tuigreet), with autologin as an opt-in:
+  set `rhodium.autologin = true`.
 - **Keyboard layouts: Spanish (ES) + English (US)**, Spanish first, toggled with
   `Super + Space`; the default timezone is `America/Bogota`.
 - **Hardware/server-specific services off by default** (ASUS backlight, Keychron/kmonad,
@@ -234,7 +235,7 @@ Roadmap:
 - [x] Move all personal data into `data/` (users + hosts)
 - [x] Two portable hosts (`amd`, `intel`) with template hardware configs
 - [x] Add a real Intel iGPU niri module (rename the old one to `nvidia.nix`)
-- [x] Enable autologin (greetd)
+- [x] Login prompt by default (greetd + tuigreet), autologin opt-in
 - [x] Spanish + English keyboard layouts (ES first) with `America/Bogota` as default
       timezone
 - [x] Keybind cheatsheet (`Super + F1`)

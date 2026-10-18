@@ -14,14 +14,18 @@ in
 {
   options.rhodium.autologin = lib.mkOption {
     type = lib.types.bool;
-    default = true;
-    description = "Boot straight into the desktop session without a login prompt.";
+    default = false;
+    description = ''
+      Boot straight into the desktop session, without a login prompt.
+      Off by default: the greeter asks for the password on every boot.
+    '';
   };
 
   config.services.greetd = {
     enable = true;
     settings = {
-      # Fallback greeter: shown when autologin is disabled, or after logging out.
+      # Login prompt (tuigreet), shown on boot unless rhodium.autologin is on.
+      # It is also what you get back after logging out.
       default_session = {
         command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${pkgs.niri}/bin/niri-session";
         user = "greeter";

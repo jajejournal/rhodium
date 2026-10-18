@@ -21,7 +21,7 @@ There are only two hosts. Pick yours *before* installing:
 | Intel (integrated GPU)     | `intel`            | `intel`  | `manssell` |
 
 > **Why does this matter?** The username decides the Home Manager user, `/home/<user>`
-> and who gets autologin. If you create **exactly** this user during the installation,
+> and which session Home Manager configures. If you create **exactly** this user during the installation,
 > you don't have to edit a single file afterwards — the flake already knows about it.
 >
 > The **hostname** is enforced by the flake (`data/hosts/hosts.nix`), so whatever the
@@ -154,7 +154,8 @@ sudo nixos-rebuild switch --flake ~/rhodium#intel    # or #amd
 sudo reboot
 ```
 
-You should boot straight into **niri** (autologin is enabled).
+You get a login prompt (tuigreet): pick the user, type the password, and **niri** starts.
+Autologin is opt-in: set `rhodium.autologin = true`.
 
 ---
 
