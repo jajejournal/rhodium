@@ -33,7 +33,7 @@ paid software is removed.
 | Fonts | JetBrainsMono Nerd Font (free replacement for the paid original) |
 | AI agents | opencode, codex, gemini-cli, claude-code, aider |
 
-Press **Super + ç** at any time to open the shortcuts cheatsheet
+Press **Super + F1** at any time to open the shortcuts cheatsheet
 (`~/.config/niri/shortcuts.txt`). Switch keyboard layout with **Super + Space**
 (English ↔ Spanish).
 
@@ -120,7 +120,9 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 
 ## Keybinds
 
-- **Super + ç** — open the shortcuts cheatsheet (all keybinds in one file).
+- **Super + F1** — open the shortcuts cheatsheet (all keybinds in one file). It
+  works with any layout; on the Spanish layout `Super + AltGr + ,` (the `ç` key)
+  does the same.
 - **Super + Space** — switch keyboard layout (English ↔ Spanish, `grp:win_space_toggle`).
 
 The cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
@@ -199,7 +201,7 @@ Roadmap:
 - [x] Add a real Intel iGPU niri module (rename the old one to `nvidia.nix`)
 - [x] Enable autologin (greetd)
 - [x] English + Spanish keyboard layouts
-- [x] Keybind cheatsheet (`Super + ç`)
+- [x] Keybind cheatsheet (`Super + F1`)
 - [x] `INSTALL.md` for both install routes
 - [x] Add `opencode` with the free `deepseek-v4.1-flash-free` model
 - [x] Disable hardware/server-specific services by default

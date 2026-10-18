@@ -4,7 +4,7 @@
 
   Mod  =  Super / Win key
   Switch keyboard layout (EN <-> ES):  Super + Space
-  Show this cheatsheet:                Mod + c-cedilla (the key that types "ç")
+  Show this cheatsheet:                Mod + F1   (Mod + c-cedilla also works on the ES layout)
 
 --------------------------------------------------------------------------------
   SYSTEM & CORE

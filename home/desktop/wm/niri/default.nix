@@ -40,6 +40,10 @@ let
   msiPositionX = builtins.floor (resolution.width / scaleFactor);
   # Dell position = right of MSI (MSI logical width = 3440 at scale 1.0)
   dellPositionX = msiPositionX + 3440;
+
+  # Opens the keybind cheatsheet in a floating terminal (see `binds` below and
+  # xdg.configFile."niri/shortcuts.txt" at the end of this file).
+  cheatsheet = "kitty --class rh-shortcuts -e less -R \"$HOME/.config/niri/shortcuts.txt\"";
 in
 {
   programs.niri.settings = {
@@ -538,10 +542,14 @@ in
       # System & Core Controls
       "Mod+Escape".action.spawn = "hyprlock";
 
-      # Help / cheatsheet: show all keybinds in a floating terminal.
-      # The "ccedilla" keysym is the key that types "ç" (AltGr + , on the
-      # Spanish layout). The file lives at ~/.config/niri/shortcuts.txt.
-      "Mod+ccedilla".action.spawn-sh = "kitty --class rh-shortcuts -e less -R \"$HOME/.config/niri/shortcuts.txt\"";
+      # Help / cheatsheet: show every keybind in a floating terminal.
+      # The file lives at ~/.config/niri/shortcuts.txt.
+      # Mod+F1 works with ANY keyboard layout, so it is the one to remember.
+      # Mod+ccedilla is an extra alias for the Spanish layout, where "ç" is
+      # typed with AltGr + , — the "us" layout cannot type "ç" at all, so on
+      # its own it looked like the cheatsheet "did nothing".
+      "Mod+F1".action.spawn-sh = cheatsheet;
+      "Mod+ccedilla".action.spawn-sh = cheatsheet;
 
       # Focus Navigation
       "Mod+Left".action.focus-column-left = [ ];
@@ -723,7 +731,7 @@ in
   # ----------------------------------------------------------------------------
   # Keybind cheatsheet
   # ----------------------------------------------------------------------------
-  # Plain-text list of every keybind. Shown with Mod + "ç" (see binds above),
+  # Plain-text list of every keybind. Shown with Mod + F1 (see binds above),
   # and always available at ~/.config/niri/shortcuts.txt.
   xdg.configFile."niri/shortcuts.txt".source = ./shortcuts.txt;
 }
