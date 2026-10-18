@@ -1,14 +1,21 @@
 {
   pkgs,
+  lib,
   users,
+  host,
   ...
 }:
 let
+  # Resolve which user this host logs in as. The mapping lives in
+  # data/hosts/hosts.nix (`user = "user_xxx";`). Falls back to the first
+  # defined user so the flake still evaluates if a host forgets the field.
+  userKey = host.user or (builtins.head (builtins.attrNames users));
+
   user_001_data =
-    users.user_001 or {
+    users.${userKey} or {
       username = "user";
       fullName = "Default User";
-      email = "user@example.com";
+      emailMain = "user@example.com";
       description = "Default User";
       extraGroups = [ "wheel" ];
     };
@@ -21,17 +28,16 @@ in
     extraGroups = user_001_data.extraGroups;
     shell = pkgs.fish;
     home = "/home/${user_001_data.username}";
-    # openssh = {
-    #   authorizedKeys.keys = [
-    #     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJGHxTVVJeq9L0J2K0XiT/z14A/8oE86QwCZJRnmZtxr pabloaguirrenck@protonmail.com"
-    #   ];
-    # };
+    # Uncomment and paste YOUR OWN public key to log in over SSH:
+    # openssh.authorizedKeys.keys = [
+    #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... you@machine"
+    # ];
   };
 
   # NOTE: Required for devenv
   nix.settings.trusted-users = [
     "root"
-    "pabloagn"
+    "${user_001_data.username}"
   ];
 
   home-manager.backupFileExtension = "backup"; # HACK: Required since hm activation was sometimes faulty

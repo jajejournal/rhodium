@@ -53,11 +53,6 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    iridium-rh = {
-      url = "git+ssh://git@github.com/pabloagn/iridium.rh.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,7 +73,6 @@
       kanso-nvim,
       chiaroscuro,
       rhodium-alloys,
-      iridium-rh,
       niri-flake,
     }@inputs:
     let
@@ -213,93 +207,62 @@
       formatter.${system} = pkgs.nixfmt-rfc-style;
 
       # --- Nixos ---
-      nixosConfigurations = {
-        # Host Entry
-        host_001 = lib.nixosSystem {
-          inherit system pkgs;
-          modules = [
-            ./hosts/host_001
-            home-manager.nixosModules.home-manager
-            niri-flake.nixosModules.niri
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
+      nixosConfigurations =
+        let
+          # Build a complete NixOS configuration for a host.
+          #   hostKey -> key in data/hosts/hosts.nix (also the dir name under ./hosts)
+          #   userKey -> key in data/users/users.nix
+          mkHost =
+            hostKey: userKey:
+            lib.nixosSystem {
+              inherit system pkgs;
+              modules = [
+                ./hosts/${hostKey}
+                home-manager.nixosModules.home-manager
+                niri-flake.nixosModules.niri
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    backupFileExtension = "backup";
 
-                users.${userData.user_001.username or "user_001"} = import ./users/user_001;
+                    users.${userData.${userKey}.username} = import ./users/user_001;
 
-                extraSpecialArgs = {
-                  inherit
-                    pkgs-unstable
-                    inputs
-                    rhodiumLib
-                    userData
-                    ;
-                  user = userData.user_001 or { };
-                  host = hostData.host_001 or { };
-                  theme = selectedTheme;
-                  targetTheme = targetTheme; # TODO: This is temporary
-                  chiaroscuroTheme = chiaroscuroTheme; # TODO: This is temporary
-                  inherit userPreferences userExtras;
-                  fishPlugins = rhodium-alloys.fish;
-                  yaziPlugins = rhodium-alloys.yazi;
-                  inherit (rhodiumLib.generators.moduleGenerators) mkModule mkPkgModule;
-                };
+                    extraSpecialArgs = {
+                      inherit
+                        pkgs-unstable
+                        inputs
+                        rhodiumLib
+                        userData
+                        ;
+                      user = userData.${userKey} or { };
+                      host = hostData.${hostKey} or { };
+                      theme = selectedTheme;
+                      targetTheme = targetTheme; # TODO: This is temporary
+                      chiaroscuroTheme = chiaroscuroTheme; # TODO: This is temporary
+                      inherit userPreferences userExtras;
+                      fishPlugins = rhodium-alloys.fish;
+                      yaziPlugins = rhodium-alloys.yazi;
+                      inherit (rhodiumLib.generators.moduleGenerators) mkModule mkPkgModule;
+                    };
+                  };
+                }
+              ];
+              specialArgs = {
+                inherit pkgs-unstable inputs rhodiumLib;
+                users = userData;
+                host = hostData.${hostKey} or { };
               };
-            }
-          ];
-          specialArgs = {
-            inherit pkgs-unstable inputs rhodiumLib;
-            users = userData;
-            host = hostData.host_001 or { };
-          };
+            };
+        in
+        {
+          amd = mkHost "amd" "user_amd";
+          intel = mkHost "intel" "user_intel";
         };
-
-        # Host Entry
-        host_002 = lib.nixosSystem {
-          inherit system pkgs;
-          modules = [
-            ./hosts/host_002
-            home-manager.nixosModules.home-manager
-            niri-flake.nixosModules.niri
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-
-                users.${userData.user_001.username or "user_001"} = import ./users/user_001;
-
-                extraSpecialArgs = {
-                  inherit
-                    pkgs-unstable
-                    inputs
-                    rhodiumLib
-                    userData
-                    ;
-                  user = userData.user_001 or { };
-                  host = hostData.host_002 or { };
-                  theme = selectedTheme;
-                  targetTheme = targetTheme; # TODO: This is temporary
-                  inherit userPreferences userExtras;
-                  fishPlugins = rhodium-alloys.fish;
-                  yaziPlugins = rhodium-alloys.yazi;
-                };
-              };
-            }
-          ];
-          specialArgs = {
-            inherit pkgs-unstable inputs rhodiumLib;
-            users = userData;
-            host = hostData.host_002 or { };
-          };
-        };
-      };
 
       # --- Standalone Home Configurations (testing) ---
       homeConfigurations = {
-        user_001 = home-manager.lib.homeManagerConfiguration {
+        ${userData.user_amd.username} = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./users/user_001
@@ -312,7 +275,7 @@
               rhodiumLib
               userData
               ;
-            user = userData.user_001 or { };
+            user = userData.user_amd or { };
             host = { };
             theme = selectedTheme;
             targetTheme = targetTheme; # TODO: This is temporary

@@ -2,10 +2,16 @@
   pkgs,
   lib,
   config,
+  users,
+  host,
   ...
 }:
 
 with lib;
+let
+  userKey = host.user or (builtins.head (builtins.attrNames users));
+  userName = (users.${userKey} or { username = "nixos"; }).username;
+in
 
 {
   options.extraRules.keychronUdev.enable = mkEnableOption "Keychron V1 user‑service trigger";
@@ -17,7 +23,7 @@ with lib;
       # For this to work, the following needs to be run:
       #   sudo loginctl enable-linger {username}
       # Where {username} = user name
-      users.extraUsers.pabloagn.linger = true;
+      users.extraUsers.${userName}.linger = true;
       services.udev.extraRules = ''
         ACTION=="add", SUBSYSTEM=="input", KERNEL=="event*", \
           ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0311", \
@@ -32,7 +38,7 @@ with lib;
       # For this to work, the following needs to be run:
       #   sudo loginctl enable-linger {username}
       # Where {username} = user name
-      users.extraUsers.pabloagn.linger = true;
+      users.extraUsers.${userName}.linger = true;
       services.udev.extraRules = ''
         ACTION=="add", SUBSYSTEM=="input", KERNEL=="event*", \
           ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0121", \

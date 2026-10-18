@@ -36,7 +36,7 @@ in
       };
 
       input = {
-        kb_layout = "gb,us,es";
+        kb_layout = "us,es";
         kb_variant = "";
         kb_model = "";
         kb_options = "grp:win_space_toggle";

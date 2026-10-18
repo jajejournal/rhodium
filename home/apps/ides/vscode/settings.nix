@@ -86,7 +86,7 @@
           "editor.unicodeHighlight.ambiguousCharacters" = false;
           "editor.unicodeHighlight.invisibleCharacters" = true;
           "editor.fontFamily" =
-            "'BerkeleyMonoRh Nerd Font', 'JetBrainsMono Nerd Font', 'JetBrains Mono', 'FiraCode Nerd Font', 'Fira Code', Menlo, Monaco, 'Courier New', monospace";
+            "'JetBrainsMono Nerd Font', 'JetBrains Mono', 'FiraCode Nerd Font', 'Fira Code', Menlo, Monaco, 'Courier New', monospace";
           "editor.fontLigatures" = true;
           "editor.fontSize" = 14;
           "editor.lineHeight" = 1.6;

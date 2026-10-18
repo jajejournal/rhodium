@@ -133,26 +133,6 @@
         "type": "github"
       }
     },
-    "iridium-rh": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1751756156,
-        "narHash": "sha256-HeuvHF5v1nIgWGG50eSJENg6lTeG7TdfI3zFul+Dbec=",
-        "ref": "refs/heads/main",
-        "rev": "1b00db82a17e89c7aec948c41c11642e6256907f",
-        "revCount": 2,
-        "type": "git",
-        "url": "ssh://git@github.com/pabloagn/iridium.rh.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/pabloagn/iridium.rh.git"
-      }
-    },
     "kanso-nvim": {
       "flake": false,
       "locked": {
@@ -385,7 +365,6 @@
         "chiaroscuro": "chiaroscuro",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
-        "iridium-rh": "iridium-rh",
         "kanso-nvim": "kanso-nvim",
         "niri-flake": "niri-flake",
         "nixpkgs": "nixpkgs",

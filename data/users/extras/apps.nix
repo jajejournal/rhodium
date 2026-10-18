@@ -40,7 +40,7 @@
       description = "VS Code";
     };
     emacs = {
-      binary = "/home/pabloagn/.config/emacs/bin/doom";
+      binary = "doom";
       args = [ "emacs" ];
       icon = "emacs";
       description = "Doom Emacs";

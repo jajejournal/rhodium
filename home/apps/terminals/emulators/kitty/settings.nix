@@ -1,7 +1,7 @@
 { ... }:
 {
   programs.kitty = {
-    font.name = "BerkeleyMonoRh Nerd Font";
+    font.name = "JetBrainsMono Nerd Font";
     font.size = 12;
 
     settings = {

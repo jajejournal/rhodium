@@ -1,5 +1,9 @@
 { pkgs, pkgs-unstable, ... }:
 {
+  imports = [
+    ./opencode.nix
+  ];
+
   home.packages =
     (with pkgs; [
       # --- AI Coding Agents ---
@@ -12,5 +16,6 @@
       # --- AI Coding Agents (Unstable) ---
       claude-code # Anthropic's CLI for Claude
       claude-monitor # Monitor for Claude Code sessions
+      opencode # OpenCode AI coding agent (TUI)
     ]);
 }

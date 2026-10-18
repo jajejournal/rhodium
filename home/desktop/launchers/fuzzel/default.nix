@@ -27,7 +27,7 @@
         # since it was the font with widest adoption of unicode symbols
         dpi-aware = false;
         exit-on-keyboard-focus-loss = false;
-        font = "BerkeleyMonoRh Nerd Font:size=14, JuliaMono:size=14, JetBrainsMono Nerd Font:size=14";
+        font = "JetBrainsMono Nerd Font:size=14, JuliaMono:size=14";
         hide-before-typing = false;
         horizontal-pad = 40;
         icons-enabled = true;

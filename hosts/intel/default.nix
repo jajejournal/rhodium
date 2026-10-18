@@ -22,17 +22,17 @@
     ../../modules/users
     ../../modules/utils
     ../../modules/virtualization
-    ../../modules/virtualization/docker-nvidia.nix
+    ../../modules/virtualization/docker.nix
     ../../modules/gaming/steam.nix
   ];
 
   # Base
   # ---------------------------------
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  # Kernel: nixpkgs' default LTS choice. Uncomment to pin a specific series.
+  # boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Intel WiFi + Bluetooth coexistence fix for audio dropouts
   # Reference: https://wiki.nixos.org/wiki/Bluetooth
-  # This disables WiFi/BT coexistence which can cause Bluetooth audio issues
   boot.extraModprobeConfig = ''
     options iwlwifi bt_coex_active=0
   '';
@@ -42,28 +42,42 @@
     networkmanager.enable = true;
   };
 
-
-  # ---------------------------------------------------------------------------------
-
   # Modules
   # ---------------------------------
+  # NOTE: hardware/server services are OFF by default so this builds anywhere.
   extraServices = {
     asusKeyboardBacklight.enable = false;
-    laptopLid.enable = false;
+    laptopLid.enable = true;
     avahi.enable = true;
-    plex.enable = true;
-    roon.enable = true;
-    atuinSync.enable = true;
+    plex.enable = false; # media server (needs an account)
+    roon.enable = false; # Roon bridge
+    atuinSync.enable = false; # self-hosted Atuin server
   };
+
   extraRules = {
-    keychronUdev.enable = true;
-    keychronQ3Udev.enable = true;
-    hdmiAutoSwitch.enable = true;
+    keychronUdev.enable = false;
+    keychronQ3Udev.enable = false;
+    hdmiAutoSwitch.enable = false;
+    bluetoothNoPowerSave.enable = true;
   };
+
   maintenance.garbageCollection = {
     enable = true;
     schedule = "daily";
     deleteOlderThan = "30d";
+  };
+
+  # VM / Memory tuning (same defaults as the AMD host)
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;
+    "vm.vfs_cache_pressure" = 50;
+  };
+
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+    algorithm = "zstd";
+    priority = 100;
   };
 
   # Extra Args

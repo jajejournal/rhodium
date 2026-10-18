@@ -65,7 +65,7 @@
     rh-brave-preload.enable = true; # vmtouch: lock Brave binaries in RAM for instant startup
     rh-eww.enable = false;
     rh-firefox-preload.enable = true; # vmtouch: lock Firefox binaries in RAM for instant startup
-    rh-kmonad.enable = true;
+    rh-kmonad.enable = false; # NOTE: enable only if you own the supported Keychron keyboards
     rh-mako.enable = false;
     rh-neovim-daemon.enable = false;
     rh-swaybg.enable = true;
@@ -88,8 +88,8 @@
 
   # --- User Config ---
   home = {
-    username = userData.user_001.username;
-    homeDirectory = "/home/${userData.user_001.username}";
+    username = user.username;
+    homeDirectory = "/home/${user.username}";
     stateVersion = "25.05";
   };
 }

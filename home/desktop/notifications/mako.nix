@@ -64,7 +64,7 @@ in
       # --- Style ---
       border-radius = 0;
       border-size = 1;
-      font = "BerkeleyMonoRh Nerd Font 10";
+      font = "JetBrainsMono Nerd Font 10";
       height = 120;
       margin = 10;
       outer-margin = 20;

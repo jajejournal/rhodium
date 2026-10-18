@@ -8,50 +8,27 @@
     ./base.nix
   ];
 
-  # Add these kernel modules
-  boot.kernelModules = [
-    "nvidia"
-    "nvidia_modeset"
-    "nvidia_uvm"
-    "nvidia_drm"
-    "kvm-intel"
-  ];
+  # ───────────────────────────────────────────────────────────────────────────
+  # Niri on Intel integrated graphics (i915 / xe). No proprietary drivers.
+  # If your machine also has a dedicated NVIDIA GPU, import ./nvidia.nix instead
+  # (or in addition) from your host module.
+  # ───────────────────────────────────────────────────────────────────────────
 
-  # NVIDIA drivers package (use the stable version)
-  hardware.nvidia = {
-    open = true; # Use open kernel modules for Turing or later GPUs (RTX series)
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    powerManagement.enable = true; # Enable power management (suspend/resume)
-    modesetting.enable = true;
-  };
-
-  hardware.nvidia-container-toolkit = {
-    enable = true;
-  };
+  boot.kernelModules = [ "kvm-intel" ];
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # VA-API (Broadwell and newer)
+      vpl-gpu-rt # oneVPL runtime (Tiger Lake and newer)
+      libvdpau-va-gl # VDPAU over OpenGL
+    ];
   };
 
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    NVD_BACKEND = "direct"; # For hardware video acceleration
+    LIBVA_DRIVER_NAME = "iHD"; # Use Intel Media Driver for VA-API
     ELECTRON_OZONE_PLATFORM_HINT = "auto"; # Electron app flickering fix
     NIXOS_OZONE_WL = "1"; # Auto configure Electron apps for Wayland
   };
-
-  # Required NVIDIA utilities and EGL support
-  environment.systemPackages = with pkgs; [
-    egl-wayland
-    nvidia-vaapi-driver
-    libvdpau-va-gl
-  ];
-
-  # Enable NVIDIA settings
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  # Enable Wayland compatibility with Electron
-  #services.xserver.displayManager.wayland.enable = true;
 }

@@ -40,7 +40,7 @@ Rhodium is a hypermodular, declarative NixOS system built using Nix flakes. It c
 5. **External Inputs**: Integrates custom flakes:
    - `chiaroscuro`: Theme package
    - `rhodium-alloys`: Fish and Yazi plugins
-   - `iridium-rh`: Private configuration (SSH)
+   - `niri-flake`: Niri compositor module
    - `kanso-nvim`: Custom Neovim configuration
 
 ### Special Args Flow
@@ -53,7 +53,7 @@ User-level modules (`home/`) receive via `extraSpecialArgs`:
 
 ## Build and Deployment Commands
 
-All commands use `just` (see `justfile`). Host identifiers: `host_001` (justine), `host_002` (alexandria).
+All commands use `just` (see `justfile`). Host identifiers: `amd` (hostname `amd`), `intel` (hostname `intel`).
 
 ### Primary Commands
 
@@ -196,7 +196,7 @@ The configuration is a git repository. Dirty working tree warnings during builds
 
 - Uses `sops-nix` for secrets management
 - Secrets should not be committed to the repository
-- Private inputs use SSH (see `iridium-rh` input)
+- All flake inputs are public; no private/SSH inputs are required
 
 ### Custom Library (`rhodiumLib`)
 
@@ -211,10 +211,10 @@ Access in modules via the `rhodiumLib` argument.
 
 ## Documentation
 
-The documentation for this repository lives in a separate repo at:
+The documentation for the upstream project lives in a separate repo:
 
 ```
-/home/pabloagn/dev/rhodium.rh
+pabloagn/rhodium.rh   (not part of this fork)
 ```
 
 This is a Hugo site. Documentation content is in `content/docs/`. When making changes to Rhodium that affect documented behavior (scripts, keybindings, tools, architecture), the corresponding docs in `rhodium.rh` must also be updated.

@@ -1,24 +1,46 @@
 {
+  # ───────────────────────────────────────────────────────────────────────────
+  # Host registry
+  # ───────────────────────────────────────────────────────────────────────────
+  # Each key here must match:
+  #   - a directory name under ./hosts        (e.g. hosts/amd/default.nix)
+  #   - a nixosConfiguration attribute        (e.g. `nixos-rebuild switch --flake .#amd`)
+  #
+  #   hostname    -> networking.hostName
+  #   user        -> key in data/users/users.nix that this host logs in as
+  #   gpu         -> informational; pick the matching niri module in hosts/<key>
+  #   timeZone    -> time.timeZone (e.g. "Europe/Madrid", "America/Mexico_City")
+  #   locale      -> i18n.defaultLocale (keep English, e.g. "en_US.UTF-8")
+  #   mainMonitor -> primary display defaults (used by niri/waybar)
+  # ───────────────────────────────────────────────────────────────────────────
   hosts = {
-    host_001 = {
-      hostname = "justine";
-      description = "Justine Host";
+    amd = {
+      hostname = "amd";
+      description = "AMD Host";
+      user = "user_amd";
+      gpu = "amd";
+      timeZone = "Europe/Madrid";
+      locale = "en_US.UTF-8";
       mainMonitor = {
         monitorID = "eDP-1";
-        monitorResolution = "2880x1620";
-        monitorRefreshRate = "120";
-        monitorScalingFactor = "1.5";
+        monitorResolution = "1920x1080";
+        monitorRefreshRate = "60";
+        monitorScalingFactor = "1.0";
       };
       defaultLocale = "";
     };
 
-    host_002 = {
-      hostname = "alexandria";
-      description = "Alexandria Host";
+    intel = {
+      hostname = "intel";
+      description = "Intel Host";
+      user = "user_intel";
+      gpu = "intel";
+      timeZone = "Europe/Madrid";
+      locale = "en_US.UTF-8";
       mainMonitor = {
-        monitorID = "eDP-2";
+        monitorID = "eDP-1";
         monitorResolution = "1920x1080";
-        monitorRefreshRate = "300";
+        monitorRefreshRate = "60";
         monitorScalingFactor = "1.0";
       };
       defaultLocale = "";

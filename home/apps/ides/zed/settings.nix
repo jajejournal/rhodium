@@ -3,7 +3,7 @@
   programs.zed-editor = {
     userSettings = {
       # --- Appearance ---
-      buffer_font_family = "BerkeleyMonoRh Nerd Font";
+      buffer_font_family = "JetBrainsMono Nerd Font";
       # buffer_font_family = "JetBrainsMono Nerd Font";
 
       buffer_font_size = 15;

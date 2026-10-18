@@ -2,8 +2,16 @@
   config,
   pkgs,
   lib,
+  users,
+  host,
   ...
 }:
+
+let
+  userKey = host.user or (builtins.head (builtins.attrNames users));
+  userName = (users.${userKey} or { username = "nixos"; }).username;
+  userHome = "/home/${userName}";
+in
 
 {
   systemd.services.kmonad-keychron = {
@@ -29,12 +37,12 @@
     environment = {
       LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
       TZDIR = "${pkgs.tzdata}/share/zoneinfo";
-      XDG_BIN_HOME = "%h/.local/bin"; # %h expands to /home/pabloagn
+      XDG_BIN_HOME = "${userHome}/.local/bin";
     };
 
     serviceConfig = {
       Type = "simple";
-      User = "pabloagn"; # run as your user
+      User = userName; # run as the host's user
       Nice = "-5";
       Restart = "no";
 
@@ -43,13 +51,13 @@
 
       # Launch KMonad with your layout
       ExecStart = ''
-        ${pkgs.kmonad}/bin/kmonad /home/pabloagn/.config/kmonad/keychron.kbd
+        ${pkgs.kmonad}/bin/kmonad ${userHome}/.config/kmonad/keychron.kbd
       '';
     };
   };
 }
 
-# { pkgs, ... }:
+# { pkgs, users, host, ... }:
 # {
 #   # In your system configuration (not home-manager)
 #   systemd.services.kmonad-keychron = {
@@ -57,9 +65,9 @@
 #     after = [ "multi-user.target" ];
 #     serviceConfig = {
 #       Type = "simple";
-#       User = "pabloagn"; # Your username
+#       User = "<your-username>"; # Your username
 #       ExecStartPre = "${pkgs.bash}/bin/bash -c 'until [ -e /dev/input/by-id/usb-Keychron_Keychron_V1-event-kbd ]; do sleep 0.5; done'";
-#       ExecStart = "${pkgs.kmonad}/bin/kmonad /home/pabloagn/.config/kmonad/keychron.kbd";
+#       ExecStart = "${pkgs.kmonad}/bin/kmonad /home/<your-username>/.config/kmonad/keychron.kbd";
 #       Restart = "no";
 #       Nice = -5;
 #     };
