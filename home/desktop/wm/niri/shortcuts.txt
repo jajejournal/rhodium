@@ -1,0 +1,123 @@
+================================================================================
+                       RHODIUM - NIRI KEYBINDS CHEATSHEET
+================================================================================
+
+  Mod  =  Super / Win key
+  Switch keyboard layout (EN <-> ES):  Super + Space
+  Show this cheatsheet:                Mod + c-cedilla (the key that types "ç")
+
+--------------------------------------------------------------------------------
+  SYSTEM & CORE
+--------------------------------------------------------------------------------
+  Mod + Escape ......... Lock screen (hyprlock)
+  Mod + X .............. Toggle overview
+  Alt + Tab ............ Focus previous window
+  Mod + Tab ............ Focus previous workspace
+
+--------------------------------------------------------------------------------
+  FOCUS
+--------------------------------------------------------------------------------
+  Mod + Left  / H ...... Focus column left
+  Mod + Right / L ...... Focus column right
+  Mod + Up    / K ...... Focus window up
+  Mod + Down  / J ...... Focus window down
+  Mod + Alt + Left ..... Focus monitor left
+  Mod + Alt + Right .... Focus monitor right
+  Mod + Shift + Up ..... Focus workspace up
+  Mod + Shift + Down ... Focus workspace down
+
+--------------------------------------------------------------------------------
+  WORKSPACES
+--------------------------------------------------------------------------------
+  Mod + 1 ... 0 ........ Focus workspace 1 ... 10
+  Mod + Shift + 1 ... 0  Move column to workspace 1 ... 10
+  Mod + Alt + Up ....... Move workspace up
+  Mod + Alt + Down ..... Move workspace down
+
+--------------------------------------------------------------------------------
+  WINDOWS & COLUMNS
+--------------------------------------------------------------------------------
+  Mod + C .............. Close window
+  Mod + Ctrl + C ....... Force kill focused process
+  Mod + Ctrl + O ....... Toggle opacity of focused window
+  Mod + V .............. Toggle window floating
+  Mod + Shift + V ...... Switch focus between floating and tiling
+  Mod + Comma .......... Consume / expel window left
+  Mod + Period ......... Consume / expel window right
+  Mod + Z .............. Toggle column tabbed display
+  Mod + Shift + C ...... Center column
+
+--------------------------------------------------------------------------------
+  MOVE COLUMNS / WINDOWS
+--------------------------------------------------------------------------------
+  Mod + Ctrl + Left / H   Move column left
+  Mod + Ctrl + Right / L  Move column right
+  Mod + Ctrl + Up / K     Move column to workspace up
+  Mod + Ctrl + Down / J   Move column to workspace down
+  Mod + Ctrl + S ........ Move window up / to workspace up
+  Mod + Ctrl + A ........ Move window down / to workspace down
+
+--------------------------------------------------------------------------------
+  RESIZE
+--------------------------------------------------------------------------------
+  Mod + F .............. Maximize column
+  Mod + Shift + F ...... Fullscreen window
+  Mod + R .............. Switch preset column width
+  Mod + Shift + R ...... Switch preset window height
+  Mod + Ctrl + R ....... Reset window height
+  Mod + Minus .......... Column width -10%
+  Mod + Equal .......... Column width +10%
+  Mod + Shift + Minus .. Window height -10%
+  Mod + Shift + Equal .. Window height +10%
+
+--------------------------------------------------------------------------------
+  APPLICATIONS
+--------------------------------------------------------------------------------
+  Mod + W .............. Terminal (kitty)
+  Mod + Shift + W ...... Terminal (ghostty)
+  Mod + D .............. File manager (yazi)
+  Mod + E .............. Editor (neovim)
+  Mod + Shift + E ...... Editor (emacs / doom)
+  Mod + Ctrl + E ....... Editor (zed)
+  Mod + Shift + D ...... File manager (thunar)
+  Mod + B .............. Browser (firefox - Personal profile)
+  Mod + Shift + B ...... Browser (brave)
+  Mod + Q .............. Calculator (qalc)
+  Mod + Shift + Q ...... Calculator (qalculate)
+  Mod + Ctrl + Q ....... Calendar (calcure)
+
+--------------------------------------------------------------------------------
+  SCREENSHOTS
+--------------------------------------------------------------------------------
+  Mod + S / Print ...... Screenshot (full screen)
+  Mod + Shift + S ...... Screenshot (region)
+  Shift + Print ........ Screenshot (region)
+  Mod + Alt + S ........ Screenshot (window)
+  Ctrl + Print ......... Screenshot (window)
+  Mod + A / Alt + Print  Screenshot + annotate
+  Mod + Shift + A ...... OCR (text from screen)
+
+--------------------------------------------------------------------------------
+  MOUSE & TRACKPAD
+--------------------------------------------------------------------------------
+  Mod + Wheel Up ....... Focus workspace up
+  Mod + Wheel Down ..... Focus workspace down
+  Mod + Wheel Left ..... Focus column left
+  Mod + Wheel Right .... Focus column right
+  Mod + Touchpad Up .... Volume +2%
+  Mod + Touchpad Down .. Volume -2%
+
+--------------------------------------------------------------------------------
+  MEDIA & HARDWARE KEYS
+--------------------------------------------------------------------------------
+  Volume Up ............ Volume +5%
+  Volume Down .......... Volume -5%
+  Mute ................. Mute audio output
+  Mic Mute ............. Mute microphone
+  Brightness Up ........ Brightness +5%
+  Brightness Down ...... Brightness -5%
+  Play / Pause ......... Play or pause media
+  Next ................. Next track
+  Previous ............. Previous track
+
+================================================================================

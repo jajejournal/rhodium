@@ -145,6 +145,19 @@ Timezone and locale are per-host (`data/hosts/hosts.nix` → `timeZone`, `locale
 
 ---
 
+## Keybind cheatsheet
+
+Every keybind is listed in `home/desktop/wm/niri/shortcuts.txt`, which is deployed to
+`~/.config/niri/shortcuts.txt`. Open it at any time with:
+
+```
+Mod + ç    (the key that types "ç" — AltGr + , on the Spanish layout)
+```
+
+It opens in a floating terminal (`kitty --class rh-shortcuts -e less`).
+
+---
+
 ## opencode
 
 [opencode](https://opencode.ai) is installed via Home Manager
@@ -193,6 +206,7 @@ opencode auth login
 - [x] Add a real Intel iGPU niri module (rename the old one to `nvidia.nix`)
 - [x] Enable autologin (greetd)
 - [x] English + Spanish keyboard layouts
+- [x] Keybind cheatsheet (all shortcuts in one file, opened with `Mod + ç`)
 - [x] Add `opencode` with the free `deepseek-v4.1-flash-free` model
 - [x] Disable hardware/server-specific services by default
 - [x] Disable Atuin history sync by default (was pointing to the author's server)

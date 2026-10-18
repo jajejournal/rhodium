@@ -538,6 +538,11 @@ in
       # System & Core Controls
       "Mod+Escape".action.spawn = "hyprlock";
 
+      # Help / cheatsheet: show all keybinds in a floating terminal.
+      # The "ccedilla" keysym is the key that types "ç" (AltGr + , on the
+      # Spanish layout). The file lives at ~/.config/niri/shortcuts.txt.
+      "Mod+ccedilla".action.spawn-sh = "kitty --class rh-shortcuts -e less -R \"$HOME/.config/niri/shortcuts.txt\"";
+
       # Focus Navigation
       "Mod+Left".action.focus-column-left = [ ];
       "Mod+Right".action.focus-column-right = [ ];
@@ -715,4 +720,10 @@ in
     };
   };
 
+  # ----------------------------------------------------------------------------
+  # Keybind cheatsheet
+  # ----------------------------------------------------------------------------
+  # Plain-text list of every keybind. Shown with Mod + "ç" (see binds above),
+  # and always available at ~/.config/niri/shortcuts.txt.
+  xdg.configFile."niri/shortcuts.txt".source = ./shortcuts.txt;
 }
