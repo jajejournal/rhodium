@@ -87,6 +87,25 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 
 > Flakes only see files tracked by git, so `git add` new files before rebuilding.
 
+`just` comes with the config and wraps the common commands (`just --list` shows all):
+
+| Command | What it does |
+| --- | --- |
+| `just switch <host>` | Rebuild and switch now |
+| `just switch-fast <host>` | Same, with minimal output |
+| `just build <host>` | Build only (no switch) |
+| `just boot <host>` | Build and apply on next boot |
+| `just check` | `nix flake check --all-systems` |
+| `just update` | Update all flake inputs |
+| `just update-input <input>` | Update a single input |
+| `just fmt` | Format every `.nix` file |
+| `just gc` | Garbage-collect the Nix store |
+| `just rollback` | Roll back to the previous generation |
+| `just health` | System health check |
+| `just docs` | Open the upstream docs in the browser |
+
+`<host>` is `amd` or `intel`.
+
 ## Customizing
 
 - **Colors / theme** — `home/assets/themes/` + `data/users/preferences/theme.nix`.
