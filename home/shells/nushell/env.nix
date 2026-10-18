@@ -3,15 +3,11 @@
   programs.nushell = {
     # Environment variables
     environmentVariables = {
-      # Core dirs
-      RHODIUM = "$HOME/dev/rhodium/rhodium/";
-      HOME_PROJECTS = "$HOME/dev/utils/";
-      HOME_PROFESSIONAL = "$HOME/professional";
-      HOME_ACADEMIC = "$HOME/academic";
-      HOME_SOLENOIDLABS = "$HOME/solenoid-labs/";
-      HOME_VAULTS = "$HOME/vaults";
-      HOME_VAULTS_SANCTUM = "$HOME/vaults/sanctum";
-      HOME_DOWNLOADS = "$HOME/downloads/";
+      # Core dirs. Nushell does not source home-manager's session variables, so
+      # the two its own config needs are repeated here. Keep in sync with
+      # home/modules/env.nix.
+      RHODIUM = "$HOME/rhodium";
+      HOME_DOWNLOADS = "$HOME/downloads";
 
       # Default applications
       EDITOR = "nvim";

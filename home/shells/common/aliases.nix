@@ -62,37 +62,27 @@
   cursor = "cursor 2>/dev/null"; # Launch cursor cleanly
 
   # --- Jumpers ---
+  # NOTE: upstream also shipped jumpers to the author's personal folders
+  # (academic, professional, solenoid-labs, vaults, projects). Those paths do
+  # not exist on a fresh install, so they are gone.
   # Go to ->
   gC = "z $XDG_CACHE_HOME"; # Go cache home
   gD = "z $DOOMDIR"; # Go config Doom Emacs
-  ga = "z $HOME_ACADEMIC"; # Go Academic
   gb = "z $XDG_BIN_HOME"; # Go bin home
   gc = "z $XDG_CONFIG_HOME"; # Go config home
   gd = "z $HOME_DOWNLOADS"; # Go downloads
   gh = "z $HOME"; # Go home
   gi = "zi"; # Go interactive
-  gp = "z $HOME_PROJECTS"; # Go projects
-  gr = "z $RHODIUM"; # Go Rhodium
-  gS = "z $HOME_SOLENOIDLABS"; # Go SolenoidLabs
-  gv = "z $HOME_VAULTS"; # Go Obsidian Vaults
-  gw = "z $HOME_PROFESSIONAL"; # Go Professional
-
-  # Go to -> 2
-  gsg = "z $HOME_SOLENOIDLABS/glassflow"; # Go Solenoid Labs/Glassflow
+  gr = "z $RHODIUM"; # Go the Rhodium repo
 
   # --- Openers ---
   # Go to; list ->
-  gal = "z $HOME_ACADEMIC; yy";
   gbl = "z $XDG_BIN_HOME; yy";
   gcl = "z $XDG_CONFIG_HOME; yy";
   gdl = "z $HOME_DOWNLOADS; yy";
   gel = "z $XDG_CACHE_HOME; yy";
   ghl = "z $HOME; yy";
-  gpl = "z $HOME_PROJECTS; yy";
   grl = "z $RHODIUM; yy";
-  gsl = "z $HOME_SOLENOIDLABS; yy";
-  gvl = "z $HOME_VAULTS; yy";
-  gwl = "z $HOME_PROFESSIONAL; yy";
 
   # --- List ---
   # List ->

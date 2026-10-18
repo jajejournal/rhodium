@@ -1,10 +1,9 @@
 local dirs = {
-	academic = vim.fn.expand("$HOME/academic"),
-	professional = vim.fn.expand("$HOME/professional"),
+	-- Generic folders only. Upstream also pointed at the author's personal
+	-- dirs (academic / professional / solenoid-labs / vaults).
 	projects = vim.fn.expand("$HOME/dev"),
-	solenoidlabs = vim.fn.expand("$HOME/solenoid-labs"),
-	vaults = vim.fn.expand("$HOME/vaults"),
-	rhodium = vim.fn.expand("$HOME/dev/rhodium"),
+	-- The clone of this repo (upstream looked in ~/dev/rhodium).
+	rhodium = vim.fn.expand("$HOME/rhodium"),
 }
 
 -- Helper Functions
@@ -224,25 +223,9 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = true, silent = true, desc = "Files All" })
 
 		-- Z mappings with navigation history
-		vim.keymap.set("n", "za", function()
-			navigate_with_history(dirs.academic, "Academic")
-		end, { buffer = true, silent = true, desc = "Z Academic" })
-
-		vim.keymap.set("n", "zw", function()
-			navigate_with_history(dirs.professional, "Professional")
-		end, { buffer = true, silent = true, desc = "Z Professional (Work)" })
-
 		vim.keymap.set("n", "zp", function()
 			navigate_with_history(dirs.projects, "Projects")
 		end, { buffer = true, silent = true, desc = "Z Project" })
-
-		vim.keymap.set("n", "zs", function()
-			navigate_with_history(dirs.solenoidlabs, "Solenoid Labs")
-		end, { buffer = true, silent = true, desc = "Z Solenoid Labs" })
-
-		vim.keymap.set("n", "zv", function()
-			navigate_with_history(dirs.vaults, "Vaults")
-		end, { buffer = true, silent = true, desc = "Z Vault" })
 
 		-- Health check
 		vim.keymap.set("n", "hc", ":checkhealth<CR>", { buffer = true, silent = true, desc = "Health Check" })
@@ -255,16 +238,12 @@ vim.api.nvim_create_autocmd("FileType", {
 				"  [fn] Quick Note       - Create timestamped note",
 				"  [fd] Make Directory   - Create new directory",
 				"  [fp] Make Project     - Create project with optional git",
-				"  [fr] Files Rhodium    - Find files in ~/dev/rhodium",
+				"  [fr] Files Rhodium    - Find files in the Rhodium repo",
 				"  [fR] Files Recent     - Recent files (frecency)",
 				"  [fa] Files All        - Find all files (includes hidden/ignored)",
 				"",
 				"Navigation (use <C-h>/<BS> to go back, <C-l> forward):",
-				"  [za] Z Academic       - Navigate academic projects",
-				"  [zw] Z Professional   - Navigate professional/work projects",
 				"  [zp] Z Project        - Navigate personal projects",
-				"  [zs] Z Solenoid Labs  - Navigate Solenoid Labs projects",
-				"  [zv] Z Vault          - Navigate vaults",
 				"",
 				"Other:",
 				"  [hc] Health Check     - Run :checkhealth",
@@ -356,22 +335,6 @@ require("dashboard").setup({
 				icon = "⊹ ",
 				key = "fa",
 			},
-			-- {
-			-- 	action = function()
-			-- 		navigate_with_history(dirs.academic, "Academic")
-			-- 	end,
-			-- 	desc = " Z Academic",
-			-- 	icon = "⊹ ",
-			-- 	key = "za",
-			-- },
-			-- {
-			-- 	action = function()
-			-- 		navigate_with_history(dirs.professional, "Professional")
-			-- 	end,
-			-- 	desc = " Z Professional",
-			-- 	icon = "⊹ ",
-			-- 	key = "zw",
-			-- },
 			{
 				action = function()
 					navigate_with_history(dirs.projects, "Projects")
@@ -379,22 +342,6 @@ require("dashboard").setup({
 				desc = " Z Project",
 				icon = "⊹ ",
 				key = "zp",
-			},
-			{
-				action = function()
-					navigate_with_history(dirs.solenoidlabs, "Solenoid Labs")
-				end,
-				desc = " Z Solenoid Labs",
-				icon = "⊹ ",
-				key = "zs",
-			},
-			{
-				action = function()
-					navigate_with_history(dirs.vaults, "Vaults")
-				end,
-				desc = " Z Vault",
-				icon = "⊹ ",
-				key = "zv",
 			},
 			{
 				action = "checkhealth",
@@ -410,16 +357,12 @@ require("dashboard").setup({
 						"  [fn] Quick Note       - Create timestamped note",
 						"  [fd] Make Directory   - Create new directory",
 						"  [fp] Make Project     - Create project with optional git",
-						"  [fr] Files Rhodium    - Find files in ~/dev/rhodium",
+						"  [fr] Files Rhodium    - Find files in the Rhodium repo",
 						"  [fR] Files Recent     - Recent files (frecency)",
 						"  [fa] Files All        - Find all files (includes hidden/ignored)",
 						"",
 						"Navigation (use <C-h>/<BS> to go back, <C-l> forward):",
-						"  [za] Z Academic       - Navigate academic projects",
-						"  [zw] Z Professional   - Navigate professional/work projects",
 						"  [zp] Z Project        - Navigate personal projects",
-						"  [zs] Z Solenoid Labs  - Navigate Solenoid Labs projects",
-						"  [zv] Z Vault          - Navigate vaults",
 						"",
 						"Other:",
 						"  [hc] Health Check     - Run :checkhealth",

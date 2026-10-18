@@ -6,14 +6,22 @@
 let
   homeDir = config.home.homeDirectory;
 
+  # Where this repo is cloned. Upstream assumed ~/dev/rhodium; here `RHODIUM`
+  # points at the clone itself (same path as the direnv whitelist in
+  # home/utils/core/direnv.nix).
+  rhodiumDir = "${homeDir}/rhodium";
+
   dirs = {
+    # Kept on purpose: the yazi keymaps still use these
+    # (see "Go To Locations" in home/utils/files/yazi/modules/keymap.nix).
+    # Point them at folders of your own, or drop the vars *and* those keymaps
+    # together.
     academic = "${homeDir}/academic";
-    dev = "${homeDir}/dev";
-    downloads = "${homeDir}/downloads";
-    pendings = "${homeDir}/pendings";
-    professional = "${homeDir}/professional";
+    devUtils = "${homeDir}/dev/utils";
     solenoidLabs = "${homeDir}/solenoid-labs";
-    vaults = "${homeDir}/vaults";
+
+    # XDG download dir (see `xdg.userDirs` below).
+    downloads = "${homeDir}/downloads";
   };
 
   xdgDirs = {
@@ -24,17 +32,6 @@ let
   };
 
   derivedDirs = {
-    # Dev
-    devPhantom = "${dirs.dev}/phantom";
-    devRhodium = "${dirs.dev}/rhodium";
-    devAlloys = "${dirs.dev}/alloys.rhf";
-    devChiaroscuro = "${dirs.dev}/chiaroscuro.rht";
-    devUtils = "${dirs.dev}/utils";
-
-    # Obsidian Vault
-    vaultsSanctum = "${dirs.vaults}/sanctum";
-    vaultsFiction = "${dirs.vaults}/fiction";
-
     # User binaries
     userBinFuzzel = "${xdgDirs.binHome}/fuzzel";
     userBinCommon = "${xdgDirs.binHome}/common";
@@ -62,22 +59,14 @@ in
     MANPAGER = userPreferences.apps.pager;
 
     # Main dirs
-    HOME_ACADEMIC = dirs.academic;
     HOME_DOWNLOADS = dirs.downloads;
+    # The repo itself: `cd $RHODIUM`, yazi's "Go to rhodium" (g r) and
+    # television's rhodium channel.
+    RHODIUM = rhodiumDir;
+    # Only kept because yazi's g a / g s / g u keymaps use them; see `dirs`.
+    HOME_ACADEMIC = dirs.academic;
     HOME_SOLENOIDLABS = dirs.solenoidLabs;
-    HOME_PROFESSIONAL = dirs.professional;
-    HOME_VAULTS = dirs.vaults;
-
-    # Dev
-    DEV_PHANTOM = derivedDirs.devPhantom;
-    DEV_UTILS = derivedDirs.devUtils;
-    RHODIUM = derivedDirs.devRhodium;
-    DEV_ALLOYS = derivedDirs.devAlloys;
-    DEV_CHIAROSCURO = derivedDirs.devChiaroscuro;
-
-    # Vaults
-    HOME_VAULTS_SANCTUM = derivedDirs.vaultsSanctum;
-    HOME_VAULTS_FICTION = derivedDirs.vaultsFiction;
+    DEV_UTILS = dirs.devUtils;
 
     # Device mounts (TODO: Configure)
     MNT_A = "";

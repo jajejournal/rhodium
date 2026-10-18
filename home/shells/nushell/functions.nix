@@ -46,10 +46,8 @@
     # Jump to project - quick project switcher
     def --env jtp [] {
       let project_dirs = [
-        $env.HOME_PROJECTS
-        $env.HOME_PROFESSIONAL
-        $env.HOME_SOLENOIDLABS
         $env.RHODIUM
+        $"($env.HOME)/dev"
       ]
 
       let project = (
