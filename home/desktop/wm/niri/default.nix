@@ -847,6 +847,14 @@ in
         hotkey-overlay.title = "Launch App Menu [Fuzzel]";
         action.spawn = "fuzzel";
       };
+      # The rice's own menu (fuzzel-apps.sh): applications plus the bookmark and
+      # browser-profile entries, grouped by category. Upstream had this menu on
+      # Mod+A; here Mod+A is the plain app menu above and Mod+Shift+A is OCR, so
+      # it lives on Mod+M. Mod+F1 builds its cheat sheet from these titles.
+      "Mod+M" = {
+        hotkey-overlay.title = "Launch Apps + Bookmarks [Fuzzel]";
+        action.spawn-sh = "$USERBIN_FUZZEL/fuzzel-apps.sh";
+      };
       "Mod+W" = {
         hotkey-overlay.title = "Launch Terminal [Kitty]";
         action.spawn = "kitty";

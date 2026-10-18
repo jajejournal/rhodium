@@ -129,6 +129,9 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 - **Super + A** — open the app menu (`fuzzel`, the same launcher the bar button
   uses). The screenshot annotate that used to be on `Super + A` is now
   `Super + Alt + A`; the plain `Alt + Print` shortcut still works too.
+- **Super + M** — the rice's own menu (`fuzzel-apps.sh`): applications *plus*
+  bookmarks and browser profiles, grouped by category. Upstream had this menu on
+  `Super + A`.
 
 The plain-text cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
 `~/.config/niri/shortcuts.txt` and opened in a floating terminal.

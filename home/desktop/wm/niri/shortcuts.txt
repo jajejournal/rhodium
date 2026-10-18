@@ -105,7 +105,7 @@
 --------------------------------------------------------------------------------
   Keybind menu ......... Mod + F1  (fuzzel-help.sh, built from the config)
   Full cheatsheet ...... Mod + c-cedilla  (this file, via `less`)
-  Apps + bookmarks ..... fuzzel-apps.sh (entries from data/, with categories)
+  Apps + bookmarks ..... Mod + M  (fuzzel-apps.sh: entries from data/, with categories)
   Run these from a terminal (or ~/.local/bin/fuzzel/):
     fuzzel-power.sh  fuzzel-wifi.sh  fuzzel-bluetooth.sh  fuzzel-services.sh
     fuzzel-usb.sh  fuzzel-emoji.sh  fuzzel-colors.sh  fuzzel-display.sh

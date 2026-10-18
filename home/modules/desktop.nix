@@ -84,9 +84,9 @@ let
 
       # Bookmarks and browser profiles are not applications: keep them out of
       # the generic app launcher (Mod + A) so it only lists real apps. They
-      # still show up in the rice's own menus (fuzzel-apps.sh / raffi), which
-      # read these files directly. Apps flagged with `noDisplay` are treated
-      # the same way, since they only duplicate the package's own entry.
+      # still show up in the rice's own menus (fuzzel-apps.sh, Mod + M; raffi),
+      # which read these files directly. Apps flagged with `noDisplay` are
+      # treated the same way, since they only duplicate the package's own entry.
       noDisplay =
         entry.entryType == "bookmark"
         || entry.entryType == "profile"
