@@ -36,6 +36,26 @@ copy_to_clipboard() {
   fi
 }
 
+# --- Restart User Services ---
+# Restart only the user units this host actually has. Every rh-* service can be
+# enabled or disabled per user (see users/<user>/), so a unit that does not exist
+# is expected — not an error.
+restart_user_units() {
+  local unit
+  for unit in "$@"; do
+    if systemctl --user cat "${unit}.service" &>/dev/null; then
+      systemctl --user restart "${unit}.service" || true
+    fi
+  done
+}
+
+# Reload mako's configuration, but only when mako is actually running.
+reload_mako() {
+  if systemctl --user is-active --quiet rh-mako.service; then
+    makoctl reload 2>/dev/null || true
+  fi
+}
+
 # Add a blank space after the symbol
 provide_fuzzel_prompt() {
   printf "%s " "$FUZZEL_PROMPT"

@@ -37,7 +37,13 @@ function check_generations() {
 function check_rhodium_services() {
   print_pending "Rhodium Services"
   for service in rh-swaybg rh-waybar; do
-    if systemctl --user is-active "$service.service" >/dev/null 2>&1; then print_success "  $service"; else print_error "  $service"; fi
+    if ! systemctl --user cat "$service.service" >/dev/null 2>&1; then
+      echo "  $service: not enabled on this host"
+    elif systemctl --user is-active "$service.service" >/dev/null 2>&1; then
+      print_success "  $service"
+    else
+      print_error "  $service"
+    fi
   done
 }
 
