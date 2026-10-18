@@ -7,6 +7,7 @@
   rhodiumLib,
   userPreferences,
   host,
+  user,
   ...
 }:
 {
