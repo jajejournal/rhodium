@@ -119,7 +119,7 @@ cp /etc/nixos/hardware-configuration.nix ~/rhodium/hosts/intel/hardware-configur
 
 ### 5. (Optional) Set your timezone
 
-Only if you don't live in `Europe/Madrid`:
+Only if you don't live in Bogotá (the default is `America/Bogota`):
 
 ```bash
 nano ~/rhodium/data/hosts/hosts.nix     # edit `timeZone` (and `locale` if you want)
@@ -229,13 +229,15 @@ it from inside the repo: `FLAKE_PATH` defaults to the current directory.
 > **New files must be tracked by git.** Nix flakes only see files that git knows about,
 > so `git add` anything new before switching. `just switch` does **not** add it for you.
 
-- **Show all keybinds:** `Mod + F1` (or read `~/.config/niri/shortcuts.txt`).
-- **Switch keyboard layout:** `Super + Space` (English ↔ Spanish).
+- **Show all keybinds:** `Mod + F1` (searchable menu). `Mod + c-cedilla` opens the
+  full plain-text list (`~/.config/niri/shortcuts.txt`).
+- **Switch keyboard layout:** `Super + Space` (Spanish ↔ English, Spanish first).
 - **If the desktop breaks:** `Ctrl + Alt + F3` gives you a TTY. Log in, fix, rebuild.
 
 ## Things that are still yours to decide
 
-- [ ] `timeZone` / `locale` in `data/hosts/hosts.nix` (defaults to `Europe/Madrid`).
+- [ ] `timeZone` / `locale` in `data/hosts/hosts.nix` (defaults to `America/Bogota` /
+      `en_US.UTF-8`).
 - [ ] `fullName` / `emailMain` in `data/users/users.nix` (defaults to GitHub noreply).
 - [ ] Optional: your own SSH public key (`home/security/network/ssh.nix` →
       `rhSsh.authorizedKeys`).

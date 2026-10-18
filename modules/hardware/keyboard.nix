@@ -2,7 +2,7 @@
 # NOTE: Keyboard layout, timezone and locale are configurable per host in
 #       data/hosts/hosts.nix (fields: timeZone / locale).
 let
-  timeZone = host.timeZone or "Europe/Madrid";
+  timeZone = host.timeZone or "America/Bogota";
   locale = host.locale or "en_US.UTF-8";
 in
 {
@@ -28,10 +28,10 @@ in
 
   console.keyMap = "us"; # TTY console keymap
 
-  # X11/XWayland layouts: English (US) + Spanish, toggled with Super+Space.
+  # X11/XWayland layouts: Spanish (ES) + English (US), toggled with Super+Space.
   # Niri sets the Wayland layout separately (home/desktop/wm/niri/).
   services.xserver.xkb = {
-    layout = "us,es";
+    layout = "es,us";
     options = "grp:win_space_toggle";
     variant = "";
   };

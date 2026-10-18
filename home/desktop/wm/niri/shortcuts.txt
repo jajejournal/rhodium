@@ -3,8 +3,9 @@
 ================================================================================
 
   Mod  =  Super / Win key
-  Switch keyboard layout (EN <-> ES):  Super + Space
-  Show this cheatsheet:                Mod + F1   (Mod + c-cedilla also works on the ES layout)
+  Switch keyboard layout (ES <-> EN):  Super + Space
+  Keybind menu (search):               Mod + F1
+  Full cheatsheet (plain text):        Mod + c-cedilla  (this file)
 
 --------------------------------------------------------------------------------
   SYSTEM & CORE
@@ -102,7 +103,8 @@
 --------------------------------------------------------------------------------
   OTHER MENUS (fuzzel)
 --------------------------------------------------------------------------------
-  Keybind list ......... fuzzel-help.sh (generated from the config)
+  Keybind menu ......... Mod + F1  (fuzzel-help.sh, built from the config)
+  Full cheatsheet ...... Mod + c-cedilla  (this file, via `less`)
   Apps + bookmarks ..... fuzzel-apps.sh (entries from data/, with categories)
   Run these from a terminal (or ~/.local/bin/fuzzel/):
     fuzzel-power.sh  fuzzel-wifi.sh  fuzzel-bluetooth.sh  fuzzel-services.sh

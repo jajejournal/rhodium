@@ -33,9 +33,9 @@ paid software is removed.
 | Fonts | JetBrainsMono Nerd Font (free replacement for the paid original) |
 | AI agents | opencode, codex, gemini-cli, claude-code, aider |
 
-Press **Super + F1** at any time to open the shortcuts cheatsheet
-(`~/.config/niri/shortcuts.txt`). Switch keyboard layout with **Super + Space**
-(English ↔ Spanish).
+Press **Super + F1** at any time for the searchable keybind menu; `Super + AltGr + ,`
+(the `ç` key) opens the full plain-text cheatsheet. Switch keyboard layout with
+**Super + Space** (Spanish ↔ English, Spanish first).
 
 ## Installation
 
@@ -120,21 +120,23 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 
 ## Keybinds
 
-- **Super + F1** — open the shortcuts cheatsheet (all keybinds in one file). It
-  works with any layout; on the Spanish layout `Super + AltGr + ,` (the `ç` key)
-  does the same.
-- **Super + Space** — switch keyboard layout (English ↔ Spanish, `grp:win_space_toggle`).
+- **Super + F1** — searchable keybind menu (`fuzzel-help.sh`), generated from the
+  `hotkey-overlay.title` of every bind, so it is always in sync with the config.
+  Works with any layout.
+- **Super + AltGr + ,** (the `ç` key) — the full plain-text cheatsheet, which also
+  lists the rice's other menus and helper scripts.
+- **Super + Space** — switch keyboard layout (Spanish ↔ English, `grp:win_space_toggle`).
 - **Super + A** — open the app menu (`fuzzel`, the same launcher the bar button
   uses). The screenshot annotate that used to be on `Super + A` is now
   `Super + Alt + A`; the plain `Alt + Print` shortcut still works too.
 
-The cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
+The plain-text cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
 `~/.config/niri/shortcuts.txt` and opened in a floating terminal.
 
-Rhodium also ships its own keybind menu, `fuzzel-help.sh` (see
-`~/.local/bin/fuzzel/`). It is built from the `hotkey-overlay.title` of every
-bind in `home/desktop/wm/niri/default.nix`, so those titles are the source of
-truth for both menus — keep `shortcuts.txt` in sync when you change them.
+`fuzzel-help.sh` (see `~/.local/bin/fuzzel/`) builds the `Super + F1` menu from
+the `hotkey-overlay.title` of every bind in `home/desktop/wm/niri/default.nix`,
+so those titles are the source of truth for both cheatsheets — keep
+`shortcuts.txt` in sync when you change them.
 
 **What the app menu lists.** `Super + A` shows the applications installed on the
 system (each package's own `.desktop` file) plus the launcher entries you define
@@ -188,7 +190,8 @@ Nothing sensitive is stored in this repository.
 - **A package doesn't exist** — names change between nixpkgs branches. Search with
   `nix search nixpkgs <name>`.
 - **Wrong keyboard layout / console keymap** — edit `modules/hardware/keyboard.nix`.
-- **Wrong clock** — set `timeZone` in `data/hosts/hosts.nix` (defaults to `Europe/Madrid`).
+- **Wrong clock** — set `timeZone` in `data/hosts/hosts.nix` (defaults to
+  `America/Bogota`).
 
 ## Fork changes vs. upstream
 
@@ -202,7 +205,8 @@ Nothing sensitive is stored in this repository.
 - **Real Intel iGPU module.** Upstream's `niri/intel.nix` was actually an **NVIDIA** module;
   renamed to `nvidia.nix`, and a genuine Intel iGPU module was added.
 - **Autologin enabled** via greetd.
-- **Keyboard layouts: English (US) + Spanish (ES)**.
+- **Keyboard layouts: Spanish (ES) + English (US)**, Spanish first, toggled with
+  `Super + Space`; the default timezone is `America/Bogota`.
 - **Hardware/server-specific services off by default** (ASUS backlight, Keychron/kmonad,
   Plex, Roon, Atuin sync…) so a fresh install boots anywhere.
 - **No one else's bookmarks or browser profiles.** Upstream shipped 117 personal
@@ -231,7 +235,8 @@ Roadmap:
 - [x] Two portable hosts (`amd`, `intel`) with template hardware configs
 - [x] Add a real Intel iGPU niri module (rename the old one to `nvidia.nix`)
 - [x] Enable autologin (greetd)
-- [x] English + Spanish keyboard layouts
+- [x] Spanish + English keyboard layouts (ES first) with `America/Bogota` as default
+      timezone
 - [x] Keybind cheatsheet (`Super + F1`)
 - [x] App menu keybind (`Super + A` → `fuzzel`)
 - [x] `INSTALL.md` for both install routes
@@ -241,7 +246,8 @@ Roadmap:
 
 Next:
 
-- [ ] Set the real `timeZone` / `locale` in `data/hosts/hosts.nix` (currently `Europe/Madrid`)
+- [ ] Set your own `timeZone` / `locale` in `data/hosts/hosts.nix` (defaults:
+      `America/Bogota` / `en_US.UTF-8`)
 - [ ] Set the real `fullName` / `emailMain` in `data/users/users.nix` (currently GitHub noreply)
 - [ ] Validated build: `nix flake check` + first `nixos-rebuild switch`
 - [ ] Screenshots of this fork's own setup (the ones above are upstream's)

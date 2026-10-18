@@ -41,9 +41,15 @@ let
   # Dell position = right of MSI (MSI logical width = 3440 at scale 1.0)
   dellPositionX = msiPositionX + 3440;
 
-  # Opens the keybind cheatsheet in a floating terminal (see `binds` below and
-  # xdg.configFile."niri/shortcuts.txt" at the end of this file).
-  cheatsheet = "kitty --class rh-shortcuts -e less -R \"$HOME/.config/niri/shortcuts.txt\"";
+  # Keybind cheatsheets (see `binds` below and xdg.configFile."niri/shortcuts.txt"
+  # at the end of this file):
+  #   cheatsheetMenu -> searchable menu, built from the titles in this very
+  #                     config so it can never go stale
+  #                     (home/scripts/fuzzel/fuzzel-help.sh).
+  #   cheatsheetText -> the full plain-text list, which also documents the
+  #                     rice's other menus and helper scripts.
+  cheatsheetMenu = "~/.local/bin/fuzzel/fuzzel-help.sh";
+  cheatsheetText = "kitty --class rh-shortcuts -e less -R \"$HOME/.config/niri/shortcuts.txt\"";
 in
 {
   programs.niri.settings = {
@@ -102,7 +108,7 @@ in
     input = {
       keyboard = {
         xkb = {
-          layout = "us,es";
+          layout = "es,us";
           options = "grp:win_space_toggle";
         };
         repeat-delay = 300;
@@ -545,19 +551,17 @@ in
         action.spawn = "hyprlock";
       };
 
-      # Help / cheatsheet: show every keybind in a floating terminal.
-      # The file lives at ~/.config/niri/shortcuts.txt.
+      # Help / cheatsheet.
+      #   Mod+F1       -> searchable keybind menu, generated from this config.
+      #   Mod+ccedilla -> the full plain-text list (~/.config/niri/shortcuts.txt).
       # Mod+F1 works with ANY keyboard layout, so it is the one to remember.
-      # Mod+ccedilla is an extra alias for the Spanish layout, where "ç" is
-      # typed with AltGr + , — the "us" layout cannot type "ç" at all, so on
-      # its own it looked like the cheatsheet "did nothing".
       "Mod+F1" = {
         hotkey-overlay.title = "Keybind Cheatsheet";
-        action.spawn-sh = cheatsheet;
+        action.spawn-sh = cheatsheetMenu;
       };
       "Mod+ccedilla" = {
-        hotkey-overlay.title = "Keybind Cheatsheet";
-        action.spawn-sh = cheatsheet;
+        hotkey-overlay.title = "Keybind Cheatsheet (plain text)";
+        action.spawn-sh = cheatsheetText;
       };
 
       # Focus Navigation
