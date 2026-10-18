@@ -852,8 +852,11 @@ in
         action.spawn = "kitty";
       };
       "Mod+B" = {
-        hotkey-overlay.title = "Launch Browser [Firefox Personal]";
-        action.spawn = [ "firefox" "-p" "Personal" ];
+        hotkey-overlay.title = "Launch Browser [Firefox]";
+        # Firefox's default profile. To always use a named profile, set
+        # `profiles.firefox.personal` in data/users/preferences/apps.nix (the
+        # same setting the browser/links use) and spawn it with the `-P` flag.
+        action.spawn = "firefox";
       };
       "Mod+D" = {
         hotkey-overlay.title = "Launch File Manager [Yazi]";

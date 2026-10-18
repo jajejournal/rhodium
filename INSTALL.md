@@ -230,6 +230,9 @@ it from inside the repo: `FLAKE_PATH` defaults to the current directory.
 > **New files must be tracked by git.** Nix flakes only see files that git knows about,
 > so `git add` anything new before switching. `just switch` does **not** add it for you.
 
+> **direnv:** the fork whitelists `~/rhodium`, so entering it loads the dev shell
+> (`nix develop`) without asking. Clones in another path need a one-time `direnv allow`.
+
 - **Show all keybinds:** `Mod + F1` (searchable menu). `Mod + c-cedilla` opens the
   full plain-text list (`~/.config/niri/shortcuts.txt`).
 - **Switch keyboard layout:** `Super + Space` (Spanish ↔ English, Spanish first).

@@ -147,7 +147,7 @@ launch_nix_web() {
     firefox http://localhost:8649/ &
     disown
     
-    notify "$APP_TITLE" "Nix Web Started\n◌ Service: nix-web\n◌ Browser: firefox (personal profile)"
+    notify "$APP_TITLE" "Nix Web Started\n◌ Service: nix-web\n◌ Browser: firefox"
 }
 
 launch_nix_melt() {

@@ -10,21 +10,31 @@ load_metadata "fuzzel" "go"
 
 FUZZEL_WIDTH=120
 
-FIREFOX_PROFILE_PERSONAL="Personal"
-FIREFOX_PROFILE_MEDIA="Media"
+# Firefox profile to open the results in. Empty = Firefox's default profile,
+# which keeps this menu working on a fresh install (see
+# data/users/preferences/apps.nix). Set a profile name to route the searches
+# to a named Firefox profile instead.
+FIREFOX_PROFILE_PERSONAL=""
+FIREFOX_PROFILE_MEDIA=""
 
-open_in_firefox() {
+open_in_firefox_profile() {
   local url="$1"
+  local profile="$2"
   notify "$APP_TITLE" "Opening $url in Firefox..."
-  firefox -P "$FIREFOX_PROFILE_PERSONAL" --new-window "$url" &
+  if [[ -n "$profile" ]]; then
+    firefox -P "$profile" --new-window "$url" &
+  else
+    firefox --new-window "$url" &
+  fi
   disown
 }
 
+open_in_firefox() {
+  open_in_firefox_profile "$1" "$FIREFOX_PROFILE_PERSONAL"
+}
+
 open_in_firefox_media() {
-  local url="$1"
-  notify "$APP_TITLE" "Opening $url in Firefox..."
-  firefox -P "$FIREFOX_PROFILE_MEDIA" --new-window "$url" &
-  disown
+  open_in_firefox_profile "$1" "$FIREFOX_PROFILE_MEDIA"
 }
 
 urlencode() {

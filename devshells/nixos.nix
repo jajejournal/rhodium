@@ -18,9 +18,7 @@ pkgs-shell.mkShell {
     python3
     python3Packages.wcwidth
 
-    # --- Utils ---
-    pkgs-unstable.claude-code
-    pkgs-unstable.codex
-    pkgs-unstable.gemini-cli
+    # --- AI agent ---
+    pkgs-unstable.opencode
   ];
 }

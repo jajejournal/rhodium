@@ -19,7 +19,7 @@ fi
 # Read descriptions (sorted) and URLs into parallel arrays
 mapfile -t descriptions < <(jq -r '[.[]] | sort_by(.description) | .[].description' "$BOOKMARKS_FILE")
 mapfile -t urls < <(jq -r '[.[]] | sort_by(.description) | .[].url' "$BOOKMARKS_FILE")
-mapfile -t profiles < <(jq -r '[.[]] | sort_by(.description) | .[].profile' "$BOOKMARKS_FILE")
+mapfile -t profiles < <(jq -r '[.[]] | sort_by(.description) | .[].profile // ""' "$BOOKMARKS_FILE")
 
 # Build options array for decorate_fuzzel_menu
 options=()
@@ -36,7 +36,13 @@ open_url() {
   local profile="$2"
   local name="$3"
   notify "$APP_TITLE" "Opening $name..."
-  firefox -P "$profile" --new-window "$url" &
+  # An empty profile means "Firefox's default profile" (see
+  # data/users/preferences/apps.nix).
+  if [[ -n "$profile" ]]; then
+    firefox -P "$profile" --new-window "$url" &
+  else
+    firefox --new-window "$url" &
+  fi
   disown
 }
 

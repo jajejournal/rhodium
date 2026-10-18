@@ -185,6 +185,9 @@ Nothing sensitive is stored in this repository.
   `hardware-configuration.nix` into `hosts/<host>/`. See [INSTALL.md](./INSTALL.md).
 - **Black screen after login** — press `Ctrl + Alt + F3` for a TTY, log in, fix and
   rebuild.
+- **`direnv: .envrc is blocked` when you `cd` into the repo** — the repo ships an
+  `.envrc` (just `use flake`) and the fork whitelists `~/rhodium`, so this only
+  appears when your clone lives somewhere else: run `direnv allow` once inside it.
 - **Home-Manager fails on an existing file** (e.g. Firefox `profiles.ini`) — the flake sets
   `backupFileExtension = "backup"`, so the old file is renamed to `*.backup`.
 - **A package doesn't exist** — names change between nixpkgs branches. Search with
@@ -220,7 +223,9 @@ Nothing sensitive is stored in this repository.
   (`home/modules/desktop.nix`, `lib/generators/desktopGenerators.nix`).
 - **No hardcoded browser profile required.** An empty profile name means "the
   browser's default profile", so links, bookmarks and launcher entries work on a
-  fresh install instead of opening a profile that does not exist yet.
+  fresh install instead of opening a profile that does not exist yet. The same
+  applies to the helpers that used to hardcode personal profiles (`Super + B`,
+  `fuzzel-go.sh`, `fuzzel-osmium.sh`, the internal-services data file).
 - **Comments and docs in English.**
 
 Nothing here is destructive to upstream: the whole rice and module layout are preserved.

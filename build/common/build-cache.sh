@@ -43,13 +43,14 @@ update_bat_cache() {
 }
 
 # --- Update Tldr Cache ---
+# NOTE: this one downloads the pages from GitHub, so it needs network access. A
+# flaky connection must not make a rebuild look broken: it warns and moves on.
 update_tldr_cache() {
   print_pending "Updating tldr cache..."
   if tldr --update; then
     print_success "TLDR cache updated"
   else
-    print_error "Failed to update tldr cache"
-    return 1
+    print_partial "Skipped tldr cache (needs network; try again later)"
   fi
 }
 
@@ -192,7 +193,7 @@ main() {
   [[ "$run_launcher" == true ]] && { update_launcher_cache || failed_operations+=("launcher"); }
   [[ "$run_wallpapers" == true ]] && { update_wallpapers_cache || failed_operations+=("wallpapers"); }
   [[ "$run_bat" == true ]] && { update_bat_cache || failed_operations+=("bat"); }
-  [[ "$run_tldr" == true ]] && { update_tldr_cache || failed_operations+=("tldr"); }
+  [[ "$run_tldr" == true ]] && update_tldr_cache
   [[ "$run_icons" == true ]] && { update_icons_cache || failed_operations+=("icons"); }
   [[ "$run_nix" == true ]] && { update_nix_index || failed_operations+=("nix"); }
 

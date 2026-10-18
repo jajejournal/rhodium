@@ -10,13 +10,14 @@
 
     config = {
       # Whitelist configuration
+      # NOTE: any PRE-approved `.envrc` under this prefix runs automatically.
+      # The rice's own repo lives here (see INSTALL.md), and its .envrc is just
+      # `use flake`, so cd'ing into it loads the dev shell without asking.
+      # Clones elsewhere need a one-time `direnv allow`.
       whitelist = {
         # Allow entire directory hierarchies
         prefix = [
-          "${config.home.homeDirectory}/academic"
-          "${config.home.homeDirectory}/dev"
-          "${config.home.homeDirectory}/professional"
-          "${config.home.homeDirectory}/solenoid-labs"
+          "${config.home.homeDirectory}/rhodium"
         ];
       };
 
