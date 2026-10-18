@@ -73,11 +73,15 @@ Nothing here is destructive to upstream: the whole rice and module layout is pre
 
 Defined in `data/hosts/hosts.nix` and `data/users/users.nix`:
 
-| nixosConfiguration | Hostname | User | GPU |
-| --- | --- | --- | --- |
-| `amd` | `amd` | `bausserr` | AMD (iGPU/dGPU) |
-| `intel` | `intel` | `manssell` | Intel iGPU |
+| nixosConfiguration | Hostname | User | GPU | Create this user in the installer |
+| --- | --- | --- | --- | --- |
+| `amd` | `amd` | `bausserr` | AMD (iGPU/dGPU) | ✅ |
+| `intel` | `intel` | `manssell` | Intel iGPU | ✅ |
 
+> **Use exactly these during the NixOS installation** (the username most of all). If you
+> create that user in the installer, the repo needs **zero edits** to work.
+> Full walkthrough: **[INSTALL.md](./INSTALL.md)**.
+>
 > Want a single machine instead of two? Point any host at the same `user` in
 > `data/hosts/hosts.nix`, or add your own entry + directory under `hosts/`.
 
@@ -85,8 +89,12 @@ Defined in `data/hosts/hosts.nix` and `data/users/users.nix`:
 
 ## Installation
 
+> 👉 **Full step-by-step guide: [INSTALL.md](./INSTALL.md)** — it covers the
+> **graphical ISO** route (recommended, much shorter) and the manual route below.
+
 > ⚠️ The `hardware-configuration.nix` files in this repo are **templates**. If you don't
-> regenerate them on the machine you're installing to, the system won't boot.
+> replace them with one generated on the machine you're installing to, the system won't
+> boot.
 
 1. Boot the NixOS ISO, then partition and mount your disks (UEFI + ext4 example):
 
@@ -207,6 +215,7 @@ opencode auth login
 - [x] Enable autologin (greetd)
 - [x] English + Spanish keyboard layouts
 - [x] Keybind cheatsheet (all shortcuts in one file, opened with `Mod + ç`)
+- [x] `INSTALL.md` covering both ISO routes, with the recommended user/hostname per machine
 - [x] Add `opencode` with the free `deepseek-v4.1-flash-free` model
 - [x] Disable hardware/server-specific services by default
 - [x] Disable Atuin history sync by default (was pointing to the author's server)
