@@ -63,7 +63,7 @@ Boot the graphical ISO and go through the installer:
 After installing you get a **black screen with a text login prompt** (no desktop yet).
 That's expected.
 
-### 2. First boot: enable flakes and get `git`
+### 2. First boot: enable flakes, get `git` and `just`
 
 Log in with the user you created.
 
@@ -71,13 +71,17 @@ Log in with the user you created.
 sudo nano /etc/nixos/configuration.nix
 ```
 
-Add these (if `environment.systemPackages` already exists, just add `git` to its list
-instead of duplicating the line):
+Add these (if `environment.systemPackages` already exists, just add `git` and `just` to
+its list instead of duplicating the line):
 
 ```nix
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
-environment.systemPackages = with pkgs; [ git ];
+environment.systemPackages = with pkgs; [ git just ];
 ```
+
+> **Why `just` here?** Every build/install shortcut in this repo is a `just` recipe
+> (`justfile`). You need it *before* the rice is installed, so it goes into this temporary
+> config; the rice installs it again for your user later anyway.
 
 Apply it (uses the channel the installer already downloaded):
 
@@ -94,8 +98,12 @@ ping -c1 github.com     # if this fails: nmtui, or plug in an ethernet cable
 ### 3. Clone the repo
 
 ```bash
-git clone https://github.com/jajejournal/rhodium ~/rhodium
+git clone -b portability https://github.com/jajejournal/rhodium ~/rhodium
 ```
+
+> **`-b portability` matters.** `main` is still the original upstream rhodium; the
+> portability work (generic hosts, free font, opencode, both keyboard layouts…) lives on
+> the `portability` branch until it gets merged.
 
 ### 4. Copy the generated hardware configuration
 
@@ -119,7 +127,22 @@ nano ~/rhodium/data/hosts/hosts.nix     # edit `timeZone` (and `locale` if you w
 
 ### 6. Install the rice
 
-Pick the same host as your machine:
+Pick the same host as your machine. Run it **from inside the repo** — `just` reads the
+`justfile` from the current directory:
+
+```bash
+cd ~/rhodium
+
+just switch-fast intel    # or: just switch-fast amd
+```
+
+> **Why `switch-fast` on the first install?** You are still on a text console with no
+> desktop running. `just switch` also runs post-build tasks that expect a live desktop
+> session (reloading user services, refreshing icon/`mako` caches), which would print
+> harmless errors here. `switch-fast` performs exactly the same system rebuild, nothing
+> else. Once you are inside niri, use `just switch`.
+
+It is the same as the raw command, if you ever need it:
 
 ```bash
 sudo nixos-rebuild switch --flake ~/rhodium#intel    # or #amd
@@ -156,7 +179,7 @@ For when you want full control of partitioning. Adapted from the repo README.
 
    ```bash
    sudo nixos-generate-config --root /mnt
-   nix-shell -p git --run "git clone https://github.com/jajejournal/rhodium /tmp/rhodium"
+   nix-shell -p git --run "git clone -b portability https://github.com/jajejournal/rhodium /tmp/rhodium"
    ```
 
 3. Copy the generated hardware config into the matching host:
@@ -179,10 +202,14 @@ For when you want full control of partitioning. Adapted from the repo README.
    sudo nixos-enter --root /mnt -c 'passwd bausserr'
    ```
 
-6. Reboot, then manage the system from the repo:
+6. Reboot. The rice is already installed, but the repo only lived in `/tmp`, so clone it
+   again into your home and re-copy the hardware config (a fresh clone carries the
+   template, not your machine's):
 
    ```bash
-   sudo nixos-rebuild switch --flake ~/rhodium#intel    # or #amd
+   git clone -b portability https://github.com/jajejournal/rhodium ~/rhodium
+   cp /etc/nixos/hardware-configuration.nix ~/rhodium/hosts/intel/hardware-configuration.nix
+   cd ~/rhodium && just switch intel    # or: just switch amd
    ```
 
 ---
@@ -190,10 +217,17 @@ For when you want full control of partitioning. Adapted from the repo README.
 ## Day-to-day
 
 ```bash
-cd ~/rhodium
+cd ~/rhodium     # `just` only works from the repo root
 git pull
-sudo nixos-rebuild switch --flake .#intel    # or .#amd
+just switch intel    # or: just switch amd
 ```
+
+`just switch <host>` is the same as `sudo nixos-rebuild switch --flake ~/rhodium#<host>`
+plus the post-build refresh (icons, user services, notifications) — that is why you run
+it from inside the repo: `FLAKE_PATH` defaults to the current directory.
+
+> **New files must be tracked by git.** Nix flakes only see files that git knows about,
+> so `git add` anything new before switching. `just switch` does **not** add it for you.
 
 - **Show all keybinds:** `Mod + ç` (or read `~/.config/niri/shortcuts.txt`).
 - **Switch keyboard layout:** `Super + Space` (English ↔ Spanish).
