@@ -131,6 +131,11 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 The cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
 `~/.config/niri/shortcuts.txt` and opened in a floating terminal.
 
+Rhodium also ships its own keybind menu, `fuzzel-help.sh` (see
+`~/.local/bin/fuzzel/`). It is built from the `hotkey-overlay.title` of every
+bind in `home/desktop/wm/niri/default.nix`, so those titles are the source of
+truth for both menus — keep `shortcuts.txt` in sync when you change them.
+
 ## OpenCode integration (in development)
 
 [opencode](https://opencode.ai) is installed through Home Manager
