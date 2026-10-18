@@ -1,73 +1,45 @@
-<p align="center">
-  <img src="https://dvb0bsaug07xf.cloudfront.net/assets/site/logo.png" width="500px">
-</p>
+# rhodium
 
-# rhodium (fork)
+My NixOS setup: **flakes + home-manager + niri** (scrollable tiling on Wayland), heavily
+customised and made **portable** so it installs on any machine from a plain NixOS ISO.
 
-> A personal, **portable** fork of [pabloagn/rhodium](https://github.com/pabloagn/rhodium) —
-> a hypermodular **NixOS "rice"** built around the [niri](https://github.com/YaLTeR/niri)
-> Wayland compositor.
+This is a personal, cleaned-up fork of
+**[pabloagn/rhodium](https://github.com/pabloagn/rhodium)**. The whole rice and the module
+layout are kept; everything tied to the original author's private accounts, hardware and
+paid software is removed.
 
-This is my daily-driver NixOS configuration. It keeps the upstream rice (niri, waybar/astal,
-fuzzel, fish, kitty/ghostty, neovim, zed, …) but removes everything that was tied to the
-original author's private accounts, hardware and paid software, so it can be installed on
-**any machine** from a plain NixOS ISO.
+## Screenshots
 
 <p align="center">
   <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_001.jpg" width="49%"/>
   <img src="https://dvb0bsaug07xf.cloudfront.net/assets/screens/screen_002.jpg" width="49%"/>
 </p>
 
----
+## Overview
 
-## What is a "rice"?
-
-A "rice" is a heavily customized desktop: window manager / compositor, bar, launcher,
-terminal, fonts, colors, keybinds and shell, all tuned for a specific look and workflow.
-Here, everything is declared in Nix, so the whole desktop is **reproducible**: the same
-repo produces the same system on any supported machine.
-
-| Layer | Choice |
+| Area | What I use |
 | --- | --- |
 | Compositor | **niri** (scrollable tiling, Wayland) |
 | Bar / widgets | waybar + astal (ags) |
 | Launcher | fuzzel |
-| Shell | fish (+ zsh, nushell, bash) |
+| Notifications | mako |
+| Shell / prompt | fish (+ zsh, nushell, bash), starship |
 | Terminals | kitty, ghostty, foot, alacritty |
-| Editors | neovim, helix, zed, vscode, micro |
-| Prompt | starship |
-| Colors | chiaroscuro (Kanso) theme |
-| Fonts | Nerd Fonts (mono: `JetBrainsMono Nerd Font`) |
+| Editors | neovim, helix, zed, vscode, micro, emacs (doom) |
+| Files | yazi (TUI) + thunar (GUI) |
+| Lock screen | hyprlock |
+| Display manager | greetd — **autologin** straight into niri |
+| Theme | chiaroscuro (Kanso) — GTK and Qt |
+| Fonts | JetBrainsMono Nerd Font (free replacement for the paid original) |
+| AI agents | opencode, codex, gemini-cli, claude-code, aider |
 
----
+Press **Super + ç** at any time to open the shortcuts cheatsheet
+(`~/.config/niri/shortcuts.txt`). Switch keyboard layout with **Super + Space**
+(English ↔ Spanish).
 
-## Fork changes vs. upstream
+## Installation
 
-Upstream is great but is written for the author's own machines. This fork makes it
-self-contained and portable:
-
-- **Removed the private `iridium-rh` flake input.** Upstream pulled Berkeley Mono (paid)
-  and Server Mono from a private repo over SSH, which made the flake unbuildable for anyone
-  else. Replaced with the free (SIL OFL) **JetBrains Mono Nerd Font**.
-- **Removed hardcoded personal SSH key** (`~/.ssh/authorized_keys`) and the private
-  `identityFile`. It's now an opt-in module option (`rhSsh.authorizedKeys`).
-- **Everything personal moved to `data/`**: username, full name, email, hostnames and
-  monitors live in `data/users/users.nix` and `data/hosts/hosts.nix`.
-- **Two portable hosts**: `amd` and `intel`. The `hardware-configuration.nix` files are
-  **templates** that you regenerate on the target machine.
-- **Real Intel iGPU module.** Upstream's `niri/intel.nix` was actually an **NVIDIA** module;
-  renamed to `nvidia.nix`, and a genuine Intel iGPU module was added.
-- **Autologin enabled** (greetd) — boots straight into the desktop.
-- **Keyboard layouts: English (US) + Spanish (ES)**, toggle with `Super + Space`.
-- **opencode** added to the AI agents, preconfigured with the free model
-  `opencode/deepseek-v4.1-flash-free`.
-- **Hardware-specific services off by default** (ASUS backlight, Keychron/kmonad, Plex, Roon,
-  Atuin sync…) so a fresh install boots anywhere; enable the ones you own.
-- **Comments and docs in English.**
-
-Nothing here is destructive to upstream: the whole rice and module layout is preserved.
-
----
+👉 **[INSTALL.md](./INSTALL.md)** — graphical ISO (recommended) or a manual install.
 
 ## Hosts & users
 
@@ -75,102 +47,71 @@ Defined in `data/hosts/hosts.nix` and `data/users/users.nix`:
 
 | nixosConfiguration | Hostname | User | GPU | Create this user in the installer |
 | --- | --- | --- | --- | --- |
-| `amd` | `amd` | `bausserr` | AMD (iGPU/dGPU) | ✅ |
+| `amd` | `amd` | `bausserr` | AMD (iGPU / dGPU) | ✅ |
 | `intel` | `intel` | `manssell` | Intel iGPU | ✅ |
 
 > **Use exactly these during the NixOS installation** (the username most of all). If you
 > create that user in the installer, the repo needs **zero edits** to work.
-> Full walkthrough: **[INSTALL.md](./INSTALL.md)**.
 >
 > Want a single machine instead of two? Point any host at the same `user` in
 > `data/hosts/hosts.nix`, or add your own entry + directory under `hosts/`.
 
----
-
-## Installation
-
-> 👉 **Full step-by-step guide: [INSTALL.md](./INSTALL.md)** — it covers the
-> **graphical ISO** route (recommended, much shorter) and the manual route below.
-
-> ⚠️ The `hardware-configuration.nix` files in this repo are **templates**. If you don't
-> replace them with one generated on the machine you're installing to, the system won't
-> boot.
-
-1. Boot the NixOS ISO, then partition and mount your disks (UEFI + ext4 example):
-
-   ```bash
-   sudo parted /dev/nvme0n1 -- mklabel gpt
-   sudo parted /dev/nvme0n1 -- mkpart ESP fat32 1MiB 512MiB
-   sudo parted /dev/nvme0n1 -- set 1 esp on
-   sudo parted /dev/nvme0n1 -- mkpart primary ext4 512MiB 100%
-   sudo mkfs.fat -F32 -n BOOT /dev/nvme0n1p1
-   sudo mkfs.ext4 -L nixos /dev/nvme0n1p2
-   sudo mount /dev/disk/by-label/nixos /mnt
-   sudo mount --mkdir /dev/disk/by-label/BOOT /mnt/boot
-   ```
-
-2. Generate the hardware config and clone this repo:
-
-   ```bash
-   sudo nixos-generate-config --root /mnt
-   nix-shell -p git --run "git clone https://github.com/jajejournal/rhodium /tmp/rhodium"
-   ```
-
-3. Copy the generated hardware config into the matching host:
-
-   ```bash
-   # For an Intel machine:
-   sudo cp /mnt/etc/nixos/hardware-configuration.nix /tmp/rhodium/hosts/intel/hardware-configuration.nix
-   # For an AMD machine:
-   # sudo cp /mnt/etc/nixos/hardware-configuration.nix /tmp/rhodium/hosts/amd/hardware-configuration.nix
-   ```
-
-4. Install (pick `intel` or `amd`):
-
-   ```bash
-   sudo nixos-install --flake /tmp/rhodium#intel --root /mnt
-   ```
-
-5. Reboot. From then on, manage the system from the repo:
-
-   ```bash
-   cd ~/rhodium
-   sudo nixos-rebuild switch --flake .#intel   # or .#amd
-   ```
-
----
-
-## Keyboard layouts
-
-English (US) and Spanish (ES) are both enabled, switching with **Super + Space**
-(`grp:win_space_toggle`). Configured in:
-
-- `modules/hardware/keyboard.nix` (system/X11 + timezone/locale)
-- `home/desktop/wm/niri/config.kdl` and `home/desktop/wm/niri/default.nix` (niri)
-- `home/desktop/wm/hyprland/base.nix` (hyprland)
-
-Timezone and locale are per-host (`data/hosts/hosts.nix` → `timeZone`, `locale`).
-
----
-
-## Keybind cheatsheet
-
-Every keybind is listed in `home/desktop/wm/niri/shortcuts.txt`, which is deployed to
-`~/.config/niri/shortcuts.txt`. Open it at any time with:
+## Repository layout
 
 ```
-Mod + ç    (the key that types "ç" — AltGr + , on the Spanish layout)
+rhodium/
+├── flake.nix                      # inputs + nixosConfigurations (amd, intel)
+├── INSTALL.md                     # install guide (graphical ISO + manual)
+├── data/                          # ← all your personal data lives here
+│   ├── hosts/hosts.nix            #   hostnames, users, monitors, timezone
+│   └── users/users.nix            #   usernames, names, emails, groups
+├── hosts/<host>/                  # per-machine NixOS config (amd/, intel/)
+│   ├── default.nix
+│   └── hardware-configuration.nix #   regenerate on the target machine
+├── users/user_001/                # shared Home Manager config
+├── modules/                       # system-level NixOS modules
+├── home/                          # Home Manager modules
+│   ├── desktop/wm/niri/           #   niri config + shortcuts.txt
+│   └── development/agents/        #   AI agents (incl. opencode)
+├── overlays/                      # package overlays (incl. the free font)
+└── justfile                       # helper recipes
 ```
 
-It opens in a floating terminal (`kitty --class rh-shortcuts -e less`).
+## Daily use
 
----
+```sh
+cd ~/rhodium
+git pull
+sudo nixos-rebuild switch --flake .#intel    # or .#amd
+```
 
-## opencode
+> Flakes only see files tracked by git, so `git add` new files before rebuilding.
 
-[opencode](https://opencode.ai) is installed via Home Manager
+## Customizing
+
+- **Colors / theme** — `home/assets/themes/` + `data/users/preferences/theme.nix`.
+  niri, waybar, kitty, fuzzel, yazi… all follow it.
+- **Fonts** — `overlays/fonts.nix` (the free replacement) and `home/modules/fonts.nix`.
+- **Keybinds** — `home/desktop/wm/niri/default.nix`; keep
+  `home/desktop/wm/niri/shortcuts.txt` in sync when you change them.
+- **Keyboard layout / timezone** — `modules/hardware/keyboard.nix` +
+  `data/hosts/hosts.nix` (`timeZone`, `locale`).
+- **Users & hosts** — `data/users/users.nix`, `data/hosts/hosts.nix`.
+- **Programs** — `home/apps/…` (user) and `modules/apps` (system).
+
+## Keybinds
+
+- **Super + ç** — open the shortcuts cheatsheet (all keybinds in one file).
+- **Super + Space** — switch keyboard layout (English ↔ Spanish, `grp:win_space_toggle`).
+
+The cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
+`~/.config/niri/shortcuts.txt` and opened in a floating terminal.
+
+## OpenCode integration (in development)
+
+[opencode](https://opencode.ai) is installed through Home Manager
 (`home/development/agents/`) and preconfigured at `~/.config/opencode/opencode.json`
-with the free model:
+with the **free** model:
 
 ```json
 { "model": "opencode/deepseek-v4.1-flash-free", "autoupdate": false }
@@ -179,32 +120,57 @@ with the free model:
 Run it with `opencode`, or pick another model with `opencode --model <provider/model>`.
 `autoupdate` is off because Nix owns the binary. To add other providers:
 
-```bash
+```sh
 opencode auth login
 ```
 
----
+> **Status: in development.** The package and config are wired up, but it has not been
+> validated on a real NixOS machine yet.
 
-## Repository layout
+## Secrets
 
-```
-├── flake.nix            # inputs + nixosConfigurations (amd, intel)
-├── data/                # ← your personal data lives here
-│   ├── hosts/hosts.nix   #   hostnames, users, monitors, timezone
-│   └── users/users.nix   #   usernames, names, emails, groups
-├── hosts/               # per-host NixOS system config (amd/, intel/)
-├── users/               # shared Home Manager user config (user_001/)
-├── modules/             # system-level NixOS modules
-├── home/                # Home Manager modules (desktop, apps, shells, …)
-├── overlays/            # package overlays (incl. the free font)
-└── justfile             # helper recipes (`just switch <host>`, …)
-```
+Nothing sensitive is stored in this repository.
 
----
+- **SSH** — paste your **public** key into `home/security/network/ssh.nix` →
+  `rhSsh.authorizedKeys`. It is opt-in: no keys are installed by default.
+- **User password** — set with `passwd` (or during installation), never committed.
+- **opencode credentials** — live in your home directory (`opencode auth login`).
 
-## TODO / roadmap
+## Troubleshooting
 
-### Done in this fork
+- **Nothing boots after installing** — you didn't copy the machine's
+  `hardware-configuration.nix` into `hosts/<host>/`. See [INSTALL.md](./INSTALL.md).
+- **Black screen after autologin** — press `Ctrl + Alt + F3` for a TTY, log in, fix and
+  rebuild.
+- **Home-Manager fails on an existing file** (e.g. Firefox `profiles.ini`) — the flake sets
+  `backupFileExtension = "backup"`, so the old file is renamed to `*.backup`.
+- **A package doesn't exist** — names change between nixpkgs branches. Search with
+  `nix search nixpkgs <name>`.
+- **Wrong keyboard layout / console keymap** — edit `modules/hardware/keyboard.nix`.
+- **Wrong clock** — set `timeZone` in `data/hosts/hosts.nix` (defaults to `Europe/Madrid`).
+
+## Fork changes vs. upstream
+
+- **Removed the private `iridium-rh` flake input.** Upstream pulled Berkeley Mono (paid) and
+  Server Mono from a private repo over SSH, which made the flake unbuildable for anyone
+  else. Replaced with the free (SIL OFL) **JetBrains Mono Nerd Font**.
+- **Removed the hardcoded personal SSH key** and the private `identityFile` — now an opt-in
+  module option (`rhSsh.authorizedKeys`).
+- **All personal data moved into `data/`** (usernames, emails, hostnames, monitors).
+- **Two portable hosts** (`amd`, `intel`) with template `hardware-configuration.nix`.
+- **Real Intel iGPU module.** Upstream's `niri/intel.nix` was actually an **NVIDIA** module;
+  renamed to `nvidia.nix`, and a genuine Intel iGPU module was added.
+- **Autologin enabled** via greetd.
+- **Keyboard layouts: English (US) + Spanish (ES)**.
+- **Hardware/server-specific services off by default** (ASUS backlight, Keychron/kmonad,
+  Plex, Roon, Atuin sync…) so a fresh install boots anywhere.
+- **Comments and docs in English.**
+
+Nothing here is destructive to upstream: the whole rice and module layout are preserved.
+
+## TODO
+
+Roadmap:
 
 - [x] Remove the private `iridium-rh` flake input
 - [x] Replace the paid font (Berkeley Mono) with a free Nerd Font
@@ -214,32 +180,21 @@ opencode auth login
 - [x] Add a real Intel iGPU niri module (rename the old one to `nvidia.nix`)
 - [x] Enable autologin (greetd)
 - [x] English + Spanish keyboard layouts
-- [x] Keybind cheatsheet (all shortcuts in one file, opened with `Mod + ç`)
-- [x] `INSTALL.md` covering both ISO routes, with the recommended user/hostname per machine
+- [x] Keybind cheatsheet (`Super + ç`)
+- [x] `INSTALL.md` for both install routes
 - [x] Add `opencode` with the free `deepseek-v4.1-flash-free` model
 - [x] Disable hardware/server-specific services by default
-- [x] Disable Atuin history sync by default (was pointing to the author's server)
 - [x] Translate comments and docs to English
 
-### Pending / do on first install
+Next:
 
-- [ ] Regenerate `hardware-configuration.nix` on each target machine
 - [ ] Set the real `timeZone` / `locale` in `data/hosts/hosts.nix` (currently `Europe/Madrid`)
 - [ ] Set the real `fullName` / `emailMain` in `data/users/users.nix` (currently GitHub noreply)
-- [ ] Run `nix flake check` and the first `nixos-rebuild switch`
-- [ ] (Optional) Add your own public SSH key via `rhSsh.authorizedKeys`
-- [ ] (Optional) `opencode auth login` for other providers
-- [ ] (Optional) Enable Keychron udev rules / `rh-kmonad` if you own one
-- [ ] (Optional) Enable ASUS-specific services on ASUS hardware
-- [ ] (Optional) Clean up the author's leftover bookmarks in `data/users/extras/bookmarks.nix`
-
-### Ideas
-
-- [ ] Screenshots of this fork's setup in the README
-- [ ] Single generic host profile for "any laptop"
-- [ ] Automated `nix flake check` in CI (GitHub Actions)
-
----
+- [ ] Validated build: `nix flake check` + first `nixos-rebuild switch`
+- [ ] Screenshots of this fork's own setup (the ones above are upstream's)
+- [ ] "Lite" profile for low-RAM machines
+- [ ] `nix flake check` in CI (GitHub Actions)
+- [ ] (Optional) own public SSH key, `opencode auth login`, Keychron/kmonad, ASUS services
 
 ## Credits & license
 
