@@ -634,6 +634,11 @@ in
       "Mod+Shift+0".action.move-column-to-workspace = 10;
 
       # Application Launchers (Primary)
+      # App menu (fuzzel): exactly the same thing as clicking the "rhodium"
+      # button on the bar. Mod+A is the launcher key in the original hyprland
+      # config; the screenshot annotate that used to live here moved to
+      # Mod+Alt+A (see Screenshots below).
+      "Mod+A".action.spawn = "fuzzel";
       "Mod+W".action.spawn = "kitty";
       "Mod+B".action.spawn = [ "firefox" "-p" "Personal" ];
       "Mod+D".action.spawn = [ "kitty" "-e" "yazi" ];
@@ -658,7 +663,9 @@ in
       "Shift+Print".action.screenshot = [ ];
       "Mod+Alt+S".action.screenshot-window = [ ];
       "Ctrl+Print".action.screenshot-window = [ ];
-      "Mod+A".action.spawn-sh = "$USERBIN_UTILS/utils-screenshot-annotate.sh";
+      # Annotate lives on Mod+Alt+A now: Mod+A is the app menu (see launchers),
+      # next to Mod+Alt+S (screenshot window). Alt+Print keeps working too.
+      "Mod+Alt+A".action.spawn-sh = "$USERBIN_UTILS/utils-screenshot-annotate.sh";
       "Alt+Print".action.spawn-sh = "$USERBIN_UTILS/utils-screenshot-annotate.sh";
       "Mod+Shift+A".action.spawn-sh = "$USERBIN_UTILS/utils-ocr.sh";
 

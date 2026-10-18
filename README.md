@@ -124,6 +124,9 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
   works with any layout; on the Spanish layout `Super + AltGr + ,` (the `ç` key)
   does the same.
 - **Super + Space** — switch keyboard layout (English ↔ Spanish, `grp:win_space_toggle`).
+- **Super + A** — open the app menu (`fuzzel`, the same launcher the bar button
+  uses). The screenshot annotate that used to be on `Super + A` is now
+  `Super + Alt + A`; the plain `Alt + Print` shortcut still works too.
 
 The cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
 `~/.config/niri/shortcuts.txt` and opened in a floating terminal.
@@ -202,6 +205,7 @@ Roadmap:
 - [x] Enable autologin (greetd)
 - [x] English + Spanish keyboard layouts
 - [x] Keybind cheatsheet (`Super + F1`)
+- [x] App menu keybind (`Super + A` → `fuzzel`)
 - [x] `INSTALL.md` for both install routes
 - [x] Add `opencode` with the free `deepseek-v4.1-flash-free` model
 - [x] Disable hardware/server-specific services by default

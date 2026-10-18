@@ -73,6 +73,7 @@
 --------------------------------------------------------------------------------
   APPLICATIONS
 --------------------------------------------------------------------------------
+  Mod + A .............. App menu (fuzzel launcher)
   Mod + W .............. Terminal (kitty)
   Mod + Shift + W ...... Terminal (ghostty)
   Mod + D .............. File manager (yazi)
@@ -94,8 +95,17 @@
   Shift + Print ........ Screenshot (region)
   Mod + Alt + S ........ Screenshot (window)
   Ctrl + Print ......... Screenshot (window)
-  Mod + A / Alt + Print  Screenshot + annotate
+  Mod + Alt + A ........ Screenshot + annotate
+  Alt + Print .......... Screenshot + annotate
   Mod + Shift + A ...... OCR (text from screen)
+
+--------------------------------------------------------------------------------
+  OTHER MENUS (fuzzel)
+--------------------------------------------------------------------------------
+  Run these from a terminal (or ~/.local/bin/fuzzel/):
+    fuzzel-power.sh  fuzzel-wifi.sh  fuzzel-bluetooth.sh  fuzzel-services.sh
+    fuzzel-usb.sh  fuzzel-emoji.sh  fuzzel-colors.sh  fuzzel-display.sh
+    fuzzel-kill.sh  fuzzel-journals.sh  ... (ls ~/.local/bin/fuzzel/)
 
 --------------------------------------------------------------------------------
   MOUSE & TRACKPAD
