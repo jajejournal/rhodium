@@ -33,6 +33,17 @@ let
   # Capitalize first letter for descriptions
   capitalize = str: lib.toUpper (lib.substring 0 1 str) + lib.substring 1 (-1) str;
 
+  # An empty profile name means "use the browser's default profile": the
+  # profile flag is left out, so entries keep working on a fresh install where
+  # no named profile exists yet (set a name in data/users/preferences/apps.nix
+  # to route a bookmark/profile to a specific one).
+  profileArgs =
+    browserConfig: profileName:
+    lib.optionals (profileName != "") [
+      browserConfig.profileFlag
+      profileName
+    ];
+
   # Flatten nested attribute set into flat structure with combined keys
   flattenNestedAttrs =
     attrs:
@@ -55,9 +66,7 @@ let
     in
     {
       binary = browserConfig.executable;
-      args = [
-        browserConfig.profileFlag
-        profileName
+      args = profileArgs browserConfig profileName ++ [
         browserConfig.newWindowFlag
         bookmark.url
       ];
@@ -79,13 +88,10 @@ let
     in
     {
       binary = browserConfig.executable;
-      args = [
-        browserConfig.profileFlag
-        profileName
-        browserConfig.newWindowFlag
-      ];
+      args = profileArgs browserConfig profileName ++ [ browserConfig.newWindowFlag ];
       icon = browser;
-      description = "${capitalize browser} ${profileName}";
+      description =
+        if profileName == "" then capitalize browser else "${capitalize browser} ${profileName}";
       entryType = "profile";
       profileName = profileName;
       categories = profile.categories or [ ];
@@ -99,6 +105,10 @@ let
     description = "${app.description}";
     entryType = "application";
     categories = app.categories or [ ];
+    # Hides the entry from generic launchers. Set `noDisplay = true` for
+    # entries that only duplicate the .desktop file the package already
+    # installs; the rice's own menus (fuzzel-apps.sh, raffi) still list them.
+    noDisplay = app.noDisplay or false;
   };
 in
 {

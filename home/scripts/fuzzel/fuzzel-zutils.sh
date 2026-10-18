@@ -144,7 +144,7 @@ launch_nix_web() {
     
     # Wait a moment for service to start, then open browser
     sleep 2
-    firefox -p Personal http://localhost:8649/ &
+    firefox http://localhost:8649/ &
     disown
     
     notify "$APP_TITLE" "Nix Web Started\n◌ Service: nix-web\n◌ Browser: firefox (personal profile)"

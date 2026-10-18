@@ -103,6 +103,7 @@
   OTHER MENUS (fuzzel)
 --------------------------------------------------------------------------------
   Keybind list ......... fuzzel-help.sh (generated from the config)
+  Apps + bookmarks ..... fuzzel-apps.sh (entries from data/, with categories)
   Run these from a terminal (or ~/.local/bin/fuzzel/):
     fuzzel-power.sh  fuzzel-wifi.sh  fuzzel-bluetooth.sh  fuzzel-services.sh
     fuzzel-usb.sh  fuzzel-emoji.sh  fuzzel-colors.sh  fuzzel-display.sh

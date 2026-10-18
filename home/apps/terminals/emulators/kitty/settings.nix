@@ -26,7 +26,7 @@
       tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
 
       # --- Urls ---
-      open_url_with = "firefox -p Personal";
+      open_url_with = "firefox";
 
       # Borders
       window_border_width = "3pt";

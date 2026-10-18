@@ -225,20 +225,12 @@
       }
     ];
 
-    # Web Browsers (with profiles & new window flags)
+    # Web Browsers (new window / private window)
     browser-personal = [
       {
-        desc = "Firefox (Personal)";
+        desc = "Firefox";
         for = "unix";
-        run = "firefox -p Personal -new-window \"$@\"";
-      }
-    ];
-
-    browser-work = [
-      {
-        desc = "Firefox (SolenoidLabs)";
-        for = "unix";
-        run = "firefox -p SolenoidLabs -new-window \"$@\"";
+        run = "firefox -new-window \"$@\"";
       }
     ];
 
@@ -246,7 +238,7 @@
       {
         desc = "Firefox (Private)";
         for = "unix";
-        run = "firefox -p Personal --private-window \"$@\"";
+        run = "firefox --private-window \"$@\"";
       }
     ];
 
@@ -509,7 +501,6 @@
           "edit-nano"
           "edit-emacs"
           "browser-personal"
-          "browser-work"
           "browser-incognito"
           "reveal"
         ];

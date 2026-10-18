@@ -1,60 +1,21 @@
 {
+  # Browser profiles offered as launcher entries in the rice's own menus
+  # (fuzzel-apps.sh, raffi). Each one becomes a desktop entry that opens the
+  # browser directly in that profile.
+  #
+  # firefox.personal is required: home/environment/mime.nix uses its launcher
+  # entry (rh-firefox-personal) as the default handler for web links.
+  #
+  # Add the profiles you actually use, e.g.:
+  #
+  #   firefox = {
+  #     personal = { profile = "personal"; description = "Firefox Personal"; };
+  #     work = { profile = "work"; description = "Firefox Work"; };
+  #   };
   firefox = {
     personal = {
       profile = "personal";
       description = "Firefox Personal";
-    };
-    media = {
-      profile = "media";
-      description = "Firefox Media";
-    };
-    solenoidlabs = {
-      profile = "solenoidlabs";
-      description = "Firefox Solenoid Labs";
-    };
-    uk = {
-      profile = "uk";
-      description = "Firefox UK";
-    };
-    academic = {
-      profile = "academic";
-      description = "Firefox Academic";
-    };
-    segmentaim = {
-      profile = "segmentaim";
-      description = "Firefox Segmentaim";
-    };
-    bsogood = {
-      profile = "bsogood";
-      description = "Firefox Bsogood";
-    };
-    phantom = {
-      profile = "phantom";
-      description = "Firefox Phantom";
-    };
-    genai = {
-      profile = "genai";
-      description = "Firefox GenAI Dev";
-    };
-    genai-2 = {
-      profile = "genai-2";
-      description = "Firefox GenAI Dev 2";
-    };
-    amsterdam = {
-      profile = "amsterdam";
-      description = "Firefox Amsterdam";
-    };
-    private = {
-      profile = "private";
-      description = "Firefox Private";
-    };
-    littlejohn = {
-      profile = "littlejohn";
-      description = "Firefox Little John";
-    };
-    atmosphericai = {
-      profile = "atmosphericai";
-      description = "Firefox Atmospheric AI";
     };
   };
 }

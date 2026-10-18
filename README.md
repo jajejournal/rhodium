@@ -136,6 +136,18 @@ Rhodium also ships its own keybind menu, `fuzzel-help.sh` (see
 bind in `home/desktop/wm/niri/default.nix`, so those titles are the source of
 truth for both menus — keep `shortcuts.txt` in sync when you change them.
 
+**What the app menu lists.** `Super + A` shows the applications installed on the
+system (each package's own `.desktop` file) plus the launcher entries you define
+in `data/users/extras/apps.nix`. Two things are kept out of it on purpose:
+
+- **Bookmarks and browser profiles** are not applications. They still exist as
+  launchable entries in the rice's own menus (`fuzzel-apps.sh`, `raffi`), which
+  read them directly. Add your own in `data/users/extras/bookmarks.nix` and
+  `data/users/extras/profiles.nix`.
+- **Entries that only duplicate a package's own entry** are marked
+  `noDisplay = true;` in `data/users/extras/apps.nix`, so an app is never listed
+  twice. Add your own launchers (wrappers, TUIs) the same way.
+
 ## OpenCode integration (in development)
 
 [opencode](https://opencode.ai) is installed through Home Manager
@@ -193,6 +205,17 @@ Nothing sensitive is stored in this repository.
 - **Keyboard layouts: English (US) + Spanish (ES)**.
 - **Hardware/server-specific services off by default** (ASUS backlight, Keychron/kmonad,
   Plex, Roon, Atuin sync…) so a fresh install boots anywhere.
+- **No one else's bookmarks or browser profiles.** Upstream shipped 117 personal
+  bookmarks and 14 Firefox profiles, which appeared as launcher entries on any
+  install. Replaced with a small, neutral starter set (`data/users/extras/bookmarks.nix`,
+  `profiles.nix`, `data/users/preferences/apps.nix`).
+- **A clean app menu.** `Super + A` lists applications only: bookmark/profile
+  entries and launcher entries that merely duplicate a package's own `.desktop`
+  file are `NoDisplay`, so nothing shows up twice and icons resolve
+  (`home/modules/desktop.nix`, `lib/generators/desktopGenerators.nix`).
+- **No hardcoded browser profile required.** An empty profile name means "the
+  browser's default profile", so links, bookmarks and launcher entries work on a
+  fresh install instead of opening a profile that does not exist yet.
 - **Comments and docs in English.**
 
 Nothing here is destructive to upstream: the whole rice and module layout are preserved.
