@@ -6,6 +6,7 @@
     ./ncspot.nix
     ./puredata.nix
     ./rmpc.nix
+    ./roon.nix
     ./sonicpi.nix
     ./spotify.nix
     ./supercollider.nix
@@ -27,8 +28,6 @@
     termusic # Feature-rich music player in Rust
     cmus # Small, fast console music player
 
-    # --- Roon ---
-    roon-tui # TUI remote control for Roon
-    roon-bridge # Roon audio output endpoint
+    # NOTE: Roon is opt-in (rh.apps.media.audio.roon) - see ./roon.nix.
   ];
 }
