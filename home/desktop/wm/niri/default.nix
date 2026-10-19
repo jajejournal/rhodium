@@ -556,16 +556,20 @@ in
         hotkey-overlay.title = "Lock Screen";
         action.spawn = "hyprlock";
       };
+      "Mod+Shift+Escape" = {
+        hotkey-overlay.title = "Power Menu [Shutdown / Reboot / Suspend]";
+        action.spawn-sh = "$USERBIN_FUZZEL/fuzzel-power.sh";
+      };
 
       # Help / cheatsheet.
       #   Mod+F1       -> searchable keybind menu, generated from this config.
-      #   Mod+ccedilla -> the full plain-text list (~/.config/niri/shortcuts.txt).
+      #   Mod+Shift+F1 -> the full plain-text list (~/.config/niri/shortcuts.txt).
       # Mod+F1 works with ANY keyboard layout, so it is the one to remember.
       "Mod+F1" = {
         hotkey-overlay.title = "Keybind Cheatsheet";
         action.spawn-sh = cheatsheetMenu;
       };
-      "Mod+ccedilla" = {
+      "Mod+Shift+F1" = {
         hotkey-overlay.title = "Keybind Cheatsheet (plain text)";
         action.spawn-sh = cheatsheetText;
       };
@@ -907,6 +911,16 @@ in
       "Mod+Ctrl+E" = {
         hotkey-overlay.title = "Launch Editor [Zed Editor]";
         action.spawn = "zeditor";
+      };
+
+      # Rice menus
+      "Mod+Shift+I" = {
+        hotkey-overlay.title = "Symbols / Unicode Icons";
+        action.spawn-sh = "$USERBIN_FUZZEL/fuzzel-icons.sh";
+      };
+      "Mod+Alt+E" = {
+        hotkey-overlay.title = "Emoji Picker (copies to clipboard)";
+        action.spawn-sh = "$USERBIN_FUZZEL/fuzzel-emoji.sh";
       };
 
       # Screenshots

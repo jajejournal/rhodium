@@ -5,12 +5,13 @@
   Mod  =  Super / Win key
   Switch keyboard layout (ES <-> EN):  Super + Space
   Keybind menu (search):               Mod + F1
-  Full cheatsheet (plain text):        Mod + c-cedilla  (this file)
+  Full cheatsheet (plain text):        Mod + Shift + F1  (this file)
 
 --------------------------------------------------------------------------------
   SYSTEM & CORE
 --------------------------------------------------------------------------------
   Mod + Escape ......... Lock screen (hyprlock)
+  Mod + Shift + Escape . Power menu: shutdown / reboot / suspend / logout
   Mod + X .............. Toggle overview
   Alt + Tab ............ Focus previous window
   Mod + Tab ............ Focus previous workspace
@@ -75,6 +76,8 @@
   APPLICATIONS
 --------------------------------------------------------------------------------
   Mod + M .............. App menu: apps + bookmarks (fuzzel-apps.sh)
+  Mod + Shift + I ...... Symbols / unicode icons (fuzzel-icons.sh)
+  Mod + Alt + E ........ Emoji picker (fuzzel-emoji.sh, copies to clipboard)
   Mod + W .............. Terminal (kitty)
   Mod + Shift + W ...... Terminal (ghostty)
   Mod + D .............. File manager (yazi)
@@ -101,14 +104,17 @@
   Mod + Shift + A ...... OCR (text from screen)
 
 --------------------------------------------------------------------------------
-  OTHER MENUS (fuzzel)
+  MORE MENUS  (scripts live in ~/.local/bin/fuzzel/)
 --------------------------------------------------------------------------------
-  Keybind menu ......... Mod + F1  (fuzzel-help.sh, built from the config)
-  Full cheatsheet ...... Mod + c-cedilla  (this file, via `less`)
-  Run these from a terminal (or ~/.local/bin/fuzzel/):
-    fuzzel-power.sh  fuzzel-wifi.sh  fuzzel-bluetooth.sh  fuzzel-services.sh
-    fuzzel-usb.sh  fuzzel-emoji.sh  fuzzel-colors.sh  fuzzel-display.sh
-    fuzzel-kill.sh  fuzzel-journals.sh  ... (ls ~/.local/bin/fuzzel/)
+  Mod + F1 ............. Searchable keybind menu (fuzzel-help.sh)
+  Mod + Shift + F1 ..... This cheatsheet (plain text)
+  Bar: click logo ...... Apps + bookmarks (fuzzel-apps.sh)
+  Bar: click Bluetooth . Bluetooth (fuzzel-bluetooth.sh)
+  Bar: right-click bat . Power menu (fuzzel-power.sh)
+  Terminal only ........ wifi, networking, display, colors, services, usb,
+    mounts, vaults, temperature, journals, kill, yank, go, osmium, remote,
+    xecute, zutils, find, launch, query, icons, emoji, auth, askpass
+    ... (ls ~/.local/bin/fuzzel/)
 
 --------------------------------------------------------------------------------
   MOUSE & TRACKPAD

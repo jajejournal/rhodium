@@ -37,8 +37,8 @@ paid software is removed.
 | Fonts | JetBrainsMono Nerd Font (free replacement for the paid original) |
 | AI agents | opencode, codex, gemini-cli, claude-code, aider |
 
-Press **Super + F1** at any time for the searchable keybind menu; `Super + AltGr + ,`
-(the `ç` key) opens the full plain-text cheatsheet. Switch keyboard layout with
+Press **Super + F1** at any time for the searchable keybind menu; `Super + Shift + F1`
+opens the full plain-text cheatsheet. Switch keyboard layout with
 **Super + Space** (Spanish ↔ English, Spanish first).
 
 ## Installation
@@ -129,7 +129,7 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 - **Super + F1** — searchable keybind menu (`fuzzel-help.sh`), generated from the
   `hotkey-overlay.title` of every bind, so it is always in sync with the config.
   Works with any layout.
-- **Super + AltGr + ,** (the `ç` key) — the full plain-text cheatsheet, which also
+- **Super + Shift + F1** — the full plain-text cheatsheet, which also
   lists the rice's other menus and helper scripts.
 - **Super + Space** — switch keyboard layout (Spanish ↔ English, `grp:win_space_toggle`).
 - **Super + M** — open the app menu (`fuzzel-apps.sh`): applications *plus*
@@ -137,6 +137,16 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
   `Super + A` is intentionally unbound (upstream used it for a second launcher).
   The screenshot annotate that used to live there is on `Super + Alt + A`, and
   `Alt + Print` still works too.
+- **Super + Shift + Escape** — power menu (`fuzzel-power.sh`): power off, reboot,
+  reboot to UEFI, suspend, hibernate, log out, lock screen, airplane mode.
+- **Super + Shift + I** — symbols / unicode icons picker (`fuzzel-icons.sh`).
+- **Super + Alt + E** — emoji picker (`fuzzel-emoji.sh`, copies to clipboard).
+
+The rest of the menus ship as scripts in `~/.local/bin/fuzzel/` and are not
+keybound: wifi, networking, display, colors, services, USB, mounts, vaults,
+temperature, journals, kill, yank, go, osmium, remote, xecute, zutils, find,
+launch, query. A few are on the bar: click the logo for the app menu, click
+Bluetooth for its menu, and right-click the battery for the power menu.
 
 The plain-text cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
 `~/.config/niri/shortcuts.txt` and opened in a floating terminal.
