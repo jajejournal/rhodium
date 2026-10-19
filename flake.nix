@@ -95,6 +95,7 @@
         overlays = [
           nur.overlays.default
           overlaysWithInputs.fonts
+          overlaysWithInputs.opencode
         ];
       };
 
@@ -106,6 +107,7 @@
         overlays = [
           nur.overlays.default
           overlaysWithInputs.fonts
+          overlaysWithInputs.opencode
         ];
       };
 

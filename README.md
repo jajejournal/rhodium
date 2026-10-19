@@ -170,8 +170,17 @@ Run it with `opencode`, or pick another model with `opencode --model <provider/m
 opencode auth login
 ```
 
-> **Status: in development.** The package and config are wired up, but it has not been
-> validated on a real NixOS machine yet.
+opencode is a Bun-compiled binary, and nixpkgs builds it for CPUs **with AVX2**.
+On older machines — a ThinkPad T420, for example, whose Sandy Bridge CPU has AVX
+but no AVX2 — that build dies immediately with
+`Illegal instruction (core dumped)`. `overlays/opencode.nix` therefore installs
+upstream's own **baseline** build of opencode instead of compiling it, which runs
+on those CPUs and on modern ones alike. To bump it, edit the version and the hash
+in that file.
+
+> **Status: in use.** Validated on a T420 (old CPU, no AVX2) and on modern
+> machines; the model config above is what both the devshell and
+> `~/.config/opencode/opencode.json` use.
 
 ## Secrets
 
