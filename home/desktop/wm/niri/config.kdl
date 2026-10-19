@@ -11,7 +11,6 @@ input {
     keyboard {
         xkb {
             layout "us,es"
-            options "grp:win_space_toggle"
         }
         // Faster keyboard repeat & delay
         repeat-delay 300
@@ -340,8 +339,11 @@ binds {
     // Mod+Shift+C { spawn "sh" "-c" "env DISPLAY=:0 xsel -ob | wl-copy"; }
     // Mod+Shift+V { spawn "sh" "-c" "wl-paste -n | env DISPLAY=:0 xsel -ib"; }
     // System & Core Controls
-    Mod+Escape hotkey-overlay-title="Lock Screen" {
+    Mod+Space hotkey-overlay-title="Lock Screen" {
         spawn "hyprlock"
+    }
+    Mod+Shift+Space hotkey-overlay-title="Power Menu [Shutdown / Reboot / Suspend]" {
+        spawn-sh "$USERBIN_FUZZEL/fuzzel-power.sh"
     }
     // Mod+Shift+Q hotkey-overlay-title="Quit Niri" {
     //     quit

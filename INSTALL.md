@@ -235,7 +235,7 @@ it from inside the repo: `FLAKE_PATH` defaults to the current directory.
 
 - **Show all keybinds:** `Mod + F1` (searchable menu). `Mod + Shift + F1` opens the
   full plain-text list (`~/.config/niri/shortcuts.txt`).
-- **Switch keyboard layout:** `Super + Space` (Spanish ↔ English, Spanish first).
+- **Switch keyboard layout:** click the **ES/US** indicator in the waybar (Spanish first).
 - **If the desktop breaks:** `Ctrl + Alt + F3` gives you a TTY. Log in, fix, rebuild.
 
 ## Things that are still yours to decide

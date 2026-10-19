@@ -6,6 +6,7 @@ let
   moduleBluetooth = import ./bluetooth.nix;
   moduleCpu = import ./cpu.nix;
   moduleCustomClock = import ./custom-clock.nix;
+  moduleCustomKeyboardLayout = import ./custom-keyboard-layout.nix;
   moduleCustomRhodium = import ./custom-rhodium.nix;
   moduleCustomThmAmb = import ./custom-thm-amb.nix;
   moduleCustomThmAmd = import ./custom-thm-amd.nix;
@@ -22,12 +23,10 @@ let
   moduleMemory = import ./memory.nix;
   moduleNetworkWifiDl = import ./network-wifi-dl.nix;
   moduleNetworkWifiUl = import ./network-wifi-ul.nix;
-  moduleNiriLanguage = import ./niri-language.nix;
   moduleNiriWorkspaces = import ./niri-workspaces.nix;
   moduleWireplumberSink = import ./wireplumber-sink.nix;
   moduleWireplumberSource = import ./wireplumber-source.nix;
   moduleTray = import ./tray.nix;
-
 
   # --- Import Groups ---
   moduleGroupThermals = import ./group-thermals.nix;
@@ -51,6 +50,7 @@ let
     moduleWireplumberSource
     moduleCustomBullet
     moduleCustomClock
+    moduleCustomKeyboardLayout
     moduleCustomSeparator
     moduleCustomThmAmb
     moduleCustomThmAmd
@@ -65,7 +65,6 @@ let
     moduleKeyboardStateCapslock
     moduleNetworkWifiDl
     moduleNetworkWifiUl
-    moduleNiriLanguage
     moduleNiriWorkspaces
     moduleTray
   ];
@@ -114,7 +113,7 @@ let
       "backlight"
       "wireplumber#sink"
       "custom/separator"
-      "niri/language"
+      "custom/keyboard-layout"
       "custom/separator"
       "tray"
 

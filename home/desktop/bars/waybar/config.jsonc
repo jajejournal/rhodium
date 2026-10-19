@@ -18,7 +18,7 @@
     "group/thermals",
     "battery",
     "custom/separator",
-    "niri/language",
+    "custom/keyboard-layout",
     "keyboard-state#capslock",
   ],
 
@@ -357,9 +357,14 @@
     "tooltip-format": "Recording Device\n━━━━━━━━━━━━━━━━━━\n•Device ⟶ {node_name}\n• Volume ⟶ {volume}%",
   },
 
-  "niri/language": {
-    "format": "{short}",
-    "format-alt": "{long}",
+  "custom/keyboard-layout": {
+    "exec": "$XDG_BIN_HOME/waybar/rh-keyboard-layout.sh",
+    "interval": 1,
+    "tooltip": true,
+    "tooltip-format": "Click to switch keyboard layout",
+    "on-click": "niri msg action switch-layout next",
+    "on-click-right": "niri msg action switch-layout prev",
+    "format": "{}",
   },
 
   "keyboard-state#capslock": {

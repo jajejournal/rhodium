@@ -3,15 +3,15 @@
 ================================================================================
 
   Mod  =  Super / Win key
-  Switch keyboard layout (ES <-> EN):  Super + Space
+  Switch keyboard layout (ES <-> EN):  click the ES/US indicator in waybar
   Keybind menu (search):               Mod + F1
   Full cheatsheet (plain text):        Mod + Shift + F1  (this file)
 
 --------------------------------------------------------------------------------
   SYSTEM & CORE
 --------------------------------------------------------------------------------
-  Mod + Escape ......... Lock screen (hyprlock)
-  Mod + Shift + Escape . Power menu: shutdown / reboot / suspend / logout
+  Mod + Space ........... Lock screen (hyprlock)
+  Mod + Shift + Space ... Power menu: shutdown / reboot / suspend / logout
   Mod + X .............. Toggle overview
   Alt + Tab ............ Focus previous window
   Mod + Tab ............ Focus previous workspace

@@ -38,8 +38,8 @@ paid software is removed.
 | AI agents | opencode, codex, gemini-cli, claude-code, aider |
 
 Press **Super + F1** at any time for the searchable keybind menu; `Super + Shift + F1`
-opens the full plain-text cheatsheet. Switch keyboard layout with
-**Super + Space** (Spanish ↔ English, Spanish first).
+opens the full plain-text cheatsheet. Switch the keyboard layout by clicking the
+**ES/US** indicator in the waybar (Spanish first).
 
 ## Installation
 
@@ -131,14 +131,14 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
   Works with any layout.
 - **Super + Shift + F1** — the full plain-text cheatsheet, which also
   lists the rice's other menus and helper scripts.
-- **Super + Space** — switch keyboard layout (Spanish ↔ English, `grp:win_space_toggle`).
+- **Super + Space** — lock screen (`hyprlock`).
+- **Super + Shift + Space** — power menu (`fuzzel-power.sh`): power off, reboot,
+  reboot to UEFI, suspend, hibernate, log out, lock screen, airplane mode.
 - **Super + M** — open the app menu (`fuzzel-apps.sh`): applications *plus*
   bookmarks and browser profiles, grouped by category. This is the only menu;
   `Super + A` is intentionally unbound (upstream used it for a second launcher).
   The screenshot annotate that used to live there is on `Super + Alt + A`, and
   `Alt + Print` still works too.
-- **Super + Shift + Escape** — power menu (`fuzzel-power.sh`): power off, reboot,
-  reboot to UEFI, suspend, hibernate, log out, lock screen, airplane mode.
 - **Super + Shift + I** — symbols / unicode icons picker (`fuzzel-icons.sh`).
 - **Super + Alt + E** — emoji picker (`fuzzel-emoji.sh`, copies to clipboard).
 
@@ -239,8 +239,8 @@ Nothing sensitive is stored in this repository.
   renamed to `nvidia.nix`, and a genuine Intel iGPU module was added.
 - **Login prompt by default** (greetd + tuigreet), with autologin as an opt-in:
   set `rhodium.autologin = true`.
-- **Keyboard layouts: Spanish (ES) + English (US)**, Spanish first, toggled with
-  `Super + Space`; the default timezone is `America/Bogota`.
+- **Keyboard layouts: Spanish (ES) + English (US)**, Spanish first, toggled by
+  clicking the **ES/US** indicator in the waybar; the default timezone is `America/Bogota`.
 - **Hardware/server-specific services off by default** (ASUS backlight, Keychron/kmonad,
   Plex, Roon, Atuin sync…) so a fresh install boots anywhere.
 - **No one else's bookmarks or browser profiles.** Upstream shipped 117 personal

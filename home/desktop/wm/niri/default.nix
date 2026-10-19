@@ -159,7 +159,6 @@ in
       keyboard = {
         xkb = {
           layout = "es,us";
-          options = "grp:win_space_toggle";
         };
         repeat-delay = 300;
         repeat-rate = 90;
@@ -552,11 +551,15 @@ in
     # ============================================================================
     binds = {
       # System & Core Controls
-      "Mod+Escape" = {
+      #   Mod+Space       -> lock screen.
+      #   Mod+Shift+Space -> power menu.
+      # The keyboard layout is switched by clicking the ES/US indicator in
+      # waybar, so Mod+Space is free for a real action again.
+      "Mod+Space" = {
         hotkey-overlay.title = "Lock Screen";
         action.spawn = "hyprlock";
       };
-      "Mod+Shift+Escape" = {
+      "Mod+Shift+Space" = {
         hotkey-overlay.title = "Power Menu [Shutdown / Reboot / Suspend]";
         action.spawn-sh = "$USERBIN_FUZZEL/fuzzel-power.sh";
       };

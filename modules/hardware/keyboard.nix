@@ -28,11 +28,11 @@ in
 
   console.keyMap = "us"; # TTY console keymap
 
-  # X11/XWayland layouts: Spanish (ES) + English (US), toggled with Super+Space.
-  # Niri sets the Wayland layout separately (home/desktop/wm/niri/).
+  # X11/XWayland layouts: Spanish (ES) + English (US).
+  # The layout is switched from the waybar ES/US indicator; Niri sets the
+  # Wayland layout separately (home/desktop/wm/niri/).
   services.xserver.xkb = {
     layout = "es,us";
-    options = "grp:win_space_toggle";
     variant = "";
   };
 
