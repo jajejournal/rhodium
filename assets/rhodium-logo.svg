@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" width="720" height="200" role="img" aria-label="rhodium">
+  <title>rhodium</title>
+  <!--
+    The RHODIUM wordmark, in the rice's red (#c14043: the niri active border and
+    waybar alerts). Same art as the greeter (/etc/issue) and the neovim
+    dashboard. `textLength` forces every line to the same width, so the columns
+    line up whatever monospace font the viewer ends up using.
+  -->
+  <style>
+    .logo {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+      font-size: 26px;
+      fill: #c14043;
+    }
+  </style>
+  <g class="logo">
+    <text x="40" y="48" textLength="640" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  ╦═══╗┬   ┬┌───┐ ┌┬─┐┬┬   ┬┌─┬─┐</text>
+    <text x="40" y="78" textLength="640" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  ║   ║│   ││   │  │ │││   ││ │ │</text>
+    <text x="40" y="108" textLength="640" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  ╠═╦═╝├───┤│   │  │ │││   ││ │ │</text>
+    <text x="40" y="138" textLength="640" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  ║ ║  │   ││   │  │ │││   ││ │ │</text>
+    <text x="40" y="168" textLength="640" lengthAdjust="spacingAndGlyphs" xml:space="preserve">  ╩ ╚══┴   ┴└───┘──┴─┘┴└───┘┴   ┴</text>
+  </g>
+</svg>

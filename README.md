@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/rhodium-logo.svg" alt="rhodium" width="560"/>
+</p>
+
 # rhodium
 
 My NixOS setup: **flakes + home-manager + niri** (scrollable tiling on Wayland), heavily
@@ -109,7 +113,9 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 ## Customizing
 
 - **Colors / theme** — `home/assets/themes/` + `data/users/preferences/theme.nix`.
-  niri, waybar, kitty, fuzzel, yazi… all follow it.
+  niri, waybar, kitty, fuzzel, yazi… all follow it, and so do the GTK/Qt apps
+  (`home/desktop/portals/default.nix`) and the Firefox-family browsers
+  (`home/apps/browsers/browser-theme.nix`).
 - **Fonts** — `overlays/fonts.nix` (the free replacement) and `home/modules/fonts.nix`.
 - **Keybinds** — `home/desktop/wm/niri/default.nix`; keep
   `home/desktop/wm/niri/shortcuts.txt` in sync when you change them.

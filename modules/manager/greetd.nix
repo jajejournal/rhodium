@@ -21,13 +21,32 @@ in
     '';
   };
 
+  # The RHODIUM wordmark. tuigreet reads /etc/issue (`--issue`) and paints it
+  # with the "greet" color, so this is the red logo you see on the login
+  # prompt. agetty shows the same file on the plain console logins, hence the
+  # plain text: keep it free of escapes.
+  #
+  # NixOS would fill /etc/issue from services.getty.greetingLine and wrap it in
+  # ANSI escapes, which fights with the greeter's own theming, so we write the
+  # file directly (overriding that default). Same art as the neovim dashboard.
+  environment.etc."issue".text = ''
+    ╦═══╗┬   ┬┌───┐ ┌┬─┐┬┬   ┬┌─┬─┐
+    ║   ║│   ││   │  │ │││   ││ │ │
+    ╠═╦═╝├───┤│   │  │ │││   ││ │ │
+    ║ ║  │   ││   │  │ │││   ││ │ │
+    ╩ ╚══┴   ┴└───┘──┴─┘┴└───┘┴   ┴
+  '';
+
   config.services.greetd = {
     enable = true;
     settings = {
       # Login prompt (tuigreet), shown on boot unless rhodium.autologin is on.
       # It is also what you get back after logging out.
+      #
+      # --issue                    show /etc/issue (the logo above) on top
+      # --theme 'greet=red;...'    paint it (and the frame) in the rice's red
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${pkgs.niri}/bin/niri-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --issue --time --theme 'greet=red;border=red' --cmd ${pkgs.niri}/bin/niri-session";
         user = "greeter";
       };
     }

@@ -4,6 +4,10 @@
   ...
 }:
 let
+  # Shared Firefox-family styling (dark chrome + red accents); see
+  # browser-theme.nix.
+  browserTheme = import ./browser-theme.nix { theme = config.theme; };
+
   zenProfileSettings = {
     # --- Core Functionality ---
     "browser.shell.checkDefaultBrowser" = false;
@@ -52,8 +56,8 @@ in
         name = "Personal";
         isDefault = true;
         settings = zenProfileSettings;
-        # TODO: Empty userChrome for now
-        userChrome = "";
+        # Same styling as Firefox, so the two browsers match.
+        userChrome = browserTheme.userChrome;
         # TODO: Empty extensions list for now
         extensions = [ ];
       };
