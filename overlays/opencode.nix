@@ -54,10 +54,16 @@ prev.lib.optionalAttrs prev.stdenv.hostPlatform.isx86_64 {
     dontBuild = true;
     # Never strip it: the Bun runtime lives inside this same file.
     dontStrip = true;
+    # The release tarball contains the bare `opencode` binary, with no
+    # top-level directory, which the default unpacker rejects
+    # ("unpacker appears to have produced no directories"). Extract it
+    # ourselves instead.
+    dontUnpack = true;
 
     installPhase = ''
       runHook preInstall
 
+      tar -xzf ${src}
       install -Dm755 opencode $out/bin/opencode
 
       wrapProgram $out/bin/opencode \
