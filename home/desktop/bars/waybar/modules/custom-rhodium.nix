@@ -3,8 +3,8 @@
     "custom/rhodium" = {
       format = "Rh";
       tooltip = false;
-      on-click = "fuzzel";
-      on-click-right = "fuzzel";
+      on-click = "sh -c \"$USERBIN_FUZZEL/fuzzel-apps.sh\"";
+      on-click-right = "sh -c \"$USERBIN_FUZZEL/fuzzel-apps.sh\"";
     };
   };
 }

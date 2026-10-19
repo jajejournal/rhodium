@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/rhodium-logo.svg" alt="rhodium" width="560"/>
+  <img src="assets/rhodium-logo.png" alt="rhodium" width="560"/>
 </p>
 
 # rhodium

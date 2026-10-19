@@ -691,23 +691,23 @@
       }
       # broken links
       {
-        name = "*";
+        url = "*";
         is = "orphan";
         fg = "#E46876";
       }
       # executables
       {
-        name = "*";
+        url = "*";
         is = "exec";
         fg = "#7AA89F";
       }
       # fallback
       {
-        name = "*";
+        url = "*";
         fg = "#C5C9C7";
       }
       {
-        name = "*/";
+        url = "*/";
         fg = "#8BA4B0";
       }
     ];

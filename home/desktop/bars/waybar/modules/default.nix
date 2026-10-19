@@ -85,9 +85,9 @@ let
     ipc = true;
     layer = "top";
     margin-bottom = 0;
-    margin-left = 12;
-    margin-right = 12;
-    margin-top = 10;
+    margin-left = 0;
+    margin-right = 0;
+    margin-top = 0;
     mode = "indivisible";
     name = "mainJustine";
     position = "top";

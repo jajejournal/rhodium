@@ -845,18 +845,10 @@ in
       };
 
       # Application Launchers (Primary)
-      # App menu (fuzzel): exactly the same thing as clicking the "rhodium"
-      # button on the bar. Mod+A is the launcher key in the original hyprland
-      # config; the screenshot annotate that used to live here moved to
-      # Mod+Alt+A (see Screenshots below).
-      "Mod+A" = {
-        hotkey-overlay.title = "Launch App Menu [Fuzzel]";
-        action.spawn = "fuzzel";
-      };
-      # The rice's own menu (fuzzel-apps.sh): applications plus the bookmark and
-      # browser-profile entries, grouped by category. Upstream had this menu on
-      # Mod+A; here Mod+A is the plain app menu above and Mod+Shift+A is OCR, so
-      # it lives on Mod+M. Mod+F1 builds its cheat sheet from these titles.
+      # App menu (fuzzel-apps.sh): applications plus the bookmark and
+      # browser-profile entries, grouped by category. This is the rice's own
+      # menu and the only one: the plain `fuzzel` menu that used to live on
+      # Mod+A was removed so there aren't two competing launchers.
       "Mod+M" = {
         hotkey-overlay.title = "Launch Apps + Bookmarks [Fuzzel]";
         action.spawn-sh = "$USERBIN_FUZZEL/fuzzel-apps.sh";

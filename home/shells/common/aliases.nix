@@ -150,6 +150,11 @@
   now = "date +'%Y-%m-%d %H:%M:%S'";
   week = "date +%V";
 
+  # --- AI ---
+  # OpenCode always starts in the chats folder (~/documents/opencode), where
+  # every conversation is saved in a sub-folder by topic.
+  oc = "cd ~/documents/opencode && opencode";
+
   # --- View ---
   cat = "bat";
   cata = "cat * | y"; # cat all and yank
