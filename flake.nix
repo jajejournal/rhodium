@@ -57,6 +57,11 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    rhodium-opencode = {
+      url = "github:jajejournal/rhodium-opencode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -74,6 +79,7 @@
       chiaroscuro,
       rhodium-alloys,
       niri-flake,
+      rhodium-opencode,
     }@inputs:
     let
       lib = nixpkgs.lib;
@@ -95,7 +101,7 @@
         overlays = [
           nur.overlays.default
           overlaysWithInputs.fonts
-          overlaysWithInputs.opencode
+          rhodium-opencode.overlays.default
         ];
       };
 
@@ -107,7 +113,7 @@
         overlays = [
           nur.overlays.default
           overlaysWithInputs.fonts
-          overlaysWithInputs.opencode
+          rhodium-opencode.overlays.default
         ];
       };
 
@@ -203,7 +209,7 @@
     in
     {
       # --- Overlays ---
-      overlays = import ./overlays;
+      overlays = import ./overlays { inherit inputs; };
 
       # --- Formatter ---
       formatter.${system} = pkgs.nixfmt-rfc-style;
@@ -213,9 +219,14 @@
         let
           # Build a complete NixOS configuration for a host.
           #   hostKey -> key in data/hosts/hosts.nix (also the dir name under ./hosts)
-          #   userKey -> key in data/users/users.nix
+          # The user is resolved from data/hosts/hosts.nix (`user = "user_xxx"`),
+          # falling back to the first defined user.
           mkHost =
-            hostKey: userKey:
+            hostKey:
+            let
+              userKey =
+                (hostData.${hostKey} or { }).user or (builtins.head (builtins.attrNames userData));
+            in
             lib.nixosSystem {
               inherit system pkgs;
               modules = [
@@ -258,8 +269,9 @@
             };
         in
         {
-          amd = mkHost "amd" "user_amd";
-          intel = mkHost "intel" "user_intel";
+          amd = mkHost "amd";
+          intel = mkHost "intel";
+          generic = mkHost "generic";
         };
 
       # --- Standalone Home Configurations (testing) ---

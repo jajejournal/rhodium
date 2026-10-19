@@ -71,7 +71,7 @@
   gb = "z $XDG_BIN_HOME"; # Go bin home
   gc = "z $XDG_CONFIG_HOME"; # Go config home
   gd = "z $HOME_DOWNLOADS"; # Go downloads
-  gh = "z $HOME"; # Go home
+  ghome = "z $HOME"; # Go home
   gi = "zi"; # Go interactive
   gr = "z $RHODIUM"; # Go the Rhodium repo
 

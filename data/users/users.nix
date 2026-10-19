@@ -40,5 +40,23 @@
       isNormalUser = true;
       shell = "fish";
     };
+
+    # Generic host user. Create this user (default "rhodium") in the NixOS
+    # installer, or change `username` to whatever you created.
+    user_generic = {
+      username = "rhodium";
+      fullName = "Rhodium";
+      emailMain = "rhodium@users.noreply.github.com";
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+        "input"
+        "uinput"
+        "video"
+      ];
+      isNormalUser = true;
+      shell = "fish";
+    };
   };
 }

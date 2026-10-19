@@ -12,6 +12,9 @@
 }:
 {
   imports = [
+    # External flakes
+    inputs.rhodium-opencode.homeManagerModules.default
+
     # Themes
     ../../home/assets/themes
 

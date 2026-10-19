@@ -6,12 +6,21 @@
   #   - a directory name under ./hosts        (e.g. hosts/amd/default.nix)
   #   - a nixosConfiguration attribute        (e.g. `nixos-rebuild switch --flake .#amd`)
   #
-  #   hostname    -> networking.hostName
-  #   user        -> key in data/users/users.nix that this host logs in as
-  #   gpu         -> informational; pick the matching niri module in hosts/<key>
-  #   timeZone    -> time.timeZone (e.g. "America/Bogota", "Europe/Madrid")
-  #   locale      -> i18n.defaultLocale (keep English, e.g. "en_US.UTF-8")
-  #   mainMonitor -> primary display defaults (used by niri/waybar)
+  #   hostname      -> networking.hostName
+  #   user          -> key in data/users/users.nix that this host logs in as
+  #   gpu           -> informational; pick the matching module in hosts/<key>
+  #                    ("intel" | "amd" | "nvidia" | "generic")
+  #   timeZone      -> time.timeZone (e.g. "America/Bogota", "Europe/Madrid")
+  #   locale        -> i18n.defaultLocale (keep English, e.g. "en_US.UTF-8")
+  #   mainMonitor   -> primary display (used by niri/waybar)
+  #   extraMonitors -> OPTIONAL list of extra displays, laid out to the right of
+  #                    the main one. Empty/omitted = a normal laptop with a
+  #                    single screen. Each entry uses the same keys as
+  #                    mainMonitor plus an optional `monitorRotation` (degrees).
+  #
+  # Nothing here is machine-bound except the monitor list, so a fresh install
+  # works by regenerating hosts/<h>/hardware-configuration.nix and (optionally)
+  # editing the monitors below.
   # ───────────────────────────────────────────────────────────────────────────
   hosts = {
     amd = {
@@ -27,7 +36,7 @@
         monitorRefreshRate = "60";
         monitorScalingFactor = "1.0";
       };
-      defaultLocale = "";
+      extraMonitors = [ ];
     };
 
     intel = {
@@ -43,7 +52,35 @@
         monitorRefreshRate = "60";
         monitorScalingFactor = "1.0";
       };
-      defaultLocale = "";
+      extraMonitors = [ ];
+    };
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Generic host — use this one on a brand-new PC.
+    # ─────────────────────────────────────────────────────────────────────────
+    # It installs the free GPU drivers for Intel + AMD and auto-detects the
+    # rest, so it boots and renders on nearly any machine. Steps for a new PC:
+    #
+    #   1. Create the `rhodium` user in the installer (or change `user` below).
+    #   2. Regenerate hosts/generic/hardware-configuration.nix.
+    #   3. `just switch generic`.
+    #
+    # If the machine has an NVIDIA GPU, add the nvidia.nix import in
+    # hosts/generic/default.nix and set gpu = "nvidia".
+    generic = {
+      hostname = "nixos";
+      description = "Generic / any PC";
+      user = "user_generic";
+      gpu = "generic";
+      timeZone = "America/Bogota";
+      locale = "en_US.UTF-8";
+      mainMonitor = {
+        monitorID = "eDP-1";
+        monitorResolution = "1920x1080";
+        monitorRefreshRate = "60";
+        monitorScalingFactor = "1.0";
+      };
+      extraMonitors = [ ];
     };
   };
 }

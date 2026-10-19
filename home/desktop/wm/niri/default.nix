@@ -11,15 +11,6 @@ let
   # Extract host display configuration
   hostname = host.hostname or "unknown";
 
-  # Main monitor configuration from host data
-  mainMonitor =
-    host.mainMonitor or {
-      monitorID = "eDP-1";
-      monitorResolution = "1920x1080";
-      monitorRefreshRate = "60";
-      monitorScalingFactor = "1.0";
-    };
-
   # Parse resolution to get width and height
   parseResolution =
     resolution:
@@ -31,15 +22,108 @@ let
       height = if (builtins.length parts) >= 2 then lib.toInt (builtins.elemAt parts 1) else 1080;
     };
 
-  resolution = parseResolution mainMonitor.monitorResolution;
-  refreshRate = toFloat mainMonitor.monitorRefreshRate;
-  scaleFactor = toFloat mainMonitor.monitorScalingFactor;
+  # Default main (laptop) monitor, used when the host does not define one.
+  defaultMainMonitor = {
+    monitorID = "eDP-1";
+    monitorResolution = "1920x1080";
+    monitorRefreshRate = "60";
+    monitorScalingFactor = "1.0";
+  };
 
-  # Calculate external monitor positions based on main monitor settings
-  # MSI position = main_width / main_scale (logical pixels, right of laptop)
-  msiPositionX = builtins.floor (resolution.width / scaleFactor);
-  # Dell position = right of MSI (MSI logical width = 3440 at scale 1.0)
-  dellPositionX = msiPositionX + 3440;
+  # Normalise a monitor entry into the shape used below. Accepts the same keys
+  # as `mainMonitor` in data/hosts/hosts.nix, plus an optional `monitorRotation`.
+  normalizeMonitor =
+    m:
+    let
+      res = parseResolution (m.monitorResolution or "1920x1080");
+      scale = toFloat (m.monitorScalingFactor or "1.0");
+    in
+    {
+      id = m.monitorID or "eDP-1";
+      width = res.width;
+      height = res.height;
+      refresh = toFloat (m.monitorRefreshRate or "60");
+      scale = scale;
+      # Logical (scaled) width, used to lay monitors out side by side.
+      logicalWidth = res.width / scale;
+      rotation = m.monitorRotation or 0;
+    };
+
+  # All monitors: the main one first, then any optional extra monitors declared
+  # in `host.extraMonitors` (empty on a laptop with a single display). Each
+  # monitor is placed to the right of the previous one, so a fresh machine with
+  # no external displays simply gets one output and no broken placeholders.
+  allMonitors =
+    let
+      main = normalizeMonitor (host.mainMonitor or defaultMainMonitor);
+      extras = map normalizeMonitor (host.extraMonitors or [ ]);
+      place =
+        acc: m:
+        let
+          prevX = if acc == [ ] then 0 else (lib.last acc).x + (lib.last acc).logicalWidth;
+        in
+        acc ++ [ (m // { x = prevX; }) ];
+    in
+    lib.lists.foldl' place [ ] ([ main ] ++ extras);
+
+  monitorIds = map (m: m.id) allMonitors;
+
+  # Workspace groups: each group is placed on one monitor (in order). With fewer
+  # monitors than groups, leftover groups fall back to the last monitor so every
+  # workspace stays reachable.
+  workspaceGroups = [
+    [ "main" "secondary" ]
+    [ "browser" "dev" "media" ]
+    [ "reference" "chat" ]
+  ];
+  outputForGroup =
+    i:
+    builtins.elemAt monitorIds (
+      if i < builtins.length monitorIds then i else builtins.length monitorIds - 1
+    );
+  workspaces = builtins.listToAttrs (
+    lib.flatten (
+      lib.imap0 (
+        gi: names:
+        lib.imap0 (
+          ni: name:
+          let
+            global =
+              builtins.foldl' (a: g: a + builtins.length g) 0 (lib.take gi workspaceGroups) + ni;
+          in
+          {
+            name = "${lib.fixedWidthNumber 2 (global + 1)}-${name}";
+            value = {
+              name = name;
+              open-on-output = outputForGroup gi;
+            };
+          }
+        ) names
+      ) workspaceGroups
+    )
+  );
+
+  # Outputs derived from the host monitor list (main at x=0, the rest to the
+  # right). No monitor model is hardcoded, so this is portable to any machine.
+  outputs = builtins.listToAttrs (
+    map (m: {
+      name = m.id;
+      value = {
+        mode = {
+          width = m.width;
+          height = m.height;
+          refresh = m.refresh;
+        };
+        scale = m.scale;
+        position = {
+          x = m.x;
+          y = 0;
+        };
+      } // lib.optionalAttrs (m.rotation != 0) {
+        transform.rotation = m.rotation;
+      };
+    }) allMonitors
+  );
 
   # Keybind cheatsheets (see `binds` below and xdg.configFile."niri/shortcuts.txt"
   # at the end of this file):
@@ -56,43 +140,9 @@ in
     # ============================================================================
     # Workspaces
     # ============================================================================
-    # Named workspaces pinned to outputs so they survive monitor power off/on.
-    # Keys are prefixed for lexicographic ordering; `name` is the display name.
-    workspaces = {
-      # Laptop
-      "01-main" = {
-        name = "main";
-        open-on-output = "${mainMonitor.monitorID}";
-      };
-      "02-secondary" = {
-        name = "secondary";
-        open-on-output = "${mainMonitor.monitorID}";
-      };
-
-      # MSI ultrawide (center)
-      "03-browser" = {
-        name = "browser";
-        open-on-output = "Microstep MAG 341C OLED 0x01010101";
-      };
-      "04-dev" = {
-        name = "dev";
-        open-on-output = "Microstep MAG 341C OLED 0x01010101";
-      };
-      "05-media" = {
-        name = "media";
-        open-on-output = "Microstep MAG 341C OLED 0x01010101";
-      };
-
-      # Dell 4K (right, portrait)
-      "06-reference" = {
-        name = "reference";
-        open-on-output = "Dell Inc. DELL U2725QE G3L0G84";
-      };
-      "07-chat" = {
-        name = "chat";
-        open-on-output = "Dell Inc. DELL U2725QE G3L0G84";
-      };
-    };
+    # Named workspaces pinned to outputs (derived from the host monitor list so
+    # they survive monitor power off/on). Keys are prefixed for ordering.
+    inherit workspaces;
 
     # ============================================================================
     # Environment
@@ -145,56 +195,9 @@ in
     # ============================================================================
     # Outputs
     # ============================================================================
-    outputs = {
-      # Main laptop display (dynamic based on host)
-      "${mainMonitor.monitorID}" = {
-        mode = {
-          width = resolution.width;
-          height = resolution.height;
-          refresh = refreshRate;
-        };
-        scale = scaleFactor;
-        position = {
-          x = 0;
-          y = 0;
-        };
-      };
-
-      # External monitor 1 (center): MSI MAG 341CQP QD-OLED (34" ultrawide)
-      # 3440x1440 @ 59.973Hz, horizontal orientation
-      "Microstep MAG 341C OLED 0x01010101" = {
-        mode = {
-          width = 3440;
-          height = 1440;
-          refresh = 59.973;
-        };
-        scale = 1.0;
-        position = {
-          x = msiPositionX;
-          y = 0;
-        };
-      };
-
-      # External monitor 2 (right): Dell U2725QE (27" 4K)
-      # 3840x2160 @ 120Hz, portrait orientation (90°)
-      # NOTE: Per-output layout (default-column-width) is not yet exposed by
-      # niri-flake settings module. If needed, set it via niri IPC or wait for
-      # upstream support. Do NOT set programs.niri.config — it completely
-      # overrides everything generated from programs.niri.settings.
-      "Dell Inc. DELL U2725QE G3L0G84" = {
-        mode = {
-          width = 3840;
-          height = 2160;
-          refresh = 120.0;
-        };
-        scale = 1.5;
-        transform.rotation = 90;
-        position = {
-          x = dellPositionX;
-          y = 0;
-        };
-      };
-    };
+    # Derived from the host monitor list (see data/hosts/hosts.nix). No monitor
+    # model is hardcoded, so a fresh machine gets a single output and works.
+    inherit outputs;
 
     # ============================================================================
     # Layer Rules

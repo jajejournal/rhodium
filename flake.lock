@@ -360,6 +360,26 @@
         "type": "github"
       }
     },
+    "rhodium-opencode": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792381065,
+        "narHash": "sha256-s/NvsoBQfL+qfLjv+o1sgBZTv/naeEw897prdc7eOIU=",
+        "owner": "jajejournal",
+        "repo": "rhodium-opencode",
+        "rev": "ac2ee682b278ccd1dc21734197c2eb413f0ba210",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jajejournal",
+        "repo": "rhodium-opencode",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "chiaroscuro": "chiaroscuro",
@@ -372,6 +392,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "rhodium-alloys": "rhodium-alloys",
+        "rhodium-opencode": "rhodium-opencode",
         "sops-nix": "sops-nix",
         "zen-browser": "zen-browser"
       }
