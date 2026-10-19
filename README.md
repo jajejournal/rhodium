@@ -184,6 +184,10 @@ upstream's own **baseline** build of opencode instead of compiling it, which run
 on those CPUs and on modern ones alike. To bump it, edit the version and the hash
 in that file.
 
+Keep that pin reasonably fresh: each release bakes in the catalogue of models it
+knows about, so an old binary will not offer newer free models. The 1.18.x builds
+have no `deepseek-v4.1-flash-free`; 1.19.x does.
+
 > **Status: in use.** Validated on a T420 (old CPU, no AVX2) and on modern
 > machines; the model config above is what both the devshell and
 > `~/.config/opencode/opencode.json` use.

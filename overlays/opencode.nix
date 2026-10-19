@@ -20,12 +20,18 @@
 #
 # To bump it: bump `version` and refresh the hash with
 #   nix-prefetch-url https://github.com/anomalyco/opencode/releases/download/vX.Y.Z/opencode-linux-x64-baseline.tar.gz
+#
+# Worth keeping reasonably fresh: every release bakes in the catalogue of models
+# it knows about, so an older binary does not offer models that came out later.
+# A 1.18.x build, for instance, has no `deepseek-v4.1-flash-free` (1.19.x does),
+# even though the model is free on OpenCode's side. The free models need no API
+# key, so the pin is what decides which ones you can pick.
 final: prev:
 let
-  version = "1.18.13";
+  version = "1.19.3";
   src = prev.fetchurl {
     url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-linux-x64-baseline.tar.gz";
-    hash = "sha256-1EccwmDSRrmy3yN6wD+vp1tnIzBqa8MG5U3ObpqoJNs=";
+    hash = "sha256-Uxz/JEESnDDw7dWHivSUEIrQf1/rRtfuKaKluDCldl0=";
   };
 in
 prev.lib.optionalAttrs prev.stdenv.hostPlatform.isx86_64 {
