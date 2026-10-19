@@ -390,7 +390,10 @@ in
       };
 
       background-color = "transparent";
-      gaps = 12;
+      # Half of upstream's 12: the same gap around windows and between them,
+      # just tighter. See also the waybar margins in
+      # home/desktop/bars/waybar/config.jsonc.
+      gaps = 6;
       struts = {
         left = 0;
         right = 0;
