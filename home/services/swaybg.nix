@@ -11,6 +11,11 @@ let
   # First-boot / out-of-the-box wallpaper. `switch_wallpaper` (fuzzel-display)
   # overwrites the /var/tmp symlink whenever the user picks another one.
   defaultWallpaper = "${config.xdg.dataHome}/wallpapers/bebop/bebop.jpg";
+  # Seed the /var/tmp symlink with the default wallpaper only when it does not
+  # already resolve to a file (first boot, or the chosen one was deleted).
+  seedWallpaper = pkgs.writeShellScript "rh-swaybg-seed" ''
+    test -e ${targetDir} || ${pkgs.coreutils}/bin/ln -sf ${defaultWallpaper} ${targetDir}
+  '';
 in
 {
   options.userExtraServices.rh-swaybg = {
@@ -27,13 +32,7 @@ in
 
       Service = {
         Type = "simple";
-        # Seed the default wallpaper on first boot (or if the current target was
-        # deleted). Only if the symlink does not already resolve to a file.
-        ExecStartPre = [
-          "${pkgs.bash}/bin/bash"
-          "-c"
-          "test -e ${targetDir} || ${pkgs.coreutils}/bin/ln -sf ${defaultWallpaper} ${targetDir}"
-        ];
+        ExecStartPre = [ "${seedWallpaper}" ];
         ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i ${targetDir}";
         Restart = "on-failure";
         RestartSec = 1;
