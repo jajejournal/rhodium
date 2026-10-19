@@ -74,7 +74,7 @@
 --------------------------------------------------------------------------------
   APPLICATIONS
 --------------------------------------------------------------------------------
-  Mod + A .............. App menu (fuzzel launcher)
+  Mod + M .............. App menu: apps + bookmarks (fuzzel-apps.sh)
   Mod + W .............. Terminal (kitty)
   Mod + Shift + W ...... Terminal (ghostty)
   Mod + D .............. File manager (yazi)
@@ -82,7 +82,7 @@
   Mod + Shift + E ...... Editor (emacs / doom)
   Mod + Ctrl + E ....... Editor (zed)
   Mod + Shift + D ...... File manager (thunar)
-  Mod + B .............. Browser (firefox - Personal profile)
+  Mod + B .............. Browser (firefox)
   Mod + Shift + B ...... Browser (brave)
   Mod + Q .............. Calculator (qalc)
   Mod + Shift + Q ...... Calculator (qalculate)
@@ -105,7 +105,6 @@
 --------------------------------------------------------------------------------
   Keybind menu ......... Mod + F1  (fuzzel-help.sh, built from the config)
   Full cheatsheet ...... Mod + c-cedilla  (this file, via `less`)
-  Apps + bookmarks ..... Mod + M  (fuzzel-apps.sh: entries from data/, with categories)
   Run these from a terminal (or ~/.local/bin/fuzzel/):
     fuzzel-power.sh  fuzzel-wifi.sh  fuzzel-bluetooth.sh  fuzzel-services.sh
     fuzzel-usb.sh  fuzzel-emoji.sh  fuzzel-colors.sh  fuzzel-display.sh

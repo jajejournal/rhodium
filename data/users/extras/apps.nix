@@ -1,6 +1,5 @@
 {
-  # Launcher entries for the rice's own menus (fuzzel-apps.sh, raffi) and for
-  # the generic app menu (Mod + A). Notes:
+  # Launcher entries for the rice's own menus (fuzzel-apps.sh, raffi). Notes:
   #   - `noDisplay = true;` hides an entry from the generic app menu. Use it
   #     for entries that only duplicate the .desktop file the package already
   #     installs, so the app is not listed twice.

@@ -132,12 +132,11 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 - **Super + AltGr + ,** (the `ç` key) — the full plain-text cheatsheet, which also
   lists the rice's other menus and helper scripts.
 - **Super + Space** — switch keyboard layout (Spanish ↔ English, `grp:win_space_toggle`).
-- **Super + A** — open the app menu (`fuzzel`, the same launcher the bar button
-  uses). The screenshot annotate that used to be on `Super + A` is now
-  `Super + Alt + A`; the plain `Alt + Print` shortcut still works too.
-- **Super + M** — the rice's own menu (`fuzzel-apps.sh`): applications *plus*
-  bookmarks and browser profiles, grouped by category. Upstream had this menu on
-  `Super + A`.
+- **Super + M** — open the app menu (`fuzzel-apps.sh`): applications *plus*
+  bookmarks and browser profiles, grouped by category. This is the only menu;
+  `Super + A` is intentionally unbound (upstream used it for a second launcher).
+  The screenshot annotate that used to live there is on `Super + Alt + A`, and
+  `Alt + Print` still works too.
 
 The plain-text cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
 `~/.config/niri/shortcuts.txt` and opened in a floating terminal.
@@ -147,17 +146,16 @@ the `hotkey-overlay.title` of every bind in `home/desktop/wm/niri/default.nix`,
 so those titles are the source of truth for both cheatsheets — keep
 `shortcuts.txt` in sync when you change them.
 
-**What the app menu lists.** `Super + A` shows the applications installed on the
-system (each package's own `.desktop` file) plus the launcher entries you define
-in `data/users/extras/apps.nix`. Two things are kept out of it on purpose:
-
-- **Bookmarks and browser profiles** are not applications. They still exist as
-  launchable entries in the rice's own menus (`fuzzel-apps.sh`, `raffi`), which
-  read them directly. Add your own in `data/users/extras/bookmarks.nix` and
-  `data/users/extras/profiles.nix`.
-- **Entries that only duplicate a package's own entry** are marked
-  `noDisplay = true;` in `data/users/extras/apps.nix`, so an app is never listed
-  twice. Add your own launchers (wrappers, TUIs) the same way.
+**What the app menu lists.** `Super + M` opens `fuzzel-apps.sh`, which reads the
+rice's data files: the applications installed on the system (each package's own
+`.desktop` file) and the launcher entries you define in
+`data/users/extras/apps.nix`, grouped by category. Bookmarks and browser
+profiles are not applications, but the menu lists them as their own categories
+too. The *generic* `.desktop` launcher (`raffi`, no keybind) lists applications
+only: bookmark/profile entries and launcher entries that merely duplicate a
+package's own entry are marked `noDisplay = true;` in
+`data/users/extras/apps.nix`, so an app is never listed twice and icons resolve.
+Add your own launchers (wrappers, TUIs) the same way.
 
 ## OpenCode integration (in development)
 
@@ -239,10 +237,12 @@ Nothing sensitive is stored in this repository.
   bookmarks and 14 Firefox profiles, which appeared as launcher entries on any
   install. Replaced with a small, neutral starter set (`data/users/extras/bookmarks.nix`,
   `profiles.nix`, `data/users/preferences/apps.nix`).
-- **A clean app menu.** `Super + A` lists applications only: bookmark/profile
+- **A clean generic launcher.** `raffi` lists applications only: bookmark/profile
   entries and launcher entries that merely duplicate a package's own `.desktop`
   file are `NoDisplay`, so nothing shows up twice and icons resolve
-  (`home/modules/desktop.nix`, `lib/generators/desktopGenerators.nix`).
+  (`home/modules/desktop.nix`, `lib/generators/desktopGenerators.nix`). The
+  `Super + M` menu (`fuzzel-apps.sh`) adds bookmarks and browser profiles on top,
+  grouped by category.
 - **No hardcoded browser profile required.** An empty profile name means "the
   browser's default profile", so links, bookmarks and launcher entries work on a
   fresh install instead of opening a profile that does not exist yet. The same
@@ -266,7 +266,7 @@ Roadmap:
 - [x] Spanish + English keyboard layouts (ES first) with `America/Bogota` as default
       timezone
 - [x] Keybind cheatsheet (`Super + F1`)
-- [x] App menu keybind (`Super + A` → `fuzzel`)
+- [x] App menu keybind (`Super + M` → `fuzzel-apps.sh`)
 - [x] `INSTALL.md` for both install routes
 - [x] Add `opencode` with the free `deepseek-v4.1-flash-free` model
 - [x] Disable hardware/server-specific services by default

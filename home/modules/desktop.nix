@@ -83,8 +83,8 @@ let
         if entry ? extraDesktopArgs then "\n" + lib.concatStringsSep "\n" entry.extraDesktopArgs else "";
 
       # Bookmarks and browser profiles are not applications: keep them out of
-      # the generic app launcher (Mod + A) so it only lists real apps. They
-      # still show up in the rice's own menus (fuzzel-apps.sh, Mod + M; raffi),
+      # the generic app launcher (raffi) so it only lists real apps. They still
+      # show up in the rice's own menus (fuzzel-apps.sh, Mod + M),
       # which read these files directly. Apps flagged with `noDisplay` are
       # treated the same way, since they only duplicate the package's own entry.
       noDisplay =

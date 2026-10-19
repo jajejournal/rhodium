@@ -11,8 +11,8 @@ in
 {
   # Starter bookmarks. Every entry becomes a launchable desktop entry in the
   # rice's own menus (fuzzel-apps.sh, bound to Mod + M). They are deliberately
-  # hidden from the generic app menu, so Mod + A stays a list of applications --
-  # see home/modules/desktop.nix.
+  # hidden from the generic app menu (raffi), so it stays a list of
+  # applications -- see home/modules/desktop.nix.
   #
   # Add your own: a group is just a namespace; each entry needs the browser
   # profile it should open with (`profile`, see data/users/preferences/apps.nix),
