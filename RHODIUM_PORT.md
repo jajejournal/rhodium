@@ -388,8 +388,8 @@ The repo contains a custom app registry in `data/users/extras/apps.nix` used by 
 
 ## User Services
 
-- Enabled in `users/user_001`: `rh-brave-preload`, `rh-firefox-preload`, `rh-kmonad`, `rh-swaybg`, `rh-system-keyring`, `rh-wifiSwitch`, `rh-hdmiAutoSwitch`.
-- Disabled but available: `rh-eww`, `rh-mako`, `rh-neovim-daemon`, `rh-waybar`, `rh-wlsunset`.
+- Enabled in `users/user_001`: `rh-brave-preload`, `rh-firefox-preload`, `rh-swaybg`, `rh-system-keyring`.
+- Disabled but available: `rh-eww`, `rh-hdmiAutoSwitch`, `rh-kmonad`, `rh-mako`, `rh-neovim-daemon`, `rh-waybar`, `rh-wifiSwitch`, `rh-wlsunset`.
 - Linux/systemd-only: browser preload services use `vmtouch`; Kmonad service uses Linux input/uinput; swaybg/Waybar/Mako/WLSunset are Wayland services; WiFi/display switching use NetworkManager/Niri/display scripts.
 - Mac replacements: `launchd` agents, native 1Password/keychain, Karabiner-Elements/KMonad-for-macOS, Aerospace/Yabai display/window scripts, and `caffeinate`/Shortcuts if needed.
 

@@ -75,9 +75,12 @@
     rh-swaybg.enable = true;
     rh-system-keyring.enable = true;
     rh-waybar.enable = false;
-    rh-wifiSwitch.enable = true;
+    # These helpers are hardware-specific, wlroots-only and their udev rules are
+    # disabled on the current hosts. Keep them off unless the matching hardware
+    # and compositor setup is present.
+    rh-wifiSwitch.enable = false;
     rh-wlsunset.enable = false;
-    rh-hdmiAutoSwitch.enable = true;
+    rh-hdmiAutoSwitch.enable = false;
   };
 
   # --- Rh Home Modules ---

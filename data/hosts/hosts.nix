@@ -10,6 +10,8 @@
   #   user          -> key in data/users/users.nix that this host logs in as
   #   gpu           -> informational; pick the matching module in hosts/<key>
   #                    ("intel" | "amd" | "nvidia" | "generic")
+  #   battery       -> OPTIONAL waybar battery name (default "BAT0")
+  #   hasNvme       -> OPTIONAL, show the NVMe temperature in the bar (default false)
   #   timeZone      -> time.timeZone (e.g. "America/Bogota", "Europe/Madrid")
   #   locale        -> i18n.defaultLocale (keep English, e.g. "en_US.UTF-8")
   #   mainMonitor   -> primary display (used by niri/waybar)
@@ -28,6 +30,8 @@
       description = "AMD Host";
       user = "user_amd";
       gpu = "amd";
+      battery = "BAT1";
+      hasNvme = true;
       timeZone = "America/Bogota";
       locale = "en_US.UTF-8";
       mainMonitor = {
@@ -44,12 +48,14 @@
       description = "Intel Host";
       user = "user_intel";
       gpu = "intel";
+      battery = "BAT0";
+      hasNvme = false;
       timeZone = "America/Bogota";
       locale = "en_US.UTF-8";
       mainMonitor = {
-        monitorID = "eDP-1";
-        monitorResolution = "1920x1080";
-        monitorRefreshRate = "60";
+        monitorID = "LVDS-1";
+        monitorResolution = "1366x768";
+        monitorRefreshRate = "59.978";
         monitorScalingFactor = "1.0";
       };
       extraMonitors = [ ];
@@ -72,6 +78,8 @@
       description = "Generic / any PC";
       user = "user_generic";
       gpu = "generic";
+      battery = "BAT0";
+      hasNvme = false;
       timeZone = "America/Bogota";
       locale = "en_US.UTF-8";
       mainMonitor = {

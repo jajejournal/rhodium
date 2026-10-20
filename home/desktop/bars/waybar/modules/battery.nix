@@ -1,9 +1,12 @@
 {
+  host ? { },
+}:
+{
   waybarModules = {
     battery = {
       interval = 1;
-      # bat = "BAT0";
-      bat = "BAT1";
+      # Set `battery` in data/hosts/hosts.nix when the laptop uses BAT1 instead.
+      bat = host.battery or "BAT0";
       states = {
         good = 95;
         warning = 30;

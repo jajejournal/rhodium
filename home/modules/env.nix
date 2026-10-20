@@ -104,18 +104,11 @@ in
     # CHROMIUM_FLAGS = "--disable-gpu-process-crash-limit";
     # ELECTRON_EXTRA_LAUNCH_ARGS = "--disable-gpu-process-crash-limit";
 
-    # Special Dotconfigs
-    # NOTE:
-    # - Here we include dotconfigs
-    #   that are not managed declaratively through NixOS
-    # - A good example is Doom Emacs
-    DOOMDIR = "${xdgDirs.configHome}/doom";
   };
 
   # Add directories to user's PATH
   home.sessionPath = [
     xdgDirs.binHome
-    "${homeDir}/.config/emacs/bin"
   ];
 
   # Set xdg custom dirs for userDirs

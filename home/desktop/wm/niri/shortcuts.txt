@@ -75,6 +75,7 @@
 --------------------------------------------------------------------------------
   APPLICATIONS
 --------------------------------------------------------------------------------
+  Mod + A .............. App launcher (fuzzel)
   Mod + M .............. App menu: apps + bookmarks (fuzzel-apps.sh)
   Mod + Shift + I ...... Symbols / unicode icons (fuzzel-icons.sh)
   Mod + Alt + E ........ Emoji picker (fuzzel-emoji.sh, copies to clipboard)

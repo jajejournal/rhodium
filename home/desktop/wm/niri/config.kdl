@@ -567,11 +567,17 @@ binds {
     // Application Launchers
     // Main
     // -------------------------------------------------
-    Mod+W hotkey-overlay-title="Launch Terminal [Ghostty]" {
+    Mod+A hotkey-overlay-title="Launch App Menu [Fuzzel]" {
+        spawn "fuzzel"
+    }
+    Mod+M hotkey-overlay-title="Launch Apps + Bookmarks [Fuzzel]" {
+        spawn "sh" "-c" "$USERBIN_FUZZEL/fuzzel-apps.sh"
+    }
+    Mod+W hotkey-overlay-title="Launch Terminal [Kitty]" {
         spawn "kitty"
     }
-    Mod+B hotkey-overlay-title="Launch Browser [Firefox Personal]" {
-        spawn "firefox" "-p" "Personal"
+    Mod+B hotkey-overlay-title="Launch Browser [Firefox]" {
+        spawn "firefox"
     }
     Mod+D hotkey-overlay-title="Launch File Manager [Yazi]" {
         spawn "kitty" "-e" "yazi"
@@ -635,7 +641,7 @@ binds {
     Ctrl+Print hotkey-overlay-title="Screenshot Window" {
         screenshot-window
     }
-    Mod+A hotkey-overlay-title="Screenshot Interactive [A]nnotate" {
+    Mod+Alt+A hotkey-overlay-title="Screenshot Interactive [A]nnotate" {
         spawn "sh" "-c" "$USERBIN_UTILS/utils-screenshot-annotate.sh"
     }
     Alt+Print hotkey-overlay-title="Screenshot Interactive [A]nnotate" {

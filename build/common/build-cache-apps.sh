@@ -13,6 +13,56 @@ load_metadata "fuzzel" "apps"
 # --- Variables for fuzzel-apps cache ---
 PADDING_ARGS="35 20 20" # Column padding: name, type, categories
 
+# Return success only when the .desktop entry's command exists in PATH.
+# Entries are generated for every curated app, including ones that this profile
+# does not install; hiding those keeps the launcher free of dead entries.
+entry_is_installed() {
+  local file="$1" exec_line token cmd
+  exec_line="$(sed -n 's/^Exec=//p' "$file" | head -n1)"
+  [[ -n "$exec_line" ]] || return 1
+
+  local -a tokens
+  read -ra tokens <<<"$exec_line"
+
+  local i=0
+  while ((i < ${#tokens[@]})); do
+    token="${tokens[i]}"
+    token="${token#\"}"
+    token="${token%\"}"
+    [[ "$token" == "env" ]] && {
+      ((i++))
+      continue
+    }
+    [[ "$token" == *=* && "$token" != */* ]] && {
+      ((i++))
+      continue
+    }
+    break
+  done
+
+  cmd="${tokens[i]:-}"
+  cmd="${cmd#\"}"
+  cmd="${cmd%\"}"
+
+  # Terminal entries launch their real program after `-e`.
+  if [[ "$cmd" == "kitty" || "$cmd" == "foot" || "$cmd" == "ghostty" ]]; then
+    local j=$((i + 1))
+    while ((j < ${#tokens[@]})); do
+      token="${tokens[j]#\"}"
+      token="${token%\"}"
+      if [[ "$token" == "-e" ]]; then
+        cmd="${tokens[j + 1]:-}"
+        cmd="${cmd#\"}"
+        cmd="${cmd%\"}"
+        break
+      fi
+      ((j++))
+    done
+  fi
+
+  [[ -n "$cmd" ]] && command -v -- "$cmd" >/dev/null 2>&1
+}
+
 # --- Build Fuzzel-apps Cache ---
 build_cache_apps() {
   local APP_DIR="$HOME/.local/share/applications"
@@ -30,6 +80,7 @@ build_cache_apps() {
 
   for file in "$APP_DIR"/rh-*.desktop; do
     [[ -f "$file" ]] || continue
+    entry_is_installed "$file" || continue
 
     while IFS='=' read -r key value; do
       case "$key" in

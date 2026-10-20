@@ -1,8 +1,12 @@
-{ lib, ... }:
+{
+  lib,
+  host ? { },
+  ...
+}:
 let
   # --- Import all modules ---
   moduleBacklight = import ./backlight.nix;
-  moduleBattery = import ./battery.nix;
+  moduleBattery = import ./battery.nix { inherit host; };
   moduleBluetooth = import ./bluetooth.nix;
   moduleCpu = import ./cpu.nix;
   moduleCustomClock = import ./custom-clock.nix;
@@ -29,7 +33,7 @@ let
   moduleTray = import ./tray.nix;
 
   # --- Import Groups ---
-  moduleGroupThermals = import ./group-thermals.nix;
+  moduleGroupThermals = import ./group-thermals.nix { inherit lib host; };
   moduleGroupWifiSpeed = import ./group-wifi-speed.nix;
 
   # --- Import Separators And Formatters ---
@@ -51,6 +55,7 @@ let
     moduleCustomBullet
     moduleCustomClock
     moduleCustomKeyboardLayout
+    moduleCustomRhodium
     moduleCustomSeparator
     moduleCustomThmAmb
     moduleCustomThmAmd
@@ -95,6 +100,7 @@ let
 
     # Modules
     modules-left = [
+      "custom/rhodium"
       "niri/workspaces"
     ];
     modules-center = [

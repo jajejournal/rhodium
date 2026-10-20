@@ -7,7 +7,7 @@
     terminalAlt = "ghostty";
     browser = "firefox";
     browserAlt = "brave";
-    wm = "hyprland";
+    wm = "niri";
 
     # Files
     editor = "nvim";

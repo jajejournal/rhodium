@@ -29,7 +29,7 @@ paid software is removed.
 | Notifications | mako |
 | Shell / prompt | fish (+ zsh, nushell, bash), starship |
 | Terminals | kitty, ghostty, foot, alacritty |
-| Editors | neovim, helix, zed, vscode, micro, emacs (doom) |
+| Editors | neovim, helix, zed, vscode, micro, emacs |
 | Files | yazi (TUI) + thunar (GUI) |
 | Lock screen | hyprlock |
 | Display manager | greetd — login prompt (tuigreet), autologin opt-in |
@@ -134,10 +134,11 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 - **Super + Space** — lock screen (`hyprlock`).
 - **Super + Shift + Space** — power menu (`fuzzel-power.sh`): power off, reboot,
   reboot to UEFI, suspend, hibernate, log out, lock screen, airplane mode.
-- **Super + M** — open the app menu (`fuzzel-apps.sh`): applications *plus*
-  bookmarks and browser profiles, grouped by category. This is the only menu;
-  `Super + A` is intentionally unbound (upstream used it for a second launcher).
-  The screenshot annotate that used to live there is on `Super + Alt + A`, and
+- **Super + A** — plain application launcher (`fuzzel`): installed applications
+  from your `.desktop` files.
+- **Super + M** — the rice's richer app menu (`fuzzel-apps.sh`): applications
+  *plus* bookmarks and browser profiles, grouped by category. The screenshot
+  annotate that used to live on `Super + A` is on `Super + Alt + A`, and
   `Alt + Print` still works too.
 - **Super + Shift + I** — symbols / unicode icons picker (`fuzzel-icons.sh`).
 - **Super + Alt + E** — emoji picker (`fuzzel-emoji.sh`, copies to clipboard).
@@ -156,16 +157,16 @@ the `hotkey-overlay.title` of every bind in `home/desktop/wm/niri/default.nix`,
 so those titles are the source of truth for both cheatsheets — keep
 `shortcuts.txt` in sync when you change them.
 
-**What the app menu lists.** `Super + M` opens `fuzzel-apps.sh`, which reads the
-rice's data files: the applications installed on the system (each package's own
-`.desktop` file) and the launcher entries you define in
-`data/users/extras/apps.nix`, grouped by category. Bookmarks and browser
-profiles are not applications, but the menu lists them as their own categories
-too. The *generic* `.desktop` launcher (`raffi`, no keybind) lists applications
-only: bookmark/profile entries and launcher entries that merely duplicate a
-package's own entry are marked `noDisplay = true;` in
-`data/users/extras/apps.nix`, so an app is never listed twice and icons resolve.
-Add your own launchers (wrappers, TUIs) the same way.
+**What each menu lists.** `Super + A` is plain `fuzzel`, which scans every
+installed `.desktop` file. `Super + M` opens `fuzzel-apps.sh`, which reads the
+rice's curated entries from `data/users/extras/apps.nix` (applications) plus
+bookmarks and browser profiles, grouped by category; entries whose binary is not
+installed are hidden. Bookmarks and browser profiles are not applications, but
+the menu lists them as their own categories too. The *generic* `.desktop`
+launcher (`raffi`, no keybind) lists applications only: bookmark/profile entries
+and launcher entries that merely duplicate a package's own entry are marked
+`noDisplay = true;` in `data/users/extras/apps.nix`, so an app is never listed
+twice and icons resolve. Add your own launchers (wrappers, TUIs) the same way.
 
 ## OpenCode integration (in development)
 
@@ -276,11 +277,15 @@ Roadmap:
 - [x] Spanish + English keyboard layouts (ES first) with `America/Bogota` as default
       timezone
 - [x] Keybind cheatsheet (`Super + F1`)
-- [x] App menu keybind (`Super + M` → `fuzzel-apps.sh`)
+- [x] App menu keybind (`Super + M` → `fuzzel-apps.sh`, `Super + A` → plain `fuzzel`)
 - [x] `INSTALL.md` for both install routes
 - [x] Add `opencode` with the free `deepseek-v4.1-flash-free` model
 - [x] Disable hardware/server-specific services by default
 - [x] Translate comments and docs to English
+
+  > Nota personal: casi no hablo inglés; sé lo básico (suficiente para
+  > programar, jajaja) y escribir con fluidez todavía me cuesta, pero lo iré
+  > mejorando poco a poco.
 
 Next:
 

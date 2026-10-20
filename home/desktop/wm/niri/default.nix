@@ -852,10 +852,15 @@ in
       };
 
       # Application Launchers (Primary)
+      # Plain application launcher (fuzzel): every .desktop entry, no
+      # bookmarks or browser profiles.
+      "Mod+A" = {
+        hotkey-overlay.title = "Launch App Menu [Fuzzel]";
+        action.spawn = "fuzzel";
+      };
       # App menu (fuzzel-apps.sh): applications plus the bookmark and
       # browser-profile entries, grouped by category. This is the rice's own
-      # menu and the only one: the plain `fuzzel` menu that used to live on
-      # Mod+A was removed so there aren't two competing launchers.
+      # menu and complements the plain fuzzel launcher above.
       "Mod+M" = {
         hotkey-overlay.title = "Launch Apps + Bookmarks [Fuzzel]";
         action.spawn-sh = "$USERBIN_FUZZEL/fuzzel-apps.sh";

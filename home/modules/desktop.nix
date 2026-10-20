@@ -14,8 +14,21 @@ let
       theme;
 
   # Create YAML configuration
+  # Raffi expects the versioned schema with a `launchers` map. Bookmarks and
+  # profiles are disabled so the generic launcher stays application-only.
   yamlFormat = pkgs.formats.yaml { };
-  raffiConfig = yamlFormat.generate "raffi.yaml" generatedEntries;
+  raffiConfig = yamlFormat.generate "raffi.yaml" {
+    version = 1;
+    launchers = lib.mapAttrs (_: entry: {
+      inherit (entry)
+        binary
+        args
+        description
+        icon
+        ;
+      disabled = entry.entryType != "application" || (entry.noDisplay or false);
+    }) generatedEntries;
+  };
   escapeDesktopArg =
     arg:
     let
@@ -88,9 +101,7 @@ let
       # which read these files directly. Apps flagged with `noDisplay` are
       # treated the same way, since they only duplicate the package's own entry.
       noDisplay =
-        entry.entryType == "bookmark"
-        || entry.entryType == "profile"
-        || (entry.noDisplay or false);
+        entry.entryType == "bookmark" || entry.entryType == "profile" || (entry.noDisplay or false);
     in
     ''
       [Desktop Entry]

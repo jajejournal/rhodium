@@ -11,7 +11,10 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 VPN_CONFIG_DIR="/etc/wireguard"
 
 # Get list of VPN interface names (strip .conf)
-mapfile -t vpn_interfaces < <(find "$VPN_CONFIG_DIR" -maxdepth 1 -name '*.conf' -exec basename {} .conf \;)
+vpn_interfaces=()
+if [[ -d "$VPN_CONFIG_DIR" ]]; then
+  mapfile -t vpn_interfaces < <(find "$VPN_CONFIG_DIR" -maxdepth 1 -name '*.conf' -exec basename {} .conf \;)
+fi
 
 # Check active interfaces
 active=""

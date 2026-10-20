@@ -48,10 +48,10 @@
       noDisplay = true;
     };
     emacs = {
-      binary = "doom";
-      args = [ "emacs" ];
+      binary = "emacsclient";
+      args = [ "-c" ];
       icon = "emacs";
-      description = "Doom Emacs";
+      description = "Emacs";
     };
     texmaker = {
       binary = "texmaker";
