@@ -1,3 +1,10 @@
+> **Satirical note.** GitHub used to be where you kept code. Then Microsoft bought it,
+> taught it to autocomplete, and now the site is more Copilot than GitHub: the
+> repositories are mostly there to feed the model, and every page asks if AI can
+> explain the thing you just wrote. This README was written by a human, not by
+> `copilot-swe-agent[bot]`; any resemblance to a Microsoft product roadmap is
+> purely coincidental. The real documentation starts below.
+
 <p align="center">
   <img src="assets/rhodium-logo.png" alt="rhodium" width="560"/>
 </p>
@@ -115,7 +122,9 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 - **Colors / theme** — `home/assets/themes/` + `data/users/preferences/theme.nix`.
   niri, waybar, kitty, fuzzel, yazi… all follow it, and so do the GTK/Qt apps
   (`home/desktop/portals/default.nix`) and the Firefox-family browsers
-  (`home/apps/browsers/browser-theme.nix`).
+  (`home/apps/browsers/browser-theme.nix`). Obsidian gets a matching
+  `chiaroscuro` CSS snippet installed into every vault listed in
+  `~/.config/obsidian/obsidian.json` (`home/apps/docs/obsidian-theme.nix`).
 - **Fonts** — `overlays/fonts.nix` (the free replacement) and `home/modules/fonts.nix`.
 - **Keybinds** — `home/desktop/wm/niri/default.nix`; keep
   `home/desktop/wm/niri/shortcuts.txt` in sync when you change them.
