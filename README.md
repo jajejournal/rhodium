@@ -1,9 +1,4 @@
-> **Satirical note.** GitHub used to be where you kept code. Then Microsoft bought it,
-> taught it to autocomplete, and now the site is more Copilot than GitHub: the
-> repositories are mostly there to feed the model, and every page asks if AI can
-> explain the thing you just wrote. This README was written by a human, not by
-> `copilot-swe-agent[bot]`; any resemblance to a Microsoft product roadmap is
-> purely coincidental. The real documentation starts below.
+> *remember when github was github? now it's copilot with a repo tab. damn microsoft.*
 
 <p align="center">
   <img src="assets/rhodium-logo.png" alt="rhodium" width="560"/>
