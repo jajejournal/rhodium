@@ -86,5 +86,5 @@
     "nix-command"
     "flakes"
   ];
-  system.stateVersion = "24.11";
+  system.stateVersion = host.stateVersion or "24.11";
 }

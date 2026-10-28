@@ -19,6 +19,7 @@
     ../../modules/virtualization
     ../../modules/virtualization/docker-amd.nix
     ../../modules/apps
+    ../../modules/gaming/steam.nix
     ../../modules/rules
     ../../modules/maintenance
     ../../modules/utils
@@ -99,5 +100,5 @@
     "nix-command"
     "flakes"
   ];
-  system.stateVersion = "24.05";
+  system.stateVersion = host.stateVersion or "24.05";
 }

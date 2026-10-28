@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   userPreferences,
   ...
 }:
@@ -12,6 +13,17 @@ let
   rhodiumDir = "${homeDir}/rhodium";
 
   dirs = {
+    # User content. Lowercase on purpose: the niri screenshot path, the OCR
+    # scripts and the existing installs already use these names. Keep XDG
+    # pointing here so file pickers and apps agree.
+    documents = "${homeDir}/documents";
+    downloads = "${homeDir}/downloads";
+    pictures = "${homeDir}/pictures";
+    screenshots = "${homeDir}/pictures/screenshots";
+    ocr = "${homeDir}/pictures/ocr";
+    opencodeChats = "${homeDir}/documents/opencode";
+    obsidianVault = "${homeDir}/documents/aprendizaje";
+
     # Kept on purpose: the yazi keymaps still use these
     # (see "Go To Locations" in home/utils/files/yazi/modules/keymap.nix).
     # Point them at folders of your own, or drop the vars *and* those keymaps
@@ -19,9 +31,6 @@ let
     academic = "${homeDir}/academic";
     devUtils = "${homeDir}/dev/utils";
     solenoidLabs = "${homeDir}/solenoid-labs";
-
-    # XDG download dir (see `xdg.userDirs` below).
-    downloads = "${homeDir}/downloads";
   };
 
   xdgDirs = {
@@ -116,16 +125,31 @@ in
     enable = true;
     userDirs = {
       enable = true;
-      createDirectories = false;
+      createDirectories = true;
 
       publicShare = null;
       templates = null;
       desktop = null;
-      documents = null;
+      documents = dirs.documents;
       download = dirs.downloads;
       music = null;
       videos = null;
-      pictures = null;
+      pictures = dirs.pictures;
     };
   };
+
+  # Keep the app-specific subdirectories in place on a fresh install.
+  home.activation.create-content-dirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p \
+      "${dirs.documents}" \
+      "${dirs.downloads}" \
+      "${dirs.pictures}" \
+      "${dirs.screenshots}" \
+      "${dirs.ocr}" \
+      "${dirs.opencodeChats}/nixos" \
+      "${dirs.opencodeChats}/dev" \
+      "${dirs.opencodeChats}/general" \
+      "${dirs.opencodeChats}/fitness" \
+      "${dirs.obsidianVault}"
+  '';
 }

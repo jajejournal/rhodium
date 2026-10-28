@@ -100,27 +100,6 @@ in
         format = "<b>◆ %s</b>\\n%b";
       };
 
-      "app-name=discord" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color23}";
-        border-color = "${c.color24}";
-        format = "<b>◇ %s</b>\\n%b";
-      };
-
-      "app-name=vesktop" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color23}";
-        border-color = "${c.color24}";
-        format = "<b>◇ %s</b>\\n%b";
-      };
-
-      "desktop-entry=dev.vencord.Vesktop" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color23}";
-        border-color = "${c.color24}";
-        format = "<b>◇ %s</b>\\n%b";
-      };
-
       "app-name=Signal" = {
         background-color = "${c.color21}";
         text-color = "${c.color23}";
@@ -283,14 +262,6 @@ in
       };
 
       # Music players
-      "app-name=Spotify" = {
-        background-color = "${c.color21}";
-        text-color = "${c.color23}";
-        border-color = "${c.color24}";
-        format = "<b>⊹ %s</b>\\n%b";
-        default-timeout = notifTime.xl;
-      };
-
       "app-name=rhythmbox" = {
         background-color = "${c.color21}";
         text-color = "${c.color23}";

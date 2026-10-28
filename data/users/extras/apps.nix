@@ -332,13 +332,6 @@
       description = "Telegram Desktop";
       noDisplay = true;
     };
-    discord = {
-      binary = "vesktop";
-      args = [ ];
-      icon = "discord";
-      description = "Discord";
-      noDisplay = true;
-    };
     discordo = {
       binary = "kitty";
       args = [
@@ -372,22 +365,6 @@
   };
 
   media = {
-    spotify = {
-      binary = "spotify";
-      args = [ ];
-      icon = "spotify";
-      description = "Spotify GUI";
-      noDisplay = true;
-    };
-    ncspot = {
-      binary = "kitty";
-      args = [
-        "-e"
-        "ncspot"
-      ];
-      icon = "utilities-terminal";
-      description = "Spotify TUI";
-    };
     gimp = {
       binary = "gimp";
       args = [ ];

@@ -3,12 +3,10 @@
   imports = [
     ./csound.nix
     ./ncmpc.nix
-    ./ncspot.nix
     ./puredata.nix
     ./rmpc.nix
     ./roon.nix
     ./sonicpi.nix
-    ./spotify.nix
     ./supercollider.nix
     ./tidal.nix
     ./tidalcycles.nix

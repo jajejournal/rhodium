@@ -13,20 +13,25 @@ during the installation.
 
 ## Which host am I?
 
-There are only two hosts. Pick yours *before* installing:
+There are three hosts. Pick yours *before* installing. `amd` and `intel` are the
+maintainer's machines; `generic` is the one to use on any other laptop or desktop.
 
-| Your machine               | nixosConfiguration | Hostname | Username   |
-| -------------------------- | ------------------ | -------- | ---------- |
-| AMD (Radeon iGPU / dGPU)   | `amd`              | `amd`    | `bausserr` |
-| Intel (integrated GPU)     | `intel`            | `intel`  | `manssell` |
+| Your machine                | nixosConfiguration | Hostname | Username   |
+| --------------------------- | ------------------ | -------- | ---------- |
+| Generic / any other PC      | `generic`          | `nixos`  | `rhodium`  |
+| AMD (Radeon iGPU / dGPU)    | `amd`              | `amd`    | `bausserr` |
+| Intel (integrated GPU)      | `intel`            | `intel`  | `manssell` |
 
 > **Why does this matter?** The username decides the Home Manager user, `/home/<user>`
 > and which session Home Manager configures. If you create **exactly** this user during the installation,
 > you don't have to edit a single file afterwards — the flake already knows about it.
 >
 > The **hostname** is enforced by the flake (`data/hosts/hosts.nix`), so whatever the
-> installer sets will be overwritten. Type `amd` / `intel` if it asks, but it is not
-> critical.
+> installer sets will be overwritten. Type `nixos` / `amd` / `intel` if it asks, but it
+> is not critical.
+>
+> Steam is off by default. On a machine that can run it, add
+> `rhodium.gaming.steam.enable = true;` to the matching `hosts/<host>/default.nix`.
 
 These values are defined in:
 
@@ -51,9 +56,9 @@ Boot the graphical ISO and go through the installer:
 | Installer option | What to pick |
 | --- | --- |
 | Desktop | **No desktop** |
-| Username | `bausserr` (AMD) or `manssell` (Intel) |
+| Username | `rhodium` (generic), `bausserr` (AMD) or `manssell` (Intel) |
 | Password | your choice — **remember it, you need it for `sudo`** |
-| Hostname | `amd` / `intel` (optional, see note above) |
+| Hostname | `nixos` / `amd` / `intel` (optional, see note above) |
 | Partitioning | automatic / "Erase disk" is fine |
 | Boot mode | **UEFI** — this config uses `systemd-boot` |
 
@@ -98,23 +103,33 @@ ping -c1 github.com     # if this fails: nmtui, or plug in an ethernet cable
 ### 3. Clone the repo
 
 ```bash
-git clone -b portability https://github.com/jajejournal/rhodium ~/rhodium
+git clone https://github.com/jajejournal/rhodium ~/rhodium
 ```
 
-> **`-b portability` matters.** `main` is still the original upstream rhodium; the
-> portability work (generic hosts, free font, opencode, both keyboard layouts…) lives on
-> the `portability` branch until it gets merged.
+> `main` is the only branch: it already contains the portability work (generic host,
+> free font, opencode, both keyboard layouts…).
 
 ### 4. Copy the generated hardware configuration
 
 The installer already wrote one — you only have to move it into the matching host:
 
 ```bash
+# Generic machine (any other PC):
+cp /etc/nixos/hardware-configuration.nix ~/rhodium/hosts/generic/hardware-configuration.nix
+
 # Intel machine:
-cp /etc/nixos/hardware-configuration.nix ~/rhodium/hosts/intel/hardware-configuration.nix
+# cp /etc/nixos/hardware-configuration.nix ~/rhodium/hosts/intel/hardware-configuration.nix
 
 # AMD machine:
 # cp /etc/nixos/hardware-configuration.nix ~/rhodium/hosts/amd/hardware-configuration.nix
+```
+
+Then tell git to leave your machine-specific file alone, so `git pull` does not
+conflict with it:
+
+```bash
+git update-index --skip-worktree hosts/generic/hardware-configuration.nix
+# use the matching path if you chose intel or amd
 ```
 
 ### 5. (Optional) Set your timezone
@@ -133,7 +148,7 @@ Pick the same host as your machine. Run it **from inside the repo** — `just` r
 ```bash
 cd ~/rhodium
 
-just switch-fast intel    # or: just switch-fast amd
+just switch-fast generic    # or: just switch-fast intel / amd
 ```
 
 > **Why `switch-fast` on the first install?** You are still on a text console with no
@@ -145,7 +160,7 @@ just switch-fast intel    # or: just switch-fast amd
 It is the same as the raw command, if you ever need it:
 
 ```bash
-sudo nixos-rebuild switch --flake ~/rhodium#intel    # or #amd
+sudo nixos-rebuild switch --flake ~/rhodium#generic    # or #intel / #amd
 ```
 
 ### 7. Reboot
@@ -156,6 +171,10 @@ sudo reboot
 
 You get a login prompt (tuigreet): pick the user, type the password, and **niri** starts.
 Autologin is opt-in: set `rhodium.autologin = true`.
+
+Home Manager also creates the content layout on first switch: `~/documents`,
+`~/downloads`, `~/pictures/screenshots`, `~/pictures/ocr`, the OpenCode chat
+folders and `~/documents/aprendizaje` (Obsidian vault). No manual `mkdir` needed.
 
 ---
 
@@ -180,27 +199,27 @@ For when you want full control of partitioning. Adapted from the repo README.
 
    ```bash
    sudo nixos-generate-config --root /mnt
-   nix-shell -p git --run "git clone -b portability https://github.com/jajejournal/rhodium /tmp/rhodium"
+   nix-shell -p git --run "git clone https://github.com/jajejournal/rhodium /tmp/rhodium"
    ```
 
 3. Copy the generated hardware config into the matching host:
 
    ```bash
-   sudo cp /mnt/etc/nixos/hardware-configuration.nix /tmp/rhodium/hosts/intel/hardware-configuration.nix
-   # or .../hosts/amd/hardware-configuration.nix
+   sudo cp /mnt/etc/nixos/hardware-configuration.nix /tmp/rhodium/hosts/generic/hardware-configuration.nix
+   # or .../hosts/intel/hardware-configuration.nix / .../hosts/amd/hardware-configuration.nix
    ```
 
-4. Install (choose `intel` or `amd`):
+4. Install (choose `generic`, `intel` or `amd`):
 
    ```bash
-   sudo nixos-install --flake /tmp/rhodium#intel --root /mnt
+   sudo nixos-install --flake /tmp/rhodium#generic --root /mnt
    ```
 
-5. When asked, **set a password for `bausserr`** (AMD) or `manssell` (Intel) — the
-   configuration does not ship a password:
+5. When asked, **set a password for `rhodium`** (generic), `bausserr` (AMD) or
+   `manssell` (Intel) — the configuration does not ship a password:
 
    ```bash
-   sudo nixos-enter --root /mnt -c 'passwd bausserr'
+   sudo nixos-enter --root /mnt -c 'passwd rhodium'
    ```
 
 6. Reboot. The rice is already installed, but the repo only lived in `/tmp`, so clone it
@@ -208,9 +227,10 @@ For when you want full control of partitioning. Adapted from the repo README.
    template, not your machine's):
 
    ```bash
-   git clone -b portability https://github.com/jajejournal/rhodium ~/rhodium
-   cp /etc/nixos/hardware-configuration.nix ~/rhodium/hosts/intel/hardware-configuration.nix
-   cd ~/rhodium && just switch intel    # or: just switch amd
+   git clone https://github.com/jajejournal/rhodium ~/rhodium
+   cp /etc/nixos/hardware-configuration.nix ~/rhodium/hosts/generic/hardware-configuration.nix
+   cd ~/rhodium && just switch generic    # or: intel / amd
+   git update-index --skip-worktree hosts/generic/hardware-configuration.nix
    ```
 
 ---
@@ -220,7 +240,7 @@ For when you want full control of partitioning. Adapted from the repo README.
 ```bash
 cd ~/rhodium     # `just` only works from the repo root
 git pull
-just switch intel    # or: just switch amd
+just switch generic    # or: intel / amd
 ```
 
 `just switch <host>` is the same as `sudo nixos-rebuild switch --flake ~/rhodium#<host>`

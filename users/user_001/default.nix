@@ -86,7 +86,6 @@
   # --- Rh Home Modules ---
   rh = {
     apps.media.audio = {
-      spotify.enable = true;
       roon.enable = false; # NOTE: Roon is paid + roon-bridge breaks builds; see home/apps/media/audio/roon.nix
     };
     development.languages = {

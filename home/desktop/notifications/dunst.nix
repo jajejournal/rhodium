@@ -92,14 +92,6 @@
         format = "<b>▶ %s</b>\n%b";
       };
 
-      discord = {
-        appname = "discord";
-        background = "#1e1e1e";
-        foreground = "#cccccc";
-        frame_color = "#333333";
-        format = "<b>▶ %s</b>\n%b";
-      };
-
       # System notifications
       system = {
         appname = "notify-send";

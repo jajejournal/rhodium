@@ -53,25 +53,26 @@ Defined in `data/hosts/hosts.nix` and `data/users/users.nix`:
 
 | nixosConfiguration | Hostname | User | GPU | Create this user in the installer |
 | --- | --- | --- | --- | --- |
+| `generic` | `nixos` | `rhodium` | Intel / AMD free drivers | ✅ |
 | `amd` | `amd` | `bausserr` | AMD (iGPU / dGPU) | ✅ |
 | `intel` | `intel` | `manssell` | Intel iGPU | ✅ |
 
 > **Use exactly these during the NixOS installation** (the username most of all). If you
 > create that user in the installer, the repo needs **zero edits** to work.
 >
-> Want a single machine instead of two? Point any host at the same `user` in
+> Want a single machine instead of several? Point any host at the same `user` in
 > `data/hosts/hosts.nix`, or add your own entry + directory under `hosts/`.
 
 ## Repository layout
 
 ```
 rhodium/
-├── flake.nix                      # inputs + nixosConfigurations (amd, intel)
+├── flake.nix                      # inputs + nixosConfigurations (generic, amd, intel)
 ├── INSTALL.md                     # install guide (graphical ISO + manual)
 ├── data/                          # ← all your personal data lives here
 │   ├── hosts/hosts.nix            #   hostnames, users, monitors, timezone
 │   └── users/users.nix            #   usernames, names, emails, groups
-├── hosts/<host>/                  # per-machine NixOS config (amd/, intel/)
+├── hosts/<host>/                  # per-machine NixOS config (generic/, amd/, intel/)
 │   ├── default.nix
 │   └── hardware-configuration.nix #   regenerate on the target machine
 ├── users/user_001/                # shared Home Manager config
@@ -83,12 +84,34 @@ rhodium/
 └── justfile                       # helper recipes
 ```
 
+## Home layout
+
+Home Manager creates the content directories the rice uses; you do not have to
+make them by hand.
+
+```
+~/
+├── documents/
+│   ├── aprendizaje/      # Obsidian vault
+│   └── opencode/         # OpenCode chats by topic
+├── downloads/
+└── pictures/
+    ├── screenshots/      # niri screenshot path
+    └── ocr/              # OCR text output
+```
+
+Lowercase is intentional: niri and the screenshot/OCR scripts already use those
+paths. `~/documents`, `~/downloads` and `~/pictures` are registered as XDG user
+dirs in `home/modules/env.nix`, so file pickers and apps resolve to the same
+places. Everything else follows the XDG base dirs: `~/.config`, `~/.local/share`,
+`~/.local/state`, `~/.cache`.
+
 ## Daily use
 
 ```sh
 cd ~/rhodium
 git pull
-sudo nixos-rebuild switch --flake .#intel    # or .#amd
+sudo nixos-rebuild switch --flake .#generic    # or .#intel / .#amd
 ```
 
 > Flakes only see files tracked by git, so `git add` new files before rebuilding.
@@ -110,7 +133,7 @@ sudo nixos-rebuild switch --flake .#intel    # or .#amd
 | `just health` | System health check |
 | `just docs` | Open the upstream docs in the browser |
 
-`<host>` is `amd` or `intel`.
+`<host>` is `generic`, `amd` or `intel`.
 
 ## Customizing
 
@@ -175,7 +198,7 @@ twice and icons resolve. Add your own launchers (wrappers, TUIs) the same way.
 ## OpenCode integration (in development)
 
 [opencode](https://opencode.ai) is installed through Home Manager
-(`home/development/agents/`) and preconfigured at `~/.config/opencode/opencode.json`
+(`home/development/agents/`) and preconfigured at `~/.config/opencode/config.json`
 with the **free** model:
 
 ```json
@@ -203,7 +226,7 @@ have no `deepseek-v4.1-flash-free`; 1.19.x does.
 
 > **Status: in use.** Validated on a T420 (old CPU, no AVX2) and on modern
 > machines; the model config above is what both the devshell and
-> `~/.config/opencode/opencode.json` use.
+> `~/.config/opencode/config.json` use.
 
 ## Secrets
 
@@ -239,7 +262,8 @@ Nothing sensitive is stored in this repository.
 - **Removed the hardcoded personal SSH key** and the private `identityFile` — now an opt-in
   module option (`rhSsh.authorizedKeys`).
 - **All personal data moved into `data/`** (usernames, emails, hostnames, monitors).
-- **Two portable hosts** (`amd`, `intel`) with template `hardware-configuration.nix`.
+- **Three portable hosts** (`generic`, `amd`, `intel`) with template
+  `hardware-configuration.nix`. Use `generic` on any other laptop or desktop.
 - **Real Intel iGPU module.** Upstream's `niri/intel.nix` was actually an **NVIDIA** module;
   renamed to `nvidia.nix`, and a genuine Intel iGPU module was added.
 - **Login prompt by default** (greetd + tuigreet), with autologin as an opt-in:
@@ -248,6 +272,8 @@ Nothing sensitive is stored in this repository.
   clicking the **ES/US** indicator in the waybar; the default timezone is `America/Bogota`.
 - **Hardware/server-specific services off by default** (ASUS backlight, Keychron/kmonad,
   Plex, Roon, Atuin sync…) so a fresh install boots anywhere.
+- **Steam is opt-in** (`rhodium.gaming.steam.enable = true;`) so old GPUs and
+  non-gaming machines do not pull the 32-bit graphics stack and a large closure.
 - **No one else's bookmarks or browser profiles.** Upstream shipped 117 personal
   bookmarks and 14 Firefox profiles, which appeared as launcher entries on any
   install. Replaced with a small, neutral starter set (`data/users/extras/bookmarks.nix`,
@@ -275,7 +301,7 @@ Roadmap:
 - [x] Replace the paid font (Berkeley Mono) with a free Nerd Font
 - [x] Remove hardcoded personal SSH key and private key path
 - [x] Move all personal data into `data/` (users + hosts)
-- [x] Two portable hosts (`amd`, `intel`) with template hardware configs
+- [x] Three portable hosts (`generic`, `amd`, `intel`) with template hardware configs
 - [x] Add a real Intel iGPU niri module (rename the old one to `nvidia.nix`)
 - [x] Login prompt by default (greetd + tuigreet), autologin opt-in
 - [x] Spanish + English keyboard layouts (ES first) with `America/Bogota` as default

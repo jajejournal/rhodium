@@ -14,15 +14,16 @@
   #   hasNvme       -> OPTIONAL, show the NVMe temperature in the bar (default false)
   #   timeZone      -> time.timeZone (e.g. "America/Bogota", "Europe/Madrid")
   #   locale        -> i18n.defaultLocale (keep English, e.g. "en_US.UTF-8")
+  #   stateVersion  -> system.stateVersion at first install (do not bump later)
   #   mainMonitor   -> primary display (used by niri/waybar)
   #   extraMonitors -> OPTIONAL list of extra displays, laid out to the right of
   #                    the main one. Empty/omitted = a normal laptop with a
   #                    single screen. Each entry uses the same keys as
   #                    mainMonitor plus an optional `monitorRotation` (degrees).
   #
-  # Nothing here is machine-bound except the monitor list, so a fresh install
-  # works by regenerating hosts/<h>/hardware-configuration.nix and (optionally)
-  # editing the monitors below.
+  # Only the monitor list and the hardware hints (`battery`, `hasNvme`) are
+  # machine-bound. A fresh install works by regenerating
+  # hosts/<h>/hardware-configuration.nix and (optionally) editing them below.
   # ───────────────────────────────────────────────────────────────────────────
   hosts = {
     amd = {
@@ -34,6 +35,7 @@
       hasNvme = true;
       timeZone = "America/Bogota";
       locale = "en_US.UTF-8";
+      stateVersion = "24.05";
       mainMonitor = {
         monitorID = "eDP-1";
         monitorResolution = "1920x1080";
@@ -52,6 +54,7 @@
       hasNvme = false;
       timeZone = "America/Bogota";
       locale = "en_US.UTF-8";
+      stateVersion = "24.11";
       mainMonitor = {
         monitorID = "LVDS-1";
         monitorResolution = "1366x768";
@@ -82,6 +85,7 @@
       hasNvme = false;
       timeZone = "America/Bogota";
       locale = "en_US.UTF-8";
+      stateVersion = "25.11";
       mainMonitor = {
         monitorID = "eDP-1";
         monitorResolution = "1920x1080";

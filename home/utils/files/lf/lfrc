@@ -138,13 +138,13 @@ map g
 map gc cd ~/.config
 
 # Go to Documents
-map gx cd ~/Documents
+map gx cd ~/documents
 
 # Go to Pictures
-map gp cd ~/Pictures
+map gp cd ~/pictures
 
 # Go to Downloads
-map gd cd ~/Downloads
+map gd cd ~/downloads
 
 # Go to script files dir
 map gb cd ~/bin
