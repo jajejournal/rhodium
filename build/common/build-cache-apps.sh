@@ -11,7 +11,7 @@ source "${COMMON_DIR}/bootstrap.sh"
 load_metadata "fuzzel" "apps"
 
 # --- Variables for fuzzel-apps cache ---
-PADDING_ARGS="35 20 20" # Column padding: name, type, categories
+PADDING_ARGS="35 20 20" # Column padding: name, type, group
 
 # Return success only when the .desktop entry's command exists in PATH.
 # Entries are generated for every curated app, including ones that this profile
@@ -107,6 +107,12 @@ build_cache_apps() {
     for file in "${sorted_files[@]}"; do
       name="${name_map[$file]}"
       entry_type="${type_map[$file]:-app}"
+      case "$entry_type" in
+        application) entry_type="App" ;;
+        bookmark) entry_type="Bookmark" ;;
+        profile) entry_type="Profile" ;;
+        *) entry_type="${entry_type^}" ;;
+      esac
 
       categories="${cat_map[$file]:-}"
       if [[ -n "$categories" ]]; then
@@ -120,11 +126,11 @@ build_cache_apps() {
         done
         categories="$formatted_cats"
       else
-        categories="App"
+        categories="General"
       fi
 
       local formatted_text=""
-      local parts=("$(provide_fuzzel_entry) $name" "${entry_type^}" "$categories")
+      local parts=("$(provide_fuzzel_entry) $name" "$entry_type" "$categories")
       local num_parts=${#parts[@]}
       local num_paddings=${#paddings[@]}
 

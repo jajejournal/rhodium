@@ -365,11 +365,44 @@
   };
 
   media = {
+    blender = {
+      binary = "blender";
+      args = [ ];
+      icon = "blender";
+      description = "Blender 3D";
+      categories = [ "3D" ];
+      noDisplay = true;
+    };
+    darktable = {
+      binary = "darktable";
+      args = [ ];
+      icon = "darktable";
+      description = "Darktable Photo Editor";
+      categories = [ "Photo" ];
+      noDisplay = true;
+    };
+    figma-linux = {
+      binary = "figma-linux";
+      args = [ ];
+      icon = "figma-linux";
+      description = "Figma Linux";
+      categories = [ "Design" ];
+      noDisplay = true;
+    };
     gimp = {
       binary = "gimp";
       args = [ ];
       icon = "gimp";
       description = "GIMP";
+      categories = [ "Image" ];
+      noDisplay = true;
+    };
+    handbrake = {
+      binary = "ghb";
+      args = [ ];
+      icon = "fr.handbrake.ghb";
+      description = "HandBrake";
+      categories = [ "Video" ];
       noDisplay = true;
     };
     inkscape = {
@@ -377,6 +410,23 @@
       args = [ ];
       icon = "inkscape";
       description = "InkScape";
+      categories = [ "Vector" ];
+      noDisplay = true;
+    };
+    kdenlive = {
+      binary = "kdenlive";
+      args = [ ];
+      icon = "kdenlive";
+      description = "Kdenlive Video Editor";
+      categories = [ "Video" ];
+      noDisplay = true;
+    };
+    mpv = {
+      binary = "mpv";
+      args = [ ];
+      icon = "mpv";
+      description = "mpv Media Player";
+      categories = [ "Video" ];
       noDisplay = true;
     };
     obs = {
@@ -384,6 +434,7 @@
       args = [ ];
       icon = "obs";
       description = "OBS Studio";
+      categories = [ "Recording" ];
       noDisplay = true;
     };
     plexamp = {
@@ -391,6 +442,15 @@
       args = [ ];
       icon = "plexamp";
       description = "Plexamp";
+      categories = [ "Audio" ];
+      noDisplay = true;
+    };
+    vlc = {
+      binary = "vlc";
+      args = [ ];
+      icon = "vlc";
+      description = "VLC Media Player";
+      categories = [ "Video" ];
       noDisplay = true;
     };
   };

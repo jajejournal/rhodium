@@ -51,7 +51,11 @@ let
       topKey: topValue:
       lib.mapAttrs' (subKey: subValue: {
         name = "${entryPrefix}-${topKey}-${subKey}";
-        value = subValue;
+        # Keep the top-level group so entries without explicit categories can
+        # still show a short label in the launcher (Media, Productivity, ...).
+        value = subValue // {
+          group = topKey;
+        };
       }) topValue
     ) attrs;
 
@@ -74,7 +78,7 @@ let
       description = "${bookmark.description}";
       entryType = "bookmark";
       profileName = profileName;
-      categories = bookmark.categories or [ ];
+      categories = bookmark.categories or [ (capitalize bookmark.group) ];
     };
 
   # Profile generator: Browser + profile only + special args
@@ -94,7 +98,7 @@ let
         if profileName == "" then capitalize browser else "${capitalize browser} ${profileName}";
       entryType = "profile";
       profileName = profileName;
-      categories = profile.categories or [ ];
+      categories = profile.categories or [ "Browser" ];
     };
 
   # App generator: Custom binary + flexible args + special args
@@ -104,7 +108,7 @@ let
     icon = app.icon;
     description = "${app.description}";
     entryType = "application";
-    categories = app.categories or [ ];
+    categories = app.categories or [ (capitalize app.group) ];
     # Hides the entry from generic launchers. Set `noDisplay = true` for
     # entries that only duplicate the .desktop file the package already
     # installs; the rice's own menus (fuzzel-apps.sh, raffi) still list them.

@@ -9,7 +9,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../common/bootstrap.sh"
 load_metadata "fuzzel" "apps"
 
 # --- Configuration ---
-PADDING_ARGS="35 20 20" # Column padding: name, type, categories
+PADDING_ARGS="35 20 20" # Column padding: name, type, group
 
 launch_app() {
   APP_DIR="$HOME/.local/share/applications"

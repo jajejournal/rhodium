@@ -188,8 +188,10 @@ so those titles are the source of truth for both cheatsheets — keep
 installed `.desktop` file. `Super + M` opens `fuzzel-apps.sh`, which reads the
 rice's curated entries from `data/users/extras/apps.nix` (applications) plus
 bookmarks and browser profiles, grouped by category; entries whose binary is not
-installed are hidden. Bookmarks and browser profiles are not applications, but
-the menu lists them as their own categories too. The *generic* `.desktop`
+installed are hidden. Each row shows the name, the entry type (`App`,
+`Bookmark`, `Profile`) and a short group (`Media`, `Productivity`, `Reference`,
+...). Bookmarks and browser profiles are not applications, but the menu lists
+them as their own categories too. The *generic* `.desktop`
 launcher (`raffi`, no keybind) lists applications only: bookmark/profile entries
 and launcher entries that merely duplicate a package's own entry are marked
 `noDisplay = true;` in `data/users/extras/apps.nix`, so an app is never listed
