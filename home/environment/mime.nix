@@ -13,7 +13,7 @@ let
   userBrowser = "rh-firefox-personal";
   audio = preferredApps.audioPlayer or "clementine";
   image = "rh-viewers-image-viewer";
-  pdf = preferredApps.pdfViewer or "org.pwmt.zathura.desktop";
+  pdf = preferredApps.pdfViewer or "org.pwmt.zathura";
   video = preferredApps.videoPlayer or "mpv";
 in
 {
@@ -24,6 +24,12 @@ in
       "text/x-nushell" = [ "${userEditor}.desktop" ];
       "application/x-nushell" = [ "${userEditor}.desktop" ];
       "application/pdf" = [ "${pdf}.desktop" ];
+      "application/acrobat" = [ "${pdf}.desktop" ];
+      "application/vnd.pdf" = [ "${pdf}.desktop" ];
+      "application/x-pdf" = [ "${pdf}.desktop" ];
+      "application/x-extension-pdf" = [ "${pdf}.desktop" ];
+      "text/pdf" = [ "${pdf}.desktop" ];
+      "text/x-pdf" = [ "${pdf}.desktop" ];
       "application/x-extension-htm" = [ "${userBrowser}.desktop" ];
       "application/x-extension-html" = [ "${userBrowser}.desktop" ];
       "application/x-extension-shtml" = [ "${userBrowser}.desktop" ];
