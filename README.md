@@ -185,13 +185,15 @@ so those titles are the source of truth for both cheatsheets — keep
 `shortcuts.txt` in sync when you change them.
 
 **What each menu lists.** `Super + A` is plain `fuzzel`, which scans every
-installed `.desktop` file. `Super + M` opens `fuzzel-apps.sh`, which reads the
-rice's curated entries from `data/users/extras/apps.nix` (applications) plus
-bookmarks and browser profiles, grouped by category; entries whose binary is not
-installed are hidden. Each row shows the name, the entry type (`App`,
-`Bookmark`, `Profile`) and a short group (`Media`, `Productivity`, `Reference`,
-...). Bookmarks and browser profiles are not applications, but the menu lists
-them as their own categories too. The *generic* `.desktop`
+installed `.desktop` file. `Super + M` opens `fuzzel-apps.sh`, which combines
+the system's native `.desktop` entries with the rice's curated entries from
+`data/users/extras/apps.nix` (applications) plus bookmarks and browser profiles,
+grouped by category. Native entries are always included, matching `Super + A`;
+curated entries whose binary is not installed are hidden, and curated entries
+that duplicate a native app are dropped. Each row shows the name, the entry type
+(`App`, `Bookmark`, `Profile`) and a short group (`Media`, `Productivity`,
+`Reference`, ...). Bookmarks and browser profiles are not applications, but the
+menu lists them as their own categories too. The *generic* `.desktop`
 launcher (`raffi`, no keybind) lists applications only: bookmark/profile entries
 and launcher entries that merely duplicate a package's own entry are marked
 `noDisplay = true;` in `data/users/extras/apps.nix`, so an app is never listed
@@ -284,8 +286,8 @@ Nothing sensitive is stored in this repository.
   entries and launcher entries that merely duplicate a package's own `.desktop`
   file are `NoDisplay`, so nothing shows up twice and icons resolve
   (`home/modules/desktop.nix`, `lib/generators/desktopGenerators.nix`). The
-  `Super + M` menu (`fuzzel-apps.sh`) adds bookmarks and browser profiles on top,
-  grouped by category.
+  `Super + M` menu (`fuzzel-apps.sh`) combines the native application list with
+  bookmarks and browser profiles, grouped by category.
 - **No hardcoded browser profile required.** An empty profile name means "the
   browser's default profile", so links, bookmarks and launcher entries work on a
   fresh install instead of opening a profile that does not exist yet. The same

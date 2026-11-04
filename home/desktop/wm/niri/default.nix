@@ -659,11 +659,11 @@ in
         action.move-column-right = [ ];
       };
       "Mod+Ctrl+Down" = {
-        hotkey-overlay.title = "Move Window Down";
+        hotkey-overlay.title = "Move Column to Workspace Down";
         action.move-column-to-workspace-down = [ ];
       };
       "Mod+Ctrl+Up" = {
-        hotkey-overlay.title = "Move Window Up";
+        hotkey-overlay.title = "Move Column to Workspace Up";
         action.move-column-to-workspace-up = [ ];
       };
       "Mod+Ctrl+H" = {
@@ -675,11 +675,11 @@ in
         action.move-column-right = [ ];
       };
       "Mod+Ctrl+J" = {
-        hotkey-overlay.title = "Move Window Down";
+        hotkey-overlay.title = "Move Column to Workspace Down";
         action.move-column-to-workspace-down = [ ];
       };
       "Mod+Ctrl+K" = {
-        hotkey-overlay.title = "Move Window Up";
+        hotkey-overlay.title = "Move Column to Workspace Up";
         action.move-column-to-workspace-up = [ ];
       };
 
@@ -1018,7 +1018,7 @@ in
         allow-when-locked = true;
       };
       "XF86AudioMicMute" = {
-        hotkey-overlay.title = "Toggle Mute";
+        hotkey-overlay.title = "Toggle Microphone Mute";
         action.spawn = [ "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle" ];
         allow-when-locked = true;
       };

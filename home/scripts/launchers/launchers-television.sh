@@ -117,8 +117,8 @@ main() {
 }
 
 # Kill existing TV processes
-if pgrep "tv" >/dev/null; then
-    pkill -9 "tv"
+if pgrep -x "tv" >/dev/null; then
+    pkill -9 -x "tv"
 else
     # Set terminal emulator
     TERM="${TERMINAL:-kitty}"
