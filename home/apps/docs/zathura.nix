@@ -62,7 +62,7 @@
       index-active-fg = theme.colors.bg or "#1a1a2e";
 
       # --- Recolor (dark mode for PDFs) ---
-      recolor = false; # Don't recolor by default
+      recolor = true; # Don't recolor by default
       recolor-keephue = true;
       recolor-darkcolor = theme.colors.fg or "#c8c8d0";
       recolor-lightcolor = theme.colors.bg or "#1a1a2e";
