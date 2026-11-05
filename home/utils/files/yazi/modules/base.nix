@@ -635,8 +635,8 @@
       {
         mime = "application/pdf";
         use = [
-          "okular"
           "zathura"
+          "okular"
           "libreoffice-draw"
           "open"
           "reveal"
@@ -645,8 +645,8 @@
       {
         url = "*.pdf";
         use = [
-          "okular"
           "zathura"
+          "okular"
           "libreoffice-draw"
           "open"
           "reveal"
