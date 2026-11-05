@@ -254,7 +254,7 @@ it from inside the repo: `FLAKE_PATH` defaults to the current directory.
 > (`nix develop`) without asking. Clones in another path need a one-time `direnv allow`.
 
 - **Show all keybinds:** `Mod + F1` (searchable menu). `Mod + Shift + F1` opens the
-  full plain-text list (`~/.config/niri/shortcuts.txt`).
+  full plain-text list, including per-app keybinds (`~/.config/niri/shortcuts.txt`).
 - **Switch keyboard layout:** click the **ES/US** indicator in the waybar (Spanish first).
 - **If the desktop breaks:** `Ctrl + Alt + F3` gives you a TTY. Log in, fix, rebuild.
 

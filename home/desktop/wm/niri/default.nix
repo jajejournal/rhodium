@@ -130,8 +130,9 @@ let
   #   cheatsheetMenu -> searchable menu, built from the titles in this very
   #                     config so it can never go stale
   #                     (home/scripts/fuzzel/fuzzel-help.sh).
-  #   cheatsheetText -> the full plain-text list, which also documents the
-  #                     rice's other menus and helper scripts.
+  #   cheatsheetText -> the full plain-text list: Niri binds, the rice's other
+  #                     menus/helpers, and the custom keybinds of individual
+  #                     applications (Neovim, Yazi, Zathura, Fish, ...).
   cheatsheetMenu = "~/.local/bin/fuzzel/fuzzel-help.sh";
   cheatsheetText = "kitty --class rh-shortcuts -e less -R \"$HOME/.config/niri/shortcuts.txt\"";
 in
@@ -1060,7 +1061,8 @@ in
   # ----------------------------------------------------------------------------
   # Keybind cheatsheet
   # ----------------------------------------------------------------------------
-  # Plain-text list of every keybind. Shown with Mod + F1 (see binds above),
-  # and always available at ~/.config/niri/shortcuts.txt.
+  # Plain-text list of every keybind, including per-application keybinds.
+  # Shown with Mod + Shift + F1 (see binds above), and always available at
+  # ~/.config/niri/shortcuts.txt.
   xdg.configFile."niri/shortcuts.txt".source = ./shortcuts.txt;
 }

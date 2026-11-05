@@ -1,11 +1,12 @@
 ================================================================================
-                       RHODIUM - NIRI KEYBINDS CHEATSHEET
+                       RHODIUM - KEYBINDS CHEATSHEET
 ================================================================================
 
   Mod  =  Super / Win key
   Switch keyboard layout (ES <-> EN):  click the ES/US indicator in waybar
   Keybind menu (search):               Mod + F1
   Full cheatsheet (plain text):        Mod + Shift + F1  (this file)
+  Application keybinds:                see the sections after the Niri list
 
 --------------------------------------------------------------------------------
   SYSTEM & CORE
@@ -139,5 +140,468 @@
   Play / Pause ......... Play or pause media
   Next ................. Next track
   Previous ............. Previous track
+
+================================================================================
+                 RHODIUM - APPLICATION KEYBINDS
+================================================================================
+
+  Leader = Space.  <C-x> = Ctrl+x, <M-x> = Alt+x, <S-x> = Shift+x.
+  Custom/active keybinds from the application configs in this repo.
+  Standard Vim/readline/terminal defaults are not repeated.
+
+--------------------------------------------------------------------------------
+  NEOVIM - GENERAL
+--------------------------------------------------------------------------------
+  <A-Down>                       Move line down
+  <A-Up>                         Move line up
+  <Esc>                          Clear search highlight
+  <Leader>C                      Comment all lines
+  <Leader>D                      Delete entire buffer
+  <Leader>M                      Start on word/selection
+  <Leader>Y                      Yank entire buffer to clip
+  <Leader>cD                     Insert DONE
+  <Leader>ca                     Append
+  <Leader>cd                     Insert DOCS
+  <Leader>ce                     Insert TEST
+  <Leader>cf                     Insert FIX
+  <Leader>ch                     Append
+  <Leader>ck                     Insert HACK
+  <Leader>cl                     List buffer TODOs
+  <Leader>cn                     Insert NOTE
+  <Leader>cp                     Insert PERF
+  <Leader>csd                    Swap TODO/DONE
+  <Leader>ct                     Insert TODO
+  <Leader>cw                     Insert WARN
+  <Leader>db                     Show buffer diagnostics
+  <Leader>dl                     Show line diagnostics
+  <Leader>dv                     Toggle virtual text
+  <Leader>er                     Replace buffer with clipboard
+  <Leader>ii                     Smart indent line/selection
+  <Leader>io                     Smart outdent line/selection
+  <Leader>la                     Code actions
+  <Leader>lf                     Format (Conform)
+  <Leader>lh                     Show hover
+  <Leader>lr                     Rename symbol
+  <M-S>                          Previous buffer
+  <M-h>                          Quick Harpoon 1
+  <M-j>                          Quick Harpoon 2
+  <M-k>                          Quick Harpoon 3
+  <M-l>                          Quick Harpoon 4
+  <M-s>                          Next buffer
+  <c-b>                          Scroll Backward
+  <c-f>                          Scroll Forward
+  <leader><space>n               Toggle line numbers
+  <leader><space>v               Toggle visual line movement
+  <leader><space>z               Toggle zen mode
+  <leader>b1                     Go to buffer 1
+  <leader>b2                     Go to buffer 2
+  <leader>b3                     Go to buffer 3
+  <leader>b4                     Go to buffer 4
+  <leader>b5                     Go to buffer 5
+  <leader>b6                     Go to buffer 6
+  <leader>b7                     Go to buffer 7
+  <leader>b8                     Go to buffer 8
+  <leader>b9                     Go to buffer 9
+  <leader>bP                     Toggle pin
+  <leader>bcl                    Close to left
+  <leader>bco                    Close others
+  <leader>bcp                    Pick to close
+  <leader>bcr                    Close to right
+  <leader>bgd                    Toggle Docs group
+  <leader>bgt                    Toggle Tests group
+  <leader>bmn                    Move next
+  <leader>bmp                    Move prev
+  <leader>bp                     Pick
+  <leader>bsd                    Sort by directory
+  <leader>bse                    Sort by extension
+  <leader>bst                    Sort by tabs
+  <leader>cc                     Toggle Linewise (Line/Count)
+  <leader>fD                     Diagnostics (all files)
+  <leader>fF                     Find files on current project
+  <leader>fG                     Live grep with args on current root project
+  <leader>fH                     Search history
+  <leader>fS                     Symbols (workspace)
+  <leader>fT                     Find TODOs on current buffer using priority
+  <leader>fa                     Aerial symbols
+  <leader>fb                     Buffers
+  <leader>fc                     Command history
+  <leader>fd                     Diagnostics (current file)
+  <leader>ff                     Files
+  <leader>fg                     Live grep with args
+  <leader>fh                     Help
+  <leader>fk                     Keymaps
+  <leader>fo                     Options
+  <leader>fr                     Recent (Frecency)
+  <leader>fs                     Symbols (document)
+  <leader>ft                     Find TODOs on current buffer using priority
+  <leader>fw                     Word under cursor
+  <leader>gb                     Branches
+  <leader>gc                     Commits
+  <leader>gs                     Status
+  <leader>h1                     Harpoon to file 1
+  <leader>h2                     Harpoon to file 2
+  <leader>h3                     Harpoon to file 3
+  <leader>h4                     Harpoon to file 4
+  <leader>ha                     Add file to Harpoon
+  <leader>hc                     Clear all Harpoon marks
+  <leader>hh                     Toggle Harpoon menu
+  <leader>hn                     Next Harpoon mark
+  <leader>hp                     Previous Harpoon mark
+  <leader>hr                     Remove current file from Harpoon
+  <leader>j.                     Continue last flash
+  <leader>jb                     Flash backward only
+  <leader>jf                     Flash forward only
+  <leader>jl                     Jump to line
+  <leader>jw                     Jump to word beginning
+  <leader>m,                     Set next available mark
+  <leader>m:                     Preview mark
+  <leader>m;                     Toggle mark at line
+  <leader>m<space>               Delete mark on line
+  <leader>mD                     Delete all marks in buffer
+  <leader>m[                     Previous mark
+  <leader>m]                     Next mark
+  <leader>ma                     Set mark (wait for letter)
+  <leader>md                     Delete mark (wait for letter)
+  <leader>oA                     Toggle navigation
+  <leader>oa                     Toggle sidebar
+  <leader>of                     Focus sidebar
+  <leader>q                      Close without saving (smart)
+  <leader>rf                     Search on current file
+  <leader>rr                     Replace normal or visual smartly and with prompt to user
+  <leader>rt                     Toggle Spectre
+  <leader>rw                     Search current word
+  <leader>tb                     Buffer diagnostics
+  <leader>tc                     Close all
+  <leader>td                     LSP definitions
+  <leader>ti                     LSP implementations
+  <leader>tl                     Location list
+  <leader>tq                     Quickfix list
+  <leader>tr                     LSP references
+  <leader>ts                     Document symbols
+  <leader>tt                     Toggle diagnostics
+  <leader>w                      Save and close (smart)
+  <leader>xna                    Noice All
+  <leader>xnd                    Dismiss All
+  <leader>xnh                    Noice History
+  <leader>xnl                    Noice Last Message
+  <leader>xnt                    Noice Picker (Telescope/FzfLua)
+  <leader>yc                     Open Yazi at current file
+  <leader>yr                     Resume yazi
+  <leader>yw                     Open Yazi on nvim working directory
+  S                              Flash treesitter
+  [T                             Previous trouble item
+  [d                             Previous diagnostic
+  [e                             Previous error
+  [h                             Previous Harpoon mark
+  [m                             Previous mark
+  [t                             Previous todo comment
+  ]T                             Next trouble item
+  ]T                             Next task
+  ]d                             Next diagnostic
+  ]e                             Next error
+  ]h                             Next Harpoon mark
+  ]m                             Next mark
+  ]t                             Next todo comment
+  g[T                            First trouble item
+  g]T                            Last trouble item
+  gd                             Go to definition
+  gi                             Go to implementation
+  gr                             Go to references
+  gt                             Go to type definition
+  s                              Flash jump
+  {                              Next symbol
+  }                              Previous symbol
+  [c] <S-Enter>                  Redirect Cmdline
+  [c] <c-s>                      Toggle flash search
+  [i] <c-b>                      Scroll Backward
+  [i] <c-f>                      Scroll Forward
+  [o] <leader><space>n           Toggle line numbers
+  [o] <leader>j.                 Continue last flash
+  [o] <leader>jW                 Flash select word
+  [o] <leader>jb                 Flash backward only
+  [o] <leader>jf                 Flash forward only
+  [o] <leader>jl                 Jump to line
+  [o] <leader>jw                 Jump to word beginning
+  [o] R                          Treesitter search
+  [o] S                          Flash treesitter
+  [o] r                          Remote flash
+  [o] s                          Flash jump
+  [s] <c-b>                      Scroll Backward
+  [s] <c-f>                      Scroll Forward
+  [v] <A-Down>                   Move selection down
+  [v] <A-Up>                     Move selection up
+  [v] <Leader>M                  Start on word/selection
+  [v] <Leader>ii                 Smart indent line/selection
+  [v] <Leader>io                 Smart outdent line/selection
+  [v] <Leader>lf                 Format (Conform)
+  [v] <Leader>sa                 Sort alphabetically
+  [v] <Leader>si                 Sort case-insensitive
+  [v] <Leader>sn                 Sort numerically
+  [v] <Leader>sr                 Sort reverse (descending)
+  [v] <M-S>                      Previous buffer
+  [v] <M-s>                      Next buffer
+  [v] <leader><space>n           Toggle line numbers
+  [v] <leader>rr                 Replace normal or visual smartly and with prompt to user
+  [v] <leader>rw                 Search current word
+  [x] <leader><space>n           Toggle line numbers
+  [x] <leader>cc                 Toggle Linewise (Visual Selection)
+  [x] <leader>j.                 Continue last flash
+  [x] <leader>jW                 Flash select word
+  [x] <leader>jb                 Flash backward only
+  [x] <leader>jf                 Flash forward only
+  [x] <leader>jl                 Jump to line
+  [x] <leader>jw                 Jump to word beginning
+  [x] R                          Treesitter search
+  [x] S                          Flash treesitter
+  [x] s                          Flash jump
+
+--------------------------------------------------------------------------------
+  NEOVIM - MARKDOWN
+--------------------------------------------------------------------------------
+  ;mp                            Markdown: Preview in browser
+  ;ms                            Markdown: Stop browser preview
+  ;mt                            Markdown: Toggle browser preview
+  ;pe                            Markdown: Export to PDF
+  ;pv                            Markdown: View PDF live
+
+--------------------------------------------------------------------------------
+  NEOVIM - PYTHON
+--------------------------------------------------------------------------------
+  ;e                             Molten: Evaluate operator
+  ;i                             Molten: Show info
+  ;mi                            Molten: Initialize
+  ;oh                            Molten: Hide output
+  ;os                            Molten: Show output
+  ;pr                            Python: Run current file
+  ;pt                            Python: Run pytest on current file
+  ;rd                            Molten: Delete cell
+  ;rl                            Molten: Evaluate line
+  ;rr                            Molten: Re-evaluate cell
+  ;x                             Molten: Interrupt execution
+  [v] ;r                         Molten: Evaluate visual
+
+--------------------------------------------------------------------------------
+  NEOVIM - JUPYTER
+--------------------------------------------------------------------------------
+  ;e                             Molten: Evaluate operator selection
+  ;mi                            Molten: Initialize plugin
+  ;oh                            Molten: Hide output
+  ;os                            Molten: Show/enter output
+  ;rd                            Molten: Delete cell
+  ;rl                            Molten: Evaluate line
+  ;rr                            Molten: Re-evaluate cell
+  [v] ;r                         Molten: Evaluate visual selection
+
+--------------------------------------------------------------------------------
+  NEOVIM - RUST
+--------------------------------------------------------------------------------
+  ;rb                            Rust: Build project
+  ;rc                            Rust: Check for errors (fast)
+  ;rf                            Rust: Format code
+  ;rr                            Rust: Run project
+  ;rs                            Rust: Run project on split term
+  ;rt                            Rust: Run tests
+
+--------------------------------------------------------------------------------
+  NEOVIM - LATEX
+--------------------------------------------------------------------------------
+  ;ll                            VimTeX: Continuous compile
+  ;lt                            VimTeX: Toggle TOC
+  ;lv                            VimTeX: View PDF
+
+--------------------------------------------------------------------------------
+  NEOVIM - TYPST
+--------------------------------------------------------------------------------
+  ;tea                           Typst: Export ANSI Highlight
+  ;tem                           Typst: Export Markdown
+  ;ten                           Typst: Export PNG
+  ;tep                           Typst: Export PDF
+  ;teq                           Typst: Export Query
+  ;tes                           Typst: Export SVG
+  ;tex                           Typst: Export Text
+  ;tid                           Typst: Get Document Trace
+  ;til                           Typst: Get Workspace Labels
+  ;tim                           Typst: Get Document Metrics
+  ;tis                           Typst: Get Server Info
+  ;tn                            Typst: Preview in browser without cursor follow
+  ;tp                            Typst: Preview in browser
+  ;ts                            Typst: Stop browser preview
+  ;tt                            Typst: Toggle browser preview
+  ;tu                            Typst: Update browser preview
+
+--------------------------------------------------------------------------------
+  NEOVIM - DASHBOARD
+--------------------------------------------------------------------------------
+  ?                              Show dashboard keybindings
+  fR                             Files Recent
+  fa                             Files All
+  fd                             Make Directory
+  fn                             Quick Note
+  fp                             Make Project
+  fr                             Files Rhodium
+  ft                             Touch File
+  hc                             Health Check
+  zp                             Z Project
+
+--------------------------------------------------------------------------------
+  NEOVIM - CSV
+--------------------------------------------------------------------------------
+  <leader>cU                     CSV: Unarrange columns
+  <leader>ca                     CSV: Arrange columns
+  <leader>ch                     CSV: Pin header
+  <leader>cu                     CSV: Unpin header
+  <leader>cw                     CSV: What column?
+
+--------------------------------------------------------------------------------
+  NEOVIM - TROUBLE
+--------------------------------------------------------------------------------
+  <leader>ft                     Find Files with Trouble integration
+  <leader>xX                     Toggle Buffer Diagnostics (Trouble)
+  <leader>xb                     Buffer Diagnostics (Trouble)
+  <leader>xc                     Close Trouble
+  <leader>xd                     Toggle LSP Definitions (Trouble)
+  <leader>xi                     Toggle LSP Implementations (Trouble)
+  <leader>xl                     Toggle Location List (Trouble)
+  <leader>xp                     Project Diagnostics (Trouble)
+  <leader>xq                     Toggle Quickfix (Trouble)
+  <leader>xr                     Toggle LSP References (Trouble)
+  <leader>xs                     Toggle Symbols (Trouble)
+  <leader>xt                     Toggle LSP Type Definitions (Trouble)
+  <leader>xx                     Toggle Diagnostics (Trouble)
+  [X                             First Trouble Item
+  [x                             Previous Trouble Item
+  ]X                             Last Trouble Item
+  ]x                             Next Trouble Item
+
+--------------------------------------------------------------------------------
+  YAZI
+--------------------------------------------------------------------------------
+  f f                            Search files by name (fg)
+  f g                            Search files by content using rg + fzf (fr)
+  f G                            Search files by content using rga + fzf (fr)
+  g r                            Go to rhodium
+  g h                            Go to user home
+  g H                            Go to .cache
+  g b                            Go to ./local/bin
+  g e                            Go to ./config/doom
+  g u                            Go to dev/utils
+  g p                            Go to Project Root
+  g A                            Go to .local/share/applications
+  g a                            Go to academic
+  g d                            Go to downloads
+  g s                            Go to solenoid-labs
+  F                              Smart Filter
+  l                              Smart Enter
+  ;                              Jump to char (like vim f)
+  r r                            Rename selected file(s)
+  r a                            Rename clear selected file(s)
+  r c                            Rename change selected file(s)
+  H                              DuckDB: scroll columns left
+  L                              DuckDB: scroll columns right
+  <C-d>                          DuckDB: toggle summary/standard mode
+  g i                            Open LazyGit
+  g D                            Diff selected files
+  <C-g>                          Drag files to other apps
+  <A-g>                          Drag all selected files
+  Y                              Copy files to system clipboard (Wayland)
+  c a                            Compress selected files
+  c x                            Extract archive here
+  T                              Maximize preview pane
+  <C-t>                          Minimize preview pane
+  c m                            Change file permissions
+  c s                            Execute with sudo
+  m m                            Mount/unmount disk
+  M                              Show media info
+  p                              Paste files
+  P s                            Save current as project
+  P l                            Load project
+  P d                            Delete project
+  P D                            Delete all projects
+  P m                            Merge with other projects
+  u r                            Restore deleted files
+  1                              Switch to tab 1
+  2                              Switch to tab 2
+  3                              Switch to tab 3
+  4                              Switch to tab 4
+  5                              Switch to tab 5
+  6                              Switch to tab 6
+  7                              Switch to tab 7
+  8                              Switch to tab 8
+  9                              Switch to tab 9
+
+--------------------------------------------------------------------------------
+  ZATHURA
+--------------------------------------------------------------------------------
+  <C-d>                          Scroll half page down
+  <C-u>                          Scroll half page up
+  D                              Toggle page mode
+  r                              Rotate clockwise
+  R                              Rotate counter-clockwise
+  K                              Zoom in
+  J                              Zoom out
+  i                              Toggle dark-mode recolor
+  <C-r>                          Reload document
+  p                              Print
+  b                              Toggle status bar
+  <C-c>                          Abort
+  m                              Set/evaluate mark
+  '                              Set/evaluate mark
+  <Tab>                          Toggle index (table of contents)
+
+--------------------------------------------------------------------------------
+  FISH
+--------------------------------------------------------------------------------
+  Ctrl+T (default+insert)        Jump to file (jtf)
+  Ctrl+O (default+insert)        Jump to directory (jtd)
+  Ctrl+P (default+insert)        Jump to project (jtp)
+  Ctrl+Y (default+insert)        Open Yazi file manager (yy)
+  Ctrl+H (default+insert)        Simple history pager (h)
+  Ctrl+R (default+insert)        Atuin search
+  y (visual)                     Copy selection to system clipboard
+  p (default)                    Paste from system clipboard
+
+--------------------------------------------------------------------------------
+  HELIX
+--------------------------------------------------------------------------------
+  D                              Extend to line bounds + delete selection
+  Space Space                    Save selection, select all, yank, jump back
+  Space /                        Global search
+  C-d                            Half page down + center
+  C-u                            Half page up + center
+  C-s                            Write (normal and insert mode)
+
+--------------------------------------------------------------------------------
+  ZED
+--------------------------------------------------------------------------------
+  Ctrl+B                         Toggle left dock
+  Alt+Tab                        Toggle project panel focus
+  Space C                        Toggle comments (Vim normal/visual)
+  Ctrl+Shift+Enter               Run REPL cell/selection (Python)
+  Shift+Enter                    Run REPL cell/selection (Python)
+  Ctrl+Shift+C                   Clear REPL outputs (Python)
+  Alt+Enter                      Run REPL and move down (Python)
+
+--------------------------------------------------------------------------------
+  VS CODE
+--------------------------------------------------------------------------------
+  Ctrl+1                         Toggle line comment
+  Ctrl+N                         New file in Explorer
+
+--------------------------------------------------------------------------------
+  TELEVISION
+--------------------------------------------------------------------------------
+  Down / Ctrl+J                  Select next entry
+  Up / Ctrl+K                    Select previous entry
+  Enter                          Confirm selection
+  Ctrl+Y                         Copy entry to clipboard
+  Ctrl+P                         Toggle preview
+  Ctrl+R                         Toggle remote control
+  ?                              Toggle help
+
+--------------------------------------------------------------------------------
+  ZSH
+--------------------------------------------------------------------------------
+  vi mode                        Vi-style key bindings
+  y (vicmd)                      Yank selection to system clipboard
 
 ================================================================================

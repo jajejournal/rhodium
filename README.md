@@ -144,7 +144,7 @@ sudo nixos-rebuild switch --flake .#generic    # or .#intel / .#amd
   `~/.config/obsidian/obsidian.json` (`home/apps/docs/obsidian-theme.nix`).
 - **Fonts** — `overlays/fonts.nix` (the free replacement) and `home/modules/fonts.nix`.
 - **Keybinds** — `home/desktop/wm/niri/default.nix`; keep
-  `home/desktop/wm/niri/shortcuts.txt` in sync when you change them.
+  `home/desktop/wm/niri/shortcuts.txt` in sync, including its per-app sections.
 - **Keyboard layout / timezone** — `modules/hardware/keyboard.nix` +
   `data/hosts/hosts.nix` (`timeZone`, `locale`).
 - **Users & hosts** — `data/users/users.nix`, `data/hosts/hosts.nix`.
@@ -155,8 +155,9 @@ sudo nixos-rebuild switch --flake .#generic    # or .#intel / .#amd
 - **Super + F1** — searchable keybind menu (`fuzzel-help.sh`), generated from the
   `hotkey-overlay.title` of every bind, so it is always in sync with the config.
   Works with any layout.
-- **Super + Shift + F1** — the full plain-text cheatsheet, which also
-  lists the rice's other menus and helper scripts.
+- **Super + Shift + F1** — the full plain-text cheatsheet: Niri binds, the
+  rice's other menus/helpers, and custom keybinds for individual apps
+  (Neovim, Yazi, Zathura, Fish, Helix, Zed, VS Code, Television, Zsh).
 - **Super + Space** — lock screen (`hyprlock`).
 - **Super + Shift + Space** — power menu (`fuzzel-power.sh`): power off, reboot,
   reboot to UEFI, suspend, hibernate, log out, lock screen, airplane mode.
@@ -175,7 +176,8 @@ temperature, journals, kill, yank, go, osmium, remote, xecute, zutils, find,
 launch, query. A few are on the bar: click the logo for the app menu, click
 Bluetooth for its menu, and right-click the battery for the power menu.
 
-The plain-text cheatsheet is `home/desktop/wm/niri/shortcuts.txt`, deployed to
+The plain-text cheatsheet is `home/desktop/wm/niri/shortcuts.txt`: Niri/rice
+binds first, then per-application keybinds. It is deployed to
 `~/.config/niri/shortcuts.txt` and opened in a floating terminal.
 
 `fuzzel-help.sh` (see `~/.local/bin/fuzzel/`) builds the `Super + F1` menu from
