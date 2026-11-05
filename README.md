@@ -37,7 +37,7 @@ paid software is removed.
 | Display manager | greetd — login prompt (tuigreet), autologin opt-in |
 | Theme | chiaroscuro (Kanso) — GTK and Qt |
 | Fonts | JetBrainsMono Nerd Font (free replacement for the paid original) |
-| AI agents | opencode, codex, gemini-cli, claude-code, aider |
+| AI agents | codex, gemini-cli, claude-code, aider |
 
 Press **Super + F1** at any time for the searchable keybind menu; `Super + Shift + F1`
 opens the full plain-text cheatsheet. Switch the keyboard layout by clicking the
@@ -79,7 +79,7 @@ rhodium/
 ├── modules/                       # system-level NixOS modules
 ├── home/                          # Home Manager modules
 │   ├── desktop/wm/niri/           #   niri config + shortcuts.txt
-│   └── development/agents/        #   AI agents (incl. opencode)
+│   └── development/agents/        #   AI agents
 ├── overlays/                      # package overlays (incl. the free font)
 └── justfile                       # helper recipes
 ```
@@ -92,8 +92,7 @@ make them by hand.
 ```
 ~/
 ├── documents/
-│   ├── aprendizaje/      # Obsidian vault
-│   └── opencode/         # OpenCode chats by topic
+│   └── aprendizaje/      # Obsidian vault
 ├── downloads/
 └── pictures/
     ├── screenshots/      # niri screenshot path
@@ -199,39 +198,6 @@ and launcher entries that merely duplicate a package's own entry are marked
 `noDisplay = true;` in `data/users/extras/apps.nix`, so an app is never listed
 twice and icons resolve. Add your own launchers (wrappers, TUIs) the same way.
 
-## OpenCode integration (in development)
-
-[opencode](https://opencode.ai) is installed through Home Manager
-(`home/development/agents/`) and preconfigured at `~/.config/opencode/config.json`
-with the **free** model:
-
-```json
-{ "model": "opencode/deepseek-v4.1-flash-free", "autoupdate": false }
-```
-
-Run it with `opencode`, or pick another model with `opencode --model <provider/model>`.
-`autoupdate` is off because Nix owns the binary. To add other providers:
-
-```sh
-opencode auth login
-```
-
-opencode is a Bun-compiled binary, and nixpkgs builds it for CPUs **with AVX2**.
-On older machines — a ThinkPad T420, for example, whose Sandy Bridge CPU has AVX
-but no AVX2 — that build dies immediately with
-`Illegal instruction (core dumped)`. `overlays/opencode.nix` therefore installs
-upstream's own **baseline** build of opencode instead of compiling it, which runs
-on those CPUs and on modern ones alike. To bump it, edit the version and the hash
-in that file.
-
-Keep that pin reasonably fresh: each release bakes in the catalogue of models it
-knows about, so an old binary will not offer newer free models. The 1.18.x builds
-have no `deepseek-v4.1-flash-free`; 1.19.x does.
-
-> **Status: in use.** Validated on a T420 (old CPU, no AVX2) and on modern
-> machines; the model config above is what both the devshell and
-> `~/.config/opencode/config.json` use.
-
 ## Secrets
 
 Nothing sensitive is stored in this repository.
@@ -239,7 +205,6 @@ Nothing sensitive is stored in this repository.
 - **SSH** — paste your **public** key into `home/security/network/ssh.nix` →
   `rhSsh.authorizedKeys`. It is opt-in: no keys are installed by default.
 - **User password** — set with `passwd` (or during installation), never committed.
-- **opencode credentials** — live in your home directory (`opencode auth login`).
 
 ## Troubleshooting
 
@@ -313,7 +278,6 @@ Roadmap:
 - [x] Keybind cheatsheet (`Super + F1`)
 - [x] App menu keybind (`Super + M` → `fuzzel-apps.sh`, `Super + A` → plain `fuzzel`)
 - [x] `INSTALL.md` for both install routes
-- [x] Add `opencode` with the free `deepseek-v4.1-flash-free` model
 - [x] Disable hardware/server-specific services by default
 - [x] Translate comments and docs to English
 
@@ -330,7 +294,7 @@ Next:
 - [ ] Screenshots of this fork's own setup (the ones above are upstream's)
 - [ ] "Lite" profile for low-RAM machines
 - [ ] `nix flake check` in CI (GitHub Actions)
-- [ ] (Optional) own public SSH key, `opencode auth login`, Keychron/kmonad, ASUS services
+- [ ] (Optional) own public SSH key, Keychron/kmonad, ASUS services
 
 ## Credits & license
 

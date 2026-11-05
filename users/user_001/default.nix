@@ -1,6 +1,4 @@
 {
-  inputs,
-  pkgs,
   userData,
   theme,
   userExtras,
@@ -12,9 +10,6 @@
 }:
 {
   imports = [
-    # External flakes
-    inputs.rhodium-opencode.homeManagerModules.default
-
     # Themes
     ../../home/assets/themes
 

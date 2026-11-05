@@ -57,11 +57,6 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    rhodium-opencode = {
-      url = "github:jajejournal/rhodium-opencode";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -79,7 +74,6 @@
       chiaroscuro,
       rhodium-alloys,
       niri-flake,
-      rhodium-opencode,
     }@inputs:
     let
       lib = nixpkgs.lib;
@@ -101,7 +95,6 @@
         overlays = [
           nur.overlays.default
           overlaysWithInputs.fonts
-          rhodium-opencode.overlays.default
         ];
       };
 
@@ -113,7 +106,6 @@
         overlays = [
           nur.overlays.default
           overlaysWithInputs.fonts
-          rhodium-opencode.overlays.default
         ];
       };
 

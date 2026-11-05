@@ -1,4 +1,4 @@
-{ pkgs-shell, pkgs-unstable, ... }:
+{ pkgs-shell, ... }:
 pkgs-shell.mkShell {
   buildInputs = with pkgs-shell; [
     # --- General Requirements ---
@@ -17,8 +17,5 @@ pkgs-shell.mkShell {
     # --- Requirements For Cache Building ---
     python3
     python3Packages.wcwidth
-
-    # --- AI agent ---
-    pkgs-unstable.opencode
   ];
 }

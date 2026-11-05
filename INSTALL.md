@@ -107,7 +107,7 @@ git clone https://github.com/jajejournal/rhodium ~/rhodium
 ```
 
 > `main` is the only branch: it already contains the portability work (generic host,
-> free font, opencode, both keyboard layouts…).
+> free font, both keyboard layouts…).
 
 ### 4. Copy the generated hardware configuration
 
@@ -173,8 +173,8 @@ You get a login prompt (tuigreet): pick the user, type the password, and **niri*
 Autologin is opt-in: set `rhodium.autologin = true`.
 
 Home Manager also creates the content layout on first switch: `~/documents`,
-`~/downloads`, `~/pictures/screenshots`, `~/pictures/ocr`, the OpenCode chat
-folders and `~/documents/aprendizaje` (Obsidian vault). No manual `mkdir` needed.
+`~/downloads`, `~/pictures/screenshots`, `~/pictures/ocr` and
+`~/documents/aprendizaje` (Obsidian vault). No manual `mkdir` needed.
 
 ---
 
@@ -265,4 +265,3 @@ it from inside the repo: `FLAKE_PATH` defaults to the current directory.
 - [ ] `fullName` / `emailMain` in `data/users/users.nix` (defaults to GitHub noreply).
 - [ ] Optional: your own SSH public key (`home/security/network/ssh.nix` →
       `rhSsh.authorizedKeys`).
-- [ ] Optional: `opencode auth login` if you want providers other than the free model.

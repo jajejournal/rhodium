@@ -21,7 +21,6 @@ let
     pictures = "${homeDir}/pictures";
     screenshots = "${homeDir}/pictures/screenshots";
     ocr = "${homeDir}/pictures/ocr";
-    opencodeChats = "${homeDir}/documents/opencode";
     obsidianVault = "${homeDir}/documents/aprendizaje";
 
     # Kept on purpose: the yazi keymaps still use these
@@ -146,10 +145,6 @@ in
       "${dirs.pictures}" \
       "${dirs.screenshots}" \
       "${dirs.ocr}" \
-      "${dirs.opencodeChats}/nixos" \
-      "${dirs.opencodeChats}/dev" \
-      "${dirs.opencodeChats}/general" \
-      "${dirs.opencodeChats}/fitness" \
       "${dirs.obsidianVault}"
   '';
 }
