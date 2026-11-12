@@ -1,7 +1,7 @@
 { ... }:
 {
   programs.btop.settings = {
-    color_theme = "chiaroscuro";
+    color_theme = "kanso";
     theme_background = false;
     truecolor = true;
     force_tty = false;

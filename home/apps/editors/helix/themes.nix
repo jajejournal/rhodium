@@ -1,44 +1,46 @@
 { ... }:
 {
   programs.helix.themes = {
-    chiaroscuro =
+    kanso =
       let
-        red = "#f7768e";
-        orange = "#ff9e64";
-        yellow = "#e0af68";
-        light-green = "#9ece6a";
-        green = "#73daca";
-        aqua = "#2ac3de";
-        teal = "#1abc9c";
-        turquoise = "#89ddff";
-        light-cyan = "#b4f9f8";
-        cyan = "#7dcfff";
-        blue = "#7aa2f7";
-        purple = "#9d7cd8";
-        magenta = "#bb9af7";
-        comment = "#565f89";
-        black = "#414868";
+        # Kanso (zen): the terminal/editor palette. Same colours as kitty,
+        # ghostty, foot and kanso-nvim, so TUI work looks consistent.
+        red = "#c4746e";
+        orange = "#b6927b";
+        yellow = "#c4b28a";
+        light-green = "#87a987";
+        green = "#7aa89f";
+        aqua = "#7aa89f";
+        teal = "#8ea4a2";
+        turquoise = "#7aa89f";
+        light-cyan = "#a4a7a4";
+        cyan = "#7fb4ca";
+        blue = "#8ba4b0";
+        purple = "#938aa9";
+        magenta = "#a292a3";
+        comment = "#5c6066";
+        black = "#22262d";
 
-        add = "#449dab";
-        change = "#6183bb";
-        delete = "#914c54";
+        add = "#87a987";
+        change = "#7fb4ca";
+        delete = "#e46876";
 
-        error = "#db4b4b";
-        info = "#0db9d7";
-        hint = "#1abc9c";
+        error = "#e46876";
+        info = "#7fb4ca";
+        hint = "#87a987";
 
-        fg = "#c0caf5";
-        fg-dark = "#a9b1d6";
-        fg-gutter = "#3b4261";
-        fg-linenr = "#737aa2";
-        fg-selected = "#343a55";
-        border = "#15161e";
-        border-highlight = "#27a1b9";
-        bg = "#1a1b26";
-        bg-inlay = "#1a2b32";
-        bg-selection = "#283457";
-        bg-menu = "#16161e";
-        bg-focus = "#292e42";
+        fg = "#c5c9c7";
+        fg-dark = "#a4a7a4";
+        fg-gutter = "#5c6066";
+        fg-linenr = "#a4a7a4";
+        fg-selected = "#22262d";
+        border = "#090e13";
+        border-highlight = "#e6c384";
+        bg = "#090e13";
+        bg-inlay = "#0d1217";
+        bg-selection = "#22262d";
+        bg-menu = "#0d1217";
+        bg-focus = "#1a2027";
       in
       {
         attribute = {

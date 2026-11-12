@@ -1,7 +1,7 @@
 { ... }:
 {
   programs.helix.settings = {
-    theme = "chiaroscuro";
+    theme = "kanso";
 
     keys.normal = {
       D = [

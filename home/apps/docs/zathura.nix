@@ -6,8 +6,8 @@
     options = {
       # --- Performance ---
       render-loading = true;
-      render-loading-bg = theme.colors.bg or "#1a1a2e";
-      render-loading-fg = theme.colors.fg or "#c8c8d0";
+      render-loading-bg = theme.colors.base00;
+      render-loading-fg = theme.colors.base05;
       page-cache-size = 50; # Cache more pages for faster navigation
       pages-per-row = 1;
       scroll-page-aware = true;
@@ -35,37 +35,37 @@
       zoom-step = 10;
       adjust-open = "best-fit";
 
-      # --- Colors (using theme) ---
-      default-bg = theme.colors.bg or "#1a1a2e";
-      default-fg = theme.colors.fg or "#c8c8d0";
-      statusbar-bg = theme.colors.bg_dark or "#141420";
-      statusbar-fg = theme.colors.fg or "#c8c8d0";
-      inputbar-bg = theme.colors.bg or "#1a1a2e";
-      inputbar-fg = theme.colors.fg or "#c8c8d0";
-      notification-bg = theme.colors.bg or "#1a1a2e";
-      notification-fg = theme.colors.green or "#87a987";
-      notification-error-bg = theme.colors.bg or "#1a1a2e";
-      notification-error-fg = theme.colors.red or "#c4746e";
-      notification-warning-bg = theme.colors.bg or "#1a1a2e";
-      notification-warning-fg = theme.colors.yellow or "#c4b28a";
-      highlight-color = theme.colors.yellow or "#c4b28a";
-      highlight-active-color = theme.colors.green or "#87a987";
-      completion-bg = theme.colors.bg_dark or "#141420";
-      completion-fg = theme.colors.fg or "#c8c8d0";
-      completion-highlight-bg = theme.colors.blue or "#8ba4b0";
-      completion-highlight-fg = theme.colors.bg or "#1a1a2e";
-      completion-group-bg = theme.colors.bg_dark or "#141420";
-      completion-group-fg = theme.colors.blue or "#8ba4b0";
-      index-bg = theme.colors.bg or "#1a1a2e";
-      index-fg = theme.colors.fg or "#c8c8d0";
-      index-active-bg = theme.colors.blue or "#8ba4b0";
-      index-active-fg = theme.colors.bg or "#1a1a2e";
+      # --- Colors (Chiaroscuro) ---
+      default-bg = theme.colors.base00;
+      default-fg = theme.colors.base05;
+      statusbar-bg = theme.colors.base01;
+      statusbar-fg = theme.colors.base05;
+      inputbar-bg = theme.colors.base01;
+      inputbar-fg = theme.colors.base05;
+      notification-bg = theme.colors.base01;
+      notification-fg = theme.colors.base0B;
+      notification-error-bg = theme.colors.base01;
+      notification-error-fg = theme.colors.base08;
+      notification-warning-bg = theme.colors.base01;
+      notification-warning-fg = theme.colors.base0A;
+      highlight-color = theme.colors.base09;
+      highlight-active-color = theme.colors.base0B;
+      completion-bg = theme.colors.base01;
+      completion-fg = theme.colors.base05;
+      completion-highlight-bg = theme.colors.base0D;
+      completion-highlight-fg = theme.colors.base00;
+      completion-group-bg = theme.colors.base01;
+      completion-group-fg = theme.colors.base0D;
+      index-bg = theme.colors.base00;
+      index-fg = theme.colors.base05;
+      index-active-bg = theme.colors.base0D;
+      index-active-fg = theme.colors.base00;
 
       # --- Recolor (dark mode for PDFs) ---
       recolor = true; # Don't recolor by default
       recolor-keephue = true;
-      recolor-darkcolor = theme.colors.fg or "#c8c8d0";
-      recolor-lightcolor = theme.colors.bg or "#1a1a2e";
+      recolor-darkcolor = theme.colors.base05;
+      recolor-lightcolor = theme.colors.base00;
       recolor-reverse-video = true;
     };
 
